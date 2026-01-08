@@ -1,0 +1,86 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://biopassport.org/schemas/credential-types/transfer.json",
+  "title": "Transfer Credential",
+  "description": "Chain-of-custody transfer credential (off-chain payload)",
+  "type": "object",
+  "required": ["credentialType", "materialId", "fromOrg", "toOrg", "transferDate", "shipmentMethod"],
+  "properties": {
+    "credentialType": {
+      "const": "TRANSFER"
+    },
+    "materialId": {
+      "type": "string",
+      "description": "Reference to material"
+    },
+    "fromOrg": {
+      "type": "string",
+      "description": "Sending organization"
+    },
+    "toOrg": {
+      "type": "string",
+      "description": "Receiving organization"
+    },
+    "transferDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date/time of transfer initiation"
+    },
+    "receivedDate": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Date/time material was received"
+    },
+    "shipmentMethod": {
+      "type": "string",
+      "enum": ["DRY_ICE", "LIQUID_NITROGEN", "AMBIENT", "COLD_PACK"],
+      "description": "Shipping method"
+    },
+    "carrier": {
+      "type": "string",
+      "description": "Shipping carrier"
+    },
+    "trackingNumber": {
+      "type": "string",
+      "description": "Shipment tracking number"
+    },
+    "temperatureLog": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "timestamp": { "type": "string", "format": "date-time" },
+          "temperature": { "type": "number" },
+          "unit": { "type": "string", "enum": ["C", "F"] }
+        }
+      },
+      "description": "Temperature monitoring log"
+    },
+    "quantity": {
+      "type": "object",
+      "properties": {
+        "vials": { "type": "integer", "minimum": 1 },
+        "cellCount": { "type": "string" },
+        "volume": { "type": "string" }
+      },
+      "description": "Quantity transferred"
+    },
+    "passageNumber": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Passage number at transfer"
+    },
+    "shipmentFormHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 hash of shipment form"
+    },
+    "mtaReference": {
+      "type": "string",
+      "description": "Material Transfer Agreement reference"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

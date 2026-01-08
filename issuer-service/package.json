@@ -1,0 +1,48 @@
+{
+  "name": "biopassport-issuer-service",
+  "version": "1.0.0",
+  "description": "BioPassport Credential Issuer Service",
+  "main": "dist/index.js",
+  "bin": {
+    "biopassport-issuer": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node dist/index.js",
+    "dev": "ts-node src/index.ts",
+    "cli": "ts-node src/cli.ts",
+    "register": "ts-node src/cli.ts register",
+    "issue": "ts-node src/cli.ts issue",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts"
+  },
+  "dependencies": {
+    "purechainlib": "^2.0.8",
+    "express": "^4.18.0",
+    "uuid": "^9.0.0",
+    "commander": "^11.0.0",
+    "minio": "^7.1.0",
+    "ajv": "^8.12.0",
+    "ajv-formats": "^2.1.0",
+    "elliptic": "^6.5.4",
+    "canonicalize": "^2.0.0",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/express": "^4.17.0",
+    "@types/uuid": "^9.0.0",
+    "@types/elliptic": "^6.4.0",
+    "@types/minio": "^7.1.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "eslint": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

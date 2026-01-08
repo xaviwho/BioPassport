@@ -1,0 +1,43 @@
+{
+  "totalMaterials": 500,
+  "byType": {
+    "cellLines": 355,
+    "plasmids": 145
+  },
+  "byStatus": {
+    "active": 483,
+    "quarantined": 11,
+    "revoked": 6
+  },
+  "totalCredentials": 1240,
+  "totalTransfers": 747,
+  "anomalies": {
+    "tamperedArtifacts": 20,
+    "expiredQC": 198,
+    "missingQC": 0,
+    "revokedMaterials": 6,
+    "quarantinedMaterials": 11,
+    "pendingTransfers": 11
+  },
+  "onChainVerification": {
+    "pass": 286,
+    "fail": 214,
+    "failReasons": {
+      "QC_EXPIRED": 198,
+      "TRANSFER_PENDING": 11,
+      "MATERIAL_QUARANTINED": 11,
+      "MATERIAL_REVOKED": 6
+    }
+  },
+  "fullVerification": {
+    "pass": 276,
+    "fail": 224,
+    "failReasons": {
+      "QC_EXPIRED": 198,
+      "ARTIFACT_TAMPERED": 20,
+      "TRANSFER_PENDING": 11,
+      "MATERIAL_QUARANTINED": 11,
+      "MATERIAL_REVOKED": 6
+    }
+  }
+}

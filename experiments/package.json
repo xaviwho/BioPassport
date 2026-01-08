@@ -1,0 +1,21 @@
+{
+  "name": "biopassport-experiments",
+  "version": "1.0.0",
+  "description": "BioPassport IEEE ICBC benchmarking and security experiments",
+  "scripts": {
+    "generate": "ts-node generate-dataset.ts",
+    "test": "ts-node test-integration.ts",
+    "benchmark": "ts-node benchmark-suite.ts",
+    "benchmark:full": "ts-node benchmark-suite.ts --full",
+    "reproduce": "ts-node reproduce-all.ts",
+    "reproduce:full": "ts-node reproduce-all.ts --full",
+    "all": "npm run generate && npm run test && npm run benchmark"
+  },
+  "dependencies": {
+    "ts-node": "^10.9.0",
+    "typescript": "^5.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0"
+  }
+}

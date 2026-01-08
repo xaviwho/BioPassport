@@ -1,0 +1,151 @@
+version: '3.8'
+
+services:
+  # PureChain Node 1 (Org1)
+  purechain-node1:
+    image: purechain/node:latest
+    container_name: biopassport-node1
+    environment:
+      - PURECHAIN_NODE_ID=node1
+      - PURECHAIN_ORG_ID=Org1MSP
+      - PURECHAIN_NETWORK_ID=biopassport-network
+      - PURECHAIN_CONSENSUS=raft
+      - PURECHAIN_GENESIS_BLOCK=/config/genesis.block
+    volumes:
+      - ./config/purechain:/config
+      - purechain-node1-data:/var/purechain/data
+    ports:
+      - "7051:7051"
+      - "7053:7053"
+    networks:
+      - biopassport-network
+
+  # PureChain Node 2 (Org2)
+  purechain-node2:
+    image: purechain/node:latest
+    container_name: biopassport-node2
+    environment:
+      - PURECHAIN_NODE_ID=node2
+      - PURECHAIN_ORG_ID=Org2MSP
+      - PURECHAIN_NETWORK_ID=biopassport-network
+      - PURECHAIN_CONSENSUS=raft
+      - PURECHAIN_GENESIS_BLOCK=/config/genesis.block
+    volumes:
+      - ./config/purechain:/config
+      - purechain-node2-data:/var/purechain/data
+    ports:
+      - "8051:7051"
+      - "8053:7053"
+    networks:
+      - biopassport-network
+    depends_on:
+      - purechain-node1
+
+  # PureChain Orderer
+  purechain-orderer:
+    image: purechain/orderer:latest
+    container_name: biopassport-orderer
+    environment:
+      - PURECHAIN_ORDERER_TYPE=raft
+      - PURECHAIN_NETWORK_ID=biopassport-network
+    volumes:
+      - ./config/purechain:/config
+      - purechain-orderer-data:/var/purechain/orderer
+    ports:
+      - "7050:7050"
+    networks:
+      - biopassport-network
+
+  # MinIO (S3-compatible storage for artifacts)
+  minio:
+    image: minio/minio:latest
+    container_name: biopassport-minio
+    command: server /data --console-address ":9001"
+    environment:
+      - MINIO_ROOT_USER=minioadmin
+      - MINIO_ROOT_PASSWORD=minioadmin
+    volumes:
+      - minio-data:/data
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    networks:
+      - biopassport-network
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:9000/minio/health/live"]
+      interval: 30s
+      timeout: 20s
+      retries: 3
+
+  # MinIO bucket initialization
+  minio-init:
+    image: minio/mc:latest
+    container_name: biopassport-minio-init
+    depends_on:
+      minio:
+        condition: service_healthy
+    entrypoint: >
+      /bin/sh -c "
+      mc alias set myminio http://minio:9000 minioadmin minioadmin;
+      mc mb myminio/biopassport --ignore-existing;
+      mc policy set public myminio/biopassport;
+      exit 0;
+      "
+    networks:
+      - biopassport-network
+
+  # Issuer Service (Org1)
+  issuer-org1:
+    build:
+      context: ./issuer-service
+      dockerfile: Dockerfile
+    container_name: biopassport-issuer-org1
+    environment:
+      - PORT=3001
+      - ISSUER_ORG_ID=Org1MSP
+      - PURECHAIN_ENDPOINT=purechain-node1:7051
+      - STORAGE_ENDPOINT=minio
+      - STORAGE_PORT=9000
+      - STORAGE_ACCESS_KEY=minioadmin
+      - STORAGE_SECRET_KEY=minioadmin
+      - STORAGE_BUCKET=biopassport
+    ports:
+      - "3001:3001"
+    networks:
+      - biopassport-network
+    depends_on:
+      - purechain-node1
+      - minio-init
+
+  # Issuer Service (Org2 - QC Lab)
+  issuer-org2:
+    build:
+      context: ./issuer-service
+      dockerfile: Dockerfile
+    container_name: biopassport-issuer-org2
+    environment:
+      - PORT=3002
+      - ISSUER_ORG_ID=Org2MSP
+      - PURECHAIN_ENDPOINT=purechain-node2:7051
+      - STORAGE_ENDPOINT=minio
+      - STORAGE_PORT=9000
+      - STORAGE_ACCESS_KEY=minioadmin
+      - STORAGE_SECRET_KEY=minioadmin
+      - STORAGE_BUCKET=biopassport
+    ports:
+      - "3002:3002"
+    networks:
+      - biopassport-network
+    depends_on:
+      - purechain-node2
+      - minio-init
+
+networks:
+  biopassport-network:
+    driver: bridge
+
+volumes:
+  purechain-node1-data:
+  purechain-node2-data:
+  purechain-orderer-data:
+  minio-data:

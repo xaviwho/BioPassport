@@ -1,0 +1,16 @@
+{
+  "detectors_to_run": "all",
+  "exclude_informational": false,
+  "exclude_low": false,
+  "exclude_medium": false,
+  "exclude_high": false,
+  "solc_remaps": [],
+  "solc_args": "--optimize --optimize-runs 200",
+  "disable_color": false,
+  "filter_paths": "node_modules",
+  "exclude_dependencies": true,
+  "json": "slither-report.json",
+  "sarif": "slither-report.sarif",
+  "checklist": true,
+  "show_ignored_findings": false
+}

@@ -1,0 +1,62 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://biopassport.org/schemas/credential-types/qc-myco.json",
+  "title": "Mycoplasma QC Credential",
+  "description": "Mycoplasma testing credential (off-chain payload)",
+  "type": "object",
+  "required": ["credentialType", "materialId", "result", "testMethod", "testDate", "laboratory", "validUntil"],
+  "properties": {
+    "credentialType": {
+      "const": "QC_MYCO"
+    },
+    "materialId": {
+      "type": "string",
+      "description": "Reference to material"
+    },
+    "result": {
+      "type": "string",
+      "enum": ["NEGATIVE", "POSITIVE", "INCONCLUSIVE"],
+      "description": "Test result"
+    },
+    "testMethod": {
+      "type": "string",
+      "enum": ["PCR", "CULTURE", "ELISA", "HOECHST_STAIN", "LUMINESCENCE"],
+      "description": "Testing method used"
+    },
+    "testDate": {
+      "type": "string",
+      "format": "date",
+      "description": "Date test was performed"
+    },
+    "laboratory": {
+      "type": "string",
+      "description": "Laboratory that performed the test"
+    },
+    "labAccreditation": {
+      "type": "string",
+      "description": "Lab accreditation number"
+    },
+    "sampleId": {
+      "type": "string",
+      "description": "Internal sample identifier"
+    },
+    "passageNumber": {
+      "type": "integer",
+      "minimum": 0,
+      "description": "Passage number at time of testing"
+    },
+    "validUntil": {
+      "type": "string",
+      "format": "date-time",
+      "description": "Credential expiration date"
+    },
+    "reportHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 hash of full test report PDF"
+    },
+    "notes": {
+      "type": "string"
+    }
+  }
+}

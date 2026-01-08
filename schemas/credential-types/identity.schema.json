@@ -1,0 +1,55 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://biopassport.org/schemas/credential-types/identity.json",
+  "title": "Identity Credential",
+  "description": "Cell line or plasmid identity credential (off-chain payload)",
+  "type": "object",
+  "required": ["credentialType", "materialId", "identityMethod", "identityHash", "issuedBy", "issuedAt"],
+  "properties": {
+    "credentialType": {
+      "const": "IDENTITY"
+    },
+    "materialId": {
+      "type": "string",
+      "description": "Reference to material"
+    },
+    "identityMethod": {
+      "type": "string",
+      "enum": ["STR_PROFILE", "SEQUENCE_FINGERPRINT", "SNP_PROFILE", "MORPHOLOGY"],
+      "description": "Method used for identity verification"
+    },
+    "identityHash": {
+      "type": "string",
+      "pattern": "^[a-f0-9]{64}$",
+      "description": "SHA-256 hash of identity data (STR profile, sequence, etc.)"
+    },
+    "referenceDatabase": {
+      "type": "string",
+      "description": "Reference database used (e.g., ATCC, Cellosaurus)"
+    },
+    "matchScore": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Identity match score percentage"
+    },
+    "matchThreshold": {
+      "type": "number",
+      "minimum": 0,
+      "maximum": 100,
+      "description": "Minimum threshold for positive match"
+    },
+    "issuedBy": {
+      "type": "string",
+      "description": "Issuing organization"
+    },
+    "issuedAt": {
+      "type": "string",
+      "format": "date-time"
+    },
+    "notes": {
+      "type": "string",
+      "description": "Additional notes"
+    }
+  }
+}

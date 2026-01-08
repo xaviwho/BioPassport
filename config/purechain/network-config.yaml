@@ -1,0 +1,91 @@
+# PureChain Network Configuration for BioPassport
+# This configuration defines the network topology for the BioPassport system
+
+name: biopassport-network
+version: "1.0"
+
+# Network participants
+organizations:
+  - id: Org1MSP
+    name: "Research Lab A"
+    description: "Primary research laboratory"
+    mspDir: ./crypto-config/org1/msp
+    peers:
+      - node1.biopassport.local
+    
+  - id: Org2MSP
+    name: "QC Laboratory"
+    description: "Quality control and testing laboratory"
+    mspDir: ./crypto-config/org2/msp
+    peers:
+      - node2.biopassport.local
+
+# Orderer configuration
+orderers:
+  - id: orderer1
+    url: orderer.biopassport.local:7050
+    tlsCACerts: ./crypto-config/orderer/tls/ca.crt
+
+# Channel configuration
+channels:
+  biopassport-channel:
+    orderers:
+      - orderer1
+    peers:
+      node1.biopassport.local:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+      node2.biopassport.local:
+        endorsingPeer: true
+        chaincodeQuery: true
+        ledgerQuery: true
+        eventSource: true
+
+# Chaincode (smart contract) configuration
+chaincodes:
+  - name: biopassport-registry
+    version: "1.0"
+    path: /chaincode
+    language: node
+    endorsementPolicy:
+      # Require endorsement from at least one org
+      identities:
+        - role:
+            name: member
+            mspId: Org1MSP
+        - role:
+            name: member
+            mspId: Org2MSP
+      policy:
+        1-of:
+          - signed-by: 0
+          - signed-by: 1
+
+# Policy definitions
+policies:
+  # Who can register materials
+  RegisterMaterial:
+    type: signature
+    rule: "OR('Org1MSP.member', 'Org2MSP.member')"
+  
+  # Who can issue credentials
+  IssueCredential:
+    type: signature
+    rule: "OR('Org1MSP.member', 'Org2MSP.member')"
+  
+  # Who can transfer materials
+  TransferMaterial:
+    type: signature
+    rule: "OR('Org1MSP.member', 'Org2MSP.member')"
+  
+  # Who can set status (quarantine/revoke)
+  SetStatus:
+    type: signature
+    rule: "OR('Org1MSP.admin', 'Org2MSP.admin')"
+  
+  # Who can read/verify
+  VerifyMaterial:
+    type: signature
+    rule: "OR('Org1MSP.member', 'Org2MSP.member')"

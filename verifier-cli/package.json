@@ -1,0 +1,40 @@
+{
+  "name": "biopassport-verifier",
+  "version": "1.0.0",
+  "description": "BioPassport Material Verifier CLI",
+  "main": "dist/index.js",
+  "bin": {
+    "biopassport": "./dist/cli.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "verify": "ts-node src/cli.ts verify",
+    "test": "jest",
+    "lint": "eslint src/**/*.ts"
+  },
+  "dependencies": {
+    "purechainlib": "^2.0.8",
+    "commander": "^11.0.0",
+    "chalk": "^4.1.2",
+    "ora": "^5.4.1",
+    "table": "^6.8.0",
+    "minio": "^7.1.0",
+    "elliptic": "^6.5.4",
+    "canonicalize": "^2.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "@types/elliptic": "^6.4.0",
+    "@types/ora": "^3.2.0",
+    "@types/table": "^6.0.0",
+    "typescript": "^5.0.0",
+    "ts-node": "^10.9.0",
+    "jest": "^29.0.0",
+    "@types/jest": "^29.0.0",
+    "ts-jest": "^29.0.0",
+    "eslint": "^8.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
