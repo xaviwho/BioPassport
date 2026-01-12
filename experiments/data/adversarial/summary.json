@@ -1,45 +1,46 @@
 {
   "totalMaterials": 500,
   "byType": {
-    "cellLines": 361,
-    "plasmids": 139
+    "cellLines": 350,
+    "plasmids": 150
   },
   "byStatus": {
-    "active": 437,
-    "quarantined": 27,
-    "revoked": 36
+    "active": 442,
+    "quarantined": 18,
+    "revoked": 40
   },
-  "totalCredentials": 1182,
-  "totalTransfers": 1013,
+  "totalCredentials": 1270,
+  "totalTransfers": 984,
   "anomalies": {
-    "tamperedArtifacts": 129,
-    "expiredQC": 155,
-    "missingQC": 55,
-    "revokedMaterials": 36,
-    "quarantinedMaterials": 27,
-    "pendingTransfers": 43
+    "tamperedArtifacts": 135,
+    "expiredQC": 214,
+    "missingQC": 48,
+    "revokedMaterials": 40,
+    "quarantinedMaterials": 18,
+    "pendingTransfers": 49,
+    "qcReplay": 55
   },
   "onChainVerification": {
-    "pass": 235,
-    "fail": 265,
+    "pass": 234,
+    "fail": 266,
     "failReasons": {
-      "MATERIAL_REVOKED": 36,
-      "QC_EXPIRED": 155,
-      "QC_MISSING": 55,
-      "TRANSFER_PENDING": 43,
-      "MATERIAL_QUARANTINED": 27
+      "QC_MISSING": 48,
+      "QC_EXPIRED": 159,
+      "TRANSFER_PENDING": 49,
+      "MATERIAL_REVOKED": 40,
+      "MATERIAL_QUARANTINED": 18
     }
   },
   "fullVerification": {
-    "pass": 167,
-    "fail": 333,
+    "pass": 170,
+    "fail": 330,
     "failReasons": {
-      "ARTIFACT_TAMPERED": 129,
-      "MATERIAL_REVOKED": 36,
-      "QC_EXPIRED": 155,
-      "QC_MISSING": 55,
-      "TRANSFER_PENDING": 43,
-      "MATERIAL_QUARANTINED": 27
+      "QC_MISSING": 48,
+      "ARTIFACT_TAMPERED": 135,
+      "QC_EXPIRED": 159,
+      "TRANSFER_PENDING": 49,
+      "MATERIAL_REVOKED": 40,
+      "MATERIAL_QUARANTINED": 18
     }
   }
 }

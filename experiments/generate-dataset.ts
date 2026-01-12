@@ -41,6 +41,7 @@ interface DatasetConfig {
   quarantinedMaterialRate: number; // For QC-triggered quarantine
   pendingTransferRate: number;    // 0.03
   unauthorizedIssuerRate: number; // For adversarial dataset - simulates rejected issuance
+  qcReplayRate: number;           // QC replay attack: older QC valid, latest QC expired
 }
 
 // Dataset presets for different experiment scenarios
@@ -61,7 +62,8 @@ const DATASET_PRESETS: Record<DatasetType, DatasetConfig> = {
     revokedMaterialRate: 0.01,      // ~1% revoked
     quarantinedMaterialRate: 0.02,  // ~2% quarantined (QC-triggered)
     pendingTransferRate: 0.06,      // ~6% in transit
-    unauthorizedIssuerRate: 0.0     // No unauthorized issuers
+    unauthorizedIssuerRate: 0.0,    // No unauthorized issuers
+    qcReplayRate: 0.0               // No QC replay attacks in normal ops
   },
   
   // Compliance drift: QC expiry grows over time (PASS → FAIL trend)
@@ -80,7 +82,8 @@ const DATASET_PRESETS: Record<DatasetType, DatasetConfig> = {
     revokedMaterialRate: 0.02,      // ~2% revoked
     quarantinedMaterialRate: 0.03,  // ~3% quarantined
     pendingTransferRate: 0.03,      // ~3% pending
-    unauthorizedIssuerRate: 0.0     // No unauthorized issuers
+    unauthorizedIssuerRate: 0.0,    // No unauthorized issuers
+    qcReplayRate: 0.05              // 5% QC replay in drift scenario
   },
   
   // Adversarial: tampered artifacts + replayed QC + unauthorized issuers (~60-70% FAIL)
@@ -99,7 +102,8 @@ const DATASET_PRESETS: Record<DatasetType, DatasetConfig> = {
     revokedMaterialRate: 0.07,      // 7% revoked (increased)
     quarantinedMaterialRate: 0.05,  // 5% quarantined
     pendingTransferRate: 0.10,      // 10% pending (increased)
-    unauthorizedIssuerRate: 0.10    // 10% unauthorized issuer attempts (simulates missing QC)
+    unauthorizedIssuerRate: 0.10,   // 10% unauthorized issuer attempts (simulates missing QC)
+    qcReplayRate: 0.15              // 15% QC replay attacks (older valid, latest expired)
   }
 };
 
@@ -171,6 +175,7 @@ interface DatasetSummary {
     revokedMaterials: number;
     quarantinedMaterials: number;
     pendingTransfers: number;
+    qcReplay: number;
   };
   // Split verification results: on-chain vs full (on-chain + artifact integrity)
   onChainVerification: {
@@ -210,7 +215,8 @@ class DatasetGenerator {
         missingQC: 0,
         revokedMaterials: 0,
         quarantinedMaterials: 0,
-        pendingTransfers: 0
+        pendingTransfers: 0,
+        qcReplay: 0
       },
       onChainVerification: {
         pass: 0,
@@ -253,6 +259,7 @@ class DatasetGenerator {
     const forceExpiredQC = Math.random() < this.config.expiredQCRate;
     const forceTamperedArtifact = Math.random() < this.config.tamperedArtifactRate;
     const forceUnauthorizedIssuer = Math.random() < this.config.unauthorizedIssuerRate;
+    const forceQCReplay = !forceExpiredQC && Math.random() < this.config.qcReplayRate;
 
     // Generate metadata
     const metadata = isCellLine
@@ -274,7 +281,8 @@ class DatasetGenerator {
       createdAt,
       forceExpiredQC,
       forceTamperedArtifact,
-      forceUnauthorizedIssuer
+      forceUnauthorizedIssuer,
+      forceQCReplay
     );
 
     // Generate transfers
@@ -287,15 +295,20 @@ class DatasetGenerator {
 
     // FIX: Compute anomalies from ACTUAL state after generation
     const anomalies: string[] = [];
-    const hasQC = credentials.some(c => c.credentialType === 'QC_MYCO');
-    const qcExpired = credentials.some(c => c.credentialType === 'QC_MYCO' && c.expired);
+    const qcCreds = credentials.filter(c => c.credentialType === 'QC_MYCO');
+    const hasQC = qcCreds.length > 0;
+    const latestQC = qcCreds.length > 0 ? qcCreds[qcCreds.length - 1] : null;
+    const latestQCExpired = latestQC?.expired || false;
+    const hasValidOlderQC = qcCreds.length > 1 && qcCreds.some((c, i) => i < qcCreds.length - 1 && !c.expired);
+    const isQCReplay = hasValidOlderQC && latestQCExpired; // Older valid, latest expired
     const tampered = credentials.some(c => c.artifactRef?.tampered);
     const pending = transfers.some(t => !t.accepted);
 
     if (status === 'REVOKED') anomalies.push('REVOKED');
     if (status === 'QUARANTINED') anomalies.push('QUARANTINED');
     if (!hasQC) anomalies.push('MISSING_QC'); // Unauthorized issuer was rejected
-    if (qcExpired) anomalies.push('EXPIRED_QC');
+    if (latestQCExpired) anomalies.push('EXPIRED_QC');
+    if (isQCReplay) anomalies.push('QC_REPLAY'); // QC replay attack scenario
     if (tampered) anomalies.push('TAMPERED_ARTIFACT');
     if (pending) anomalies.push('PENDING_TRANSFER');
 
@@ -366,7 +379,8 @@ class DatasetGenerator {
     createdAt: string,
     hasExpiredQC: boolean,
     hasTamperedArtifact: boolean,
-    hasUnauthorizedIssuer: boolean
+    hasUnauthorizedIssuer: boolean,
+    hasQCReplay: boolean = false
   ): GeneratedCredential[] {
     const credentials: GeneratedCredential[] = [];
     const createdDate = new Date(createdAt);
@@ -380,20 +394,49 @@ class DatasetGenerator {
       hasTamperedArtifact && Math.random() < 0.3 // 30% chance tampered artifact is on identity
     ));
 
-    // 2. QC_MYCO credential (from QC lab)
+    // 2. QC_MYCO credential(s) (from QC lab)
     // If unauthorized issuer attack, simulate missing QC (contract rejected the issuance)
     if (!hasUnauthorizedIssuer) {
-      const qcDate = new Date(createdDate.getTime() + 7 * 24 * 60 * 60 * 1000); // +7 days
       const validityDays = this.config.qcValidityDays[
         Math.floor(Math.random() * this.config.qcValidityDays.length)
       ];
-      credentials.push(this.generateQCCredential(
-        materialId,
-        qcDate,
-        validityDays,
-        hasExpiredQC,
-        hasTamperedArtifact && Math.random() >= 0.3 // 70% chance tampered artifact is on QC
-      ));
+      
+      if (hasQCReplay) {
+        // QC REPLAY ATTACK: Issue an OLDER valid QC, then a NEWER expired QC
+        // The "Latest-QC-only" policy should catch this - only the latest QC matters
+        
+        // First QC: issued 60 days ago, VALID (long validity window)
+        const olderQCDate = new Date(createdDate.getTime() + 7 * 24 * 60 * 60 * 1000);
+        credentials.push(this.generateQCCredential(
+          materialId,
+          olderQCDate,
+          180, // 180-day validity - still valid today
+          false, // NOT expired
+          false  // NOT tampered
+        ));
+        
+        // Second QC (LATEST): issued 30 days ago, EXPIRED
+        // This is the "replay attack" - attacker tries to use older valid QC
+        // but Latest-QC-only policy should reject because latest QC is expired
+        const newerQCDate = new Date(Date.now() - 20 * 24 * 60 * 60 * 1000); // 20 days ago
+        credentials.push(this.generateQCCredential(
+          materialId,
+          newerQCDate,
+          15, // 15-day validity - expired 5 days ago
+          true, // EXPIRED
+          hasTamperedArtifact && Math.random() >= 0.3
+        ));
+      } else {
+        // Normal case: single QC credential
+        const qcDate = new Date(createdDate.getTime() + 7 * 24 * 60 * 60 * 1000); // +7 days
+        credentials.push(this.generateQCCredential(
+          materialId,
+          qcDate,
+          validityDays,
+          hasExpiredQC,
+          hasTamperedArtifact && Math.random() >= 0.3 // 70% chance tampered artifact is on QC
+        ));
+      }
     }
     // else: QC credential is missing because unauthorized issuer was rejected by contract
 
@@ -602,6 +645,9 @@ class DatasetGenerator {
     }
     if (material.anomalies.includes('PENDING_TRANSFER')) {
       this.summary.anomalies.pendingTransfers++;
+    }
+    if (material.anomalies.includes('QC_REPLAY')) {
+      this.summary.anomalies.qcReplay++;
     }
   }
 
