@@ -18,7 +18,8 @@ const config: HardhatUserConfig = {
     purechain: {
       url: process.env.PURECHAIN_RPC_URL || "https://purechainnode.com:8547",
       chainId: 900520900520,
-      gasPrice: 0
+      gasPrice: 0,
+      accounts: process.env.PRIVATE_KEY ? [`0x${process.env.PRIVATE_KEY.replace(/^0x/, '')}`] : []
     }
   },
   paths: {

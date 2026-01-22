@@ -107,8 +107,8 @@ app.post('/assets', asyncHandler(async (req, res) => {
   
   const assetIdHash = ethers.keccak256(ethers.toUtf8Bytes(data.assetId));
   
-  // Call contract
-  const tx = await contract.registerAsset(assetIdHash, data.pointer);
+  // Call contract (gasPrice: 0 for PureChain)
+  const tx = await contract.registerAsset(assetIdHash, data.pointer, { gasPrice: 0 });
   const receipt = await tx.wait();
   
   res.status(201).json({
@@ -208,13 +208,14 @@ app.post('/credentials', asyncHandler(async (req, res) => {
   // TODO: Upload credential JSON to S3/IPFS and get pointer
   const pointer = `s3://biopassport/credentials/${credentialHash.slice(2, 18)}.json`;
   
-  // Call contract
+  // Call contract (gasPrice: 0 for PureChain)
   const tx = await contract.issueCredential(
     assetIdHash,
     credentialHash,
     prevHash,
     evidenceRoot,
-    pointer
+    pointer,
+    { gasPrice: 0 }
   );
   const receipt = await tx.wait();
   
@@ -333,7 +334,8 @@ app.post('/exceptions', asyncHandler(async (req, res) => {
     assetIdHash,
     relatedHash,
     data.reasonCode,
-    data.detailsPointer
+    data.detailsPointer,
+    { gasPrice: 0 }
   );
   const receipt = await tx.wait();
   
@@ -362,7 +364,7 @@ app.post('/exceptions/:id/close', asyncHandler(async (req, res) => {
   const data = CloseExceptionSchema.parse(req.body);
   const exceptionId = parseInt(req.params.id);
   
-  const tx = await contract.closeException(exceptionId, data.resolutionPointer);
+  const tx = await contract.closeException(exceptionId, data.resolutionPointer, { gasPrice: 0 });
   const receipt = await tx.wait();
   
   res.json({

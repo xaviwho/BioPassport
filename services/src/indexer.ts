@@ -83,11 +83,10 @@ export class BioPassportIndexer {
     
     this.isRunning = true;
     
-    // Start polling loop
+    // Start polling loop (handles all event processing)
+    // Note: Real-time listeners disabled for PureChain compatibility
+    // (filter subscriptions expire and cause "filter not found" errors)
     this.pollLoop(startBlock);
-    
-    // Also listen for real-time events
-    this.setupEventListeners();
   }
 
   async stop(): Promise<void> {
