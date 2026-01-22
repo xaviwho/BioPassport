@@ -21,7 +21,7 @@ interface IndexerConfig {
 }
 
 const DEFAULT_CONFIG: IndexerConfig = {
-  rpcUrl: process.env.RPC_URL || 'http://127.0.0.1:8547',
+  rpcUrl: process.env.RPC_URL || 'https://purechainnode.com:8547',
   contractAddress: process.env.CONTRACT_ADDRESS || '',
   dbConnectionString: process.env.DATABASE_URL || 'postgresql://localhost:5432/biopassport',
   chainId: process.env.CHAIN_ID ? parseInt(process.env.CHAIN_ID) : 900520900520,

@@ -18,7 +18,7 @@ import { computeCredentialHash, computeEvidenceRoot } from './crypto';
 
 const PORT = parseInt(process.env.PORT || '3000');
 const DATABASE_URL = process.env.DATABASE_URL || 'postgresql://localhost:5432/biopassport';
-const RPC_URL = process.env.RPC_URL || 'http://127.0.0.1:8547';
+const RPC_URL = process.env.RPC_URL || 'https://purechainnode.com:8547';
 const CONTRACT_ADDRESS = process.env.CONTRACT_ADDRESS || '';
 const PRIVATE_KEY = process.env.PRIVATE_KEY || '';
 const CHAIN_ID = process.env.CHAIN_ID ? parseInt(process.env.CHAIN_ID) : 900520900520;
