@@ -179,7 +179,7 @@ contract BioPassportRegistry {
         bool canUsageRights
     );
     
-    event IssuerRevoked(address indexed issuer, uint256 revokedAt);
+    event IssuerRevocationRecorded(address indexed issuer, uint256 revokedAt);
     
     // ==================== Modifiers ====================
     
@@ -249,7 +249,7 @@ contract BioPassportRegistry {
         issuerPermissions[issuer].isApproved = false;
         issuerRevokedAt[issuer] = block.timestamp;
         
-        emit IssuerRevoked(issuer, block.timestamp);
+        emit IssuerRevocationRecorded(issuer, block.timestamp);
     }
     
     // ==================== Material Functions ====================

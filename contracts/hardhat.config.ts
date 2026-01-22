@@ -3,7 +3,7 @@ import "@nomicfoundation/hardhat-toolbox";
 
 const config: HardhatUserConfig = {
   solidity: {
-    version: "0.8.19",
+    version: "0.8.20",
     settings: {
       optimizer: {
         enabled: true,
@@ -16,7 +16,7 @@ const config: HardhatUserConfig = {
       chainId: 31337
     },
     purechain: {
-      url: "https://purechainnode.com:8547",
+      url: process.env.PURECHAIN_RPC_URL || "http://127.0.0.1:8547",
       chainId: 900520900520,
       gasPrice: 0
     }
