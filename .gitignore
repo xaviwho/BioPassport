@@ -7,10 +7,17 @@ dist/
 build/
 *.js.map
 
-# Environment
+# Environment & Secrets
 .env
 .env.local
 .env.*.local
+*.pem
+*.key
+**/secrets/
+**/.secrets/
+
+# Services environment
+services/.env
 
 # IDE
 .vscode/
