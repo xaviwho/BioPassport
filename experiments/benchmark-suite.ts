@@ -1713,8 +1713,8 @@ function collectReproducibilityMetadata(dataDir: string): ReproducibilityMetadat
     nodeVersion: process.version,
     platform: `${process.platform}-${process.arch}`,
     benchmarkMode: BENCHMARK_MODE,
-    chainId: BENCHMARK_MODE === 'live' ? 'hardhat-31337' : undefined,
-    networkName: BENCHMARK_MODE === 'live' ? 'Hardhat Local Network' : undefined,
+    chainId: BENCHMARK_MODE === 'live' ? 'purechain-900520900520' : undefined,
+    networkName: BENCHMARK_MODE === 'live' ? 'PureChain Network' : undefined,
     rpcUrl: BENCHMARK_MODE === 'live' ? '[redacted]' : undefined,
     datasetChecksum,
   };
@@ -1893,7 +1893,13 @@ async function main(): Promise<void> {
       const { createPureChainClient } = await import('../issuer-service/src/purechain-client');
       const pureChainClient = createPureChainClient();
       await pureChainClient.connect();
-      await pureChainClient.deployContract();
+      
+      // Only deploy if no contract address is configured (already attached in connect())
+      if (!process.env.BIOPASSPORT_CONTRACT_ADDRESS) {
+        await pureChainClient.deployContract();
+      } else {
+        console.log('  Using existing contract (skipping deployment)');
+      }
       
       // Wrap PureChainClient to match BlockchainClient interface
       // 

@@ -18,6 +18,7 @@ build/
 
 # Services environment
 services/.env
+issuer-service/.env
 
 # IDE
 .vscode/

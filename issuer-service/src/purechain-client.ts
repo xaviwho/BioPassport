@@ -3,15 +3,41 @@
  * Uses direct ethers.js with retry logic (bypasses purechainlib)
  */
 
+import * as dotenv from 'dotenv';
 import { ethers, JsonRpcProvider, Wallet, Contract, ContractFactory, HDNodeWallet } from 'ethers';
 import * as fs from 'fs';
 import * as path from 'path';
 
-// Network configuration - Using Hardhat Network for reliable local execution
-const PURECHAIN_RPC = 'http://127.0.0.1:8545';
-const PURECHAIN_CHAIN_ID = 31337;
-// Use null to let ethers auto-calculate gas (Hardhat requires EIP-1559 base fee)
-const PURECHAIN_GAS_PRICE: bigint | null = null;
+// Load .env from issuer-service directory (relative to this file)
+const envPath = path.resolve(__dirname, '..', '.env');
+const result = dotenv.config({ path: envPath });
+if (result.error) {
+  // Try alternative paths
+  const altPaths = [
+    path.resolve(process.cwd(), '..', 'issuer-service', '.env'),
+    path.resolve(process.cwd(), 'issuer-service', '.env'),
+  ];
+  for (const altPath of altPaths) {
+    if (fs.existsSync(altPath)) {
+      dotenv.config({ path: altPath });
+      console.log(`Loaded .env from: ${altPath}`);
+      break;
+    }
+  }
+}
+
+// Debug: Show if private key was loaded
+if (process.env.PURECHAIN_PRIVATE_KEY) {
+  console.log(`Private key loaded: ${process.env.PURECHAIN_PRIVATE_KEY.substring(0, 8)}...`);
+} else {
+  console.log('WARNING: PURECHAIN_PRIVATE_KEY not found in environment');
+}
+
+// Network configuration - PureChain network
+const PURECHAIN_RPC = process.env.RPC_URL || 'https://purechainnode.com:8547';
+const PURECHAIN_CHAIN_ID = Number(process.env.CHAIN_ID) || 900520900520;
+// PureChain uses zero gas
+const PURECHAIN_GAS_PRICE: bigint | null = 0n;
 
 /**
  * Custom fetch with retry logic for handling 502/503 errors
@@ -59,14 +85,12 @@ async function fetchWithRetry(
 }
 
 /**
- * Create a JsonRpcProvider (no retry for Hardhat - it's reliable)
+ * Create a JsonRpcProvider with retry logic for PureChain
  */
 function createRetryProvider(): JsonRpcProvider {
-  // For Hardhat, we don't need retry logic - it's reliable
-  // Retry logic was causing nonce conflicts with parallel requests
   const provider = new JsonRpcProvider(PURECHAIN_RPC, { 
     chainId: PURECHAIN_CHAIN_ID, 
-    name: 'hardhat'
+    name: 'purechain'
   }, { staticNetwork: true });
   
   return provider;
@@ -200,9 +224,10 @@ export class PureChainClient {
     const factory = new ContractFactory(abi, bytecode, this.wallet);
     console.log('  Deploying contract...');
     
-    // Use fixed gas limit for large contract deployment
+    // Use fixed gas limit for large contract deployment, zero gas price for PureChain
     const contract = await factory.deploy({ 
-      gasLimit: 10000000  // 10M gas - enough for large contract
+      gasLimit: 30000000,  // 30M gas - BioPassport contract is large
+      gasPrice: PURECHAIN_GAS_PRICE
     });
     
     console.log('  Transaction sent, waiting for confirmation...');
@@ -278,12 +303,31 @@ export class PureChainClient {
       
       console.log(`[TX] ${methodName} nonce=${nonce}`);
       
-      const tx = await (this.contract as any)[methodName](...args, { 
+      // Manually encode and send transaction to avoid ethers v6 argument parsing issues
+      const contractAddress = await this.contract!.getAddress();
+      let data: string;
+      try {
+        data = this.contract!.interface.encodeFunctionData(methodName, args);
+      } catch (encodeError: any) {
+        console.log(`  [ENCODE ERROR] ${methodName}: ${encodeError.message}`);
+        throw encodeError;
+      }
+      
+      const txRequest = {
+        to: contractAddress,
+        data: data,
         gasPrice: PURECHAIN_GAS_PRICE,
+        gasLimit: 500000,
         nonce: nonce
-      });
+      };
+      
+      const tx = await this.wallet!.sendTransaction(txRequest);
       const receipt = await tx.wait();
       const duration = performance.now() - start;
+      
+      if (!receipt) {
+        throw new Error('Transaction failed - no receipt');
+      }
       
       // Only increment nonce AFTER successful confirmation
       this._nextNonce++;
@@ -319,10 +363,15 @@ export class PureChainClient {
     this.ensureConnected();
     
     try {
+      // Contract expects bytes32 for metadataHash and ownerOrg string
+      const hashBytes32 = this.toBytes32(metadataHash);
+      const ownerOrg = this.config.orgId || 'Org1MSP';
+      
       const { receipt, metrics } = await this.executeWithMetrics(
         'registerMaterial',
         materialType,
-        metadataHash
+        hashBytes32,
+        ownerOrg
       );
 
       // Finality assertion
@@ -336,10 +385,11 @@ export class PureChainClient {
       }
 
       // Construct materialId using deterministic format from contract:
-      // materialId = "bio:" + materialType + ":" + materialCount
-      // The event has materialId indexed (hashed), so we reconstruct it ourselves
+      // materialId = "bio:" + typePrefix + ":" + materialCount
+      // Contract uses lowercase: cell_line or plasmid
       this._materialCount++;
-      const materialId = `bio:${materialType}:${this._materialCount}`;
+      const typePrefix = materialType === 'CELL_LINE' ? 'cell_line' : 'plasmid';
+      const materialId = `bio:${typePrefix}:${this._materialCount}`;
 
       return {
         txId: receipt.hash,
@@ -370,18 +420,26 @@ export class PureChainClient {
   ): Promise<TransactionResult> {
     this.ensureConnected();
     
-    // Solidity expects artifactRefs as JSON string
-    const artifactRefs = JSON.stringify([{ cid: artifactCid, hash: artifactHash }]);
+    // Convert credential type string to enum index
+    const credTypeIndex = this.credentialTypeToIndex(credentialType);
+    // Convert hashes to bytes32
+    const commitmentBytes32 = this.toBytes32(commitmentHash);
+    const artifactBytes32 = this.toBytes32(artifactHash);
+    const issuerId = this.config.orgId || 'Org1MSP';
+    
+    // Debug: log the args being encoded
+    console.log(`  [DEBUG] issueCredential args: materialId=${materialId}, credType=${credTypeIndex}, validUntil=${validUntilUnixSec}`);
     
     try {
       const { receipt, metrics } = await this.executeWithMetrics(
         'issueCredential',
         materialId,
-        credentialType,          // string (not enum index)
-        commitmentHash,          // string
+        credTypeIndex,           // uint8 enum index (0, 1, 2)
+        commitmentBytes32,       // bytes32
         validUntilUnixSec,       // uint256 (unix seconds)
-        artifactRefs,            // string (JSON encoded)
-        signatureRef             // string
+        artifactCid,             // string (off-chain storage URI)
+        artifactBytes32,         // bytes32
+        issuerId                 // string (issuer org ID)
       );
 
       // Finality assertion: verify we have a mined transaction
@@ -418,11 +476,17 @@ export class PureChainClient {
     this.ensureConnected();
     
     try {
+      // Contract expects: initiateTransfer(materialId, toAddress, toOrg, shipmentHash)
+      // Use wallet address as toAddress (self-transfer for benchmark)
+      const toAddress = this.wallet!.address;
+      const shipmentBytes32 = this.toBytes32(shipmentHash);
+      
       const { receipt, metrics } = await this.executeWithMetrics(
-        'transferMaterial',
+        'initiateTransfer',
         materialId,
+        toAddress,
         toOrg,
-        shipmentHash
+        shipmentBytes32
       );
 
       // Finality assertion
@@ -858,6 +922,18 @@ export class PureChainClient {
     }
   }
 
+  /**
+   * Convert hex string to bytes32 format (add 0x prefix if needed)
+   */
+  private toBytes32(hash: string): string {
+    if (!hash) return '0x' + '0'.repeat(64);
+    // Remove 0x prefix if present, then re-add it
+    const cleanHash = hash.startsWith('0x') ? hash.slice(2) : hash;
+    // Pad to 64 chars (32 bytes) if needed
+    const padded = cleanHash.padStart(64, '0');
+    return '0x' + padded;
+  }
+
   private parseMaterial(data: any): Material {
     // Map numeric status to string (Solidity enum returns uint8)
     const rawStatus = data.status ?? data[4];
@@ -914,60 +990,26 @@ export class PureChainClient {
 
   /**
    * Get ABI and bytecode for BioPassport Registry contract
-   * Uses embedded contract source for consistency (string-based credential types)
+   * Loads both from Hardhat artifacts to ensure consistency
    */
   private getBioPassportRegistryABI(): { abi: any[]; bytecode: string } {
-    // Use embedded contract ABI (string-based, matches our client methods)
-    const abi = [
-      "function registerMaterial(string materialType, string metadataHash) returns (string)",
-      "function getMaterial(string materialId) view returns (tuple(string materialId, string materialType, string metadataHash, string ownerOrg, uint8 status, uint256 createdAt, uint256 updatedAt))",
-      "function issueCredential(string materialId, string credentialType, string commitmentHash, uint256 validUntil, string artifactRefs, string signatureRef) returns (string)",
-      "function getCredential(string credentialId) view returns (tuple(string materialId, string credentialId, string credentialType, string commitmentHash, string issuerId, uint256 issuedAt, uint256 validUntil, string artifactRefs, string signatureRef, bool revoked))",
-      "function getCredentialsForMaterial(string materialId) view returns (tuple(string materialId, string credentialId, string credentialType, string commitmentHash, string issuerId, uint256 issuedAt, uint256 validUntil, string artifactRefs, string signatureRef, bool revoked)[])",
-      "function transferMaterial(string materialId, string toOrg, string shipmentHash) returns (string)",
-      "function acceptTransfer(string transferId)",
-      "function setStatus(string materialId, uint8 status, string reasonHash)",
-      "function revokeCredential(string credentialId, string reason)",
-      "function verifyMaterial(string materialId) view returns (bool pass, string[] reasons)",
-      "function getHistory(string materialId) view returns (tuple(string materialId, string[] events))",
-      "function getMaterialsByOrg(string orgId) view returns (tuple(string materialId, string materialType, string metadataHash, string ownerOrg, uint8 status, uint256 createdAt, uint256 updatedAt)[])",
-      "event MaterialRegistered(string indexed materialId, string materialType, string ownerOrg)",
-      "event CredentialIssued(string indexed credentialId, string indexed materialId, string credentialType)",
-      "event MaterialTransferred(string indexed transferId, string indexed materialId, string fromOrg, string toOrg)",
-      "event TransferAccepted(string indexed transferId)",
-      "event StatusChanged(string indexed materialId, uint8 newStatus)",
-      "event CredentialRevoked(string indexed credentialId, string reason)"
+    // Load from Hardhat artifacts (pre-compiled)
+    const artifactPaths = [
+      path.resolve(__dirname, '..', '..', 'contracts', 'artifacts', 'src', 'BioPassportRegistry.sol', 'BioPassportRegistry.json'),
+      path.resolve(__dirname, '..', '..', '..', 'contracts', 'artifacts', 'src', 'BioPassportRegistry.sol', 'BioPassportRegistry.json'),
+      path.resolve(process.cwd(), '..', 'contracts', 'artifacts', 'src', 'BioPassportRegistry.sol', 'BioPassportRegistry.json'),
+      path.resolve(process.cwd(), 'contracts', 'artifacts', 'src', 'BioPassportRegistry.sol', 'BioPassportRegistry.json'),
     ];
     
-    // Compile from embedded source
-    const source = this.getBioPassportRegistrySource();
-    const bytecode = this.compileContract(source);
-    
-    return { abi, bytecode };
-  }
-  
-  /**
-   * Compile Solidity source to bytecode (simplified - uses solc if available)
-   */
-  private compileContract(source: string): string {
-    // In production, this should use pre-compiled bytecode or hardhat artifacts
-    // For now, we use solc-js if available, or fall back to a known bytecode
-    try {
-      // Try to require solc
-      const solc = require('solc');
-      const input = {
-        language: 'Solidity',
-        sources: { 'BioPassportRegistry.sol': { content: source } },
-        settings: { outputSelection: { '*': { '*': ['evm.bytecode'] } } }
-      };
-      const output = JSON.parse(solc.compile(JSON.stringify(input)));
-      return output.contracts['BioPassportRegistry.sol']['BioPassportRegistry'].evm.bytecode.object;
-    } catch {
-      // If solc not available, use ethers to compile via provider (or use pre-compiled)
-      // For PureChain deployment, we assume the contract compiles at runtime
-      console.log('[INFO] solc not available, using runtime compilation via provider');
-      return '0x'; // Placeholder - actual deployment will use purechain's solc
+    for (const artifactPath of artifactPaths) {
+      if (fs.existsSync(artifactPath)) {
+        console.log(`  Loading contract from: ${artifactPath}`);
+        const artifact = JSON.parse(fs.readFileSync(artifactPath, 'utf8'));
+        return { abi: artifact.abi, bytecode: artifact.bytecode };
+      }
     }
+    
+    throw new Error('BioPassportRegistry artifact not found. Run `npx hardhat compile` in contracts/ first.');
   }
 
   /**
