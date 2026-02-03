@@ -1,6 +1,6 @@
 /**
  * BioPassport Material Verifier
- * 
+ *
  * Verifies materials against on-chain policy rules and validates
  * off-chain artifact integrity.
  */
@@ -9,17 +9,23 @@ import * as crypto from 'crypto';
 import { Client as MinioClient } from 'minio';
 import canonicalize from 'canonicalize';
 import { ec as EC } from 'elliptic';
+import { ethers, JsonRpcProvider, Contract } from 'ethers';
+import * as fs from 'fs';
+import * as path from 'path';
+import { IssuerRegistry } from './issuer-registry';
 
 const ec = new EC('secp256k1');
 
 export interface VerifierConfig {
   purechainEndpoint: string;
+  contractAddress: string;
   storageEndpoint: string;
   storagePort: number;
   storageBucket: string;
   storageAccessKey: string;
   storageSecretKey: string;
   trustedIssuers?: string[];
+  issuerRegistryPath?: string;
 }
 
 export interface Material {
@@ -109,6 +115,9 @@ export interface ArtifactIntegrityResult {
 export class MaterialVerifier {
   private config: VerifierConfig;
   private storage: MinioClient;
+  private provider: JsonRpcProvider;
+  private contract: Contract;
+  private issuerRegistry: IssuerRegistry;
 
   constructor(config: VerifierConfig) {
     this.config = config;
@@ -119,6 +128,48 @@ export class MaterialVerifier {
       accessKey: config.storageAccessKey,
       secretKey: config.storageSecretKey
     });
+
+    // Initialize PureChain connection
+    this.provider = new JsonRpcProvider(config.purechainEndpoint, {
+      chainId: 900520900520,  // PureChain chain ID
+      name: 'purechain'
+    }, { staticNetwork: true });
+
+    // Load contract ABI and initialize contract
+    const contractABI = this.loadContractABI();
+    this.contract = new Contract(
+      config.contractAddress,
+      contractABI,
+      this.provider
+    );
+
+    // Initialize issuer registry
+    this.issuerRegistry = new IssuerRegistry(config.issuerRegistryPath);
+  }
+
+  /**
+   * Load contract ABI from compiled artifacts
+   */
+  private loadContractABI(): any[] {
+    const artifactPaths = [
+      path.resolve(__dirname, '../../contracts/artifacts/src/BioPassportRegistry.sol/BioPassportRegistry.json'),
+      path.resolve(__dirname, '../../../contracts/artifacts/src/BioPassportRegistry.sol/BioPassportRegistry.json'),
+      path.resolve(process.cwd(), 'contracts/artifacts/src/BioPassportRegistry.sol/BioPassportRegistry.json'),
+      path.resolve(process.cwd(), '../contracts/artifacts/src/BioPassportRegistry.sol/BioPassportRegistry.json'),
+    ];
+
+    for (const artifactPath of artifactPaths) {
+      if (fs.existsSync(artifactPath)) {
+        console.log(`Loading contract ABI from: ${artifactPath}`);
+        const artifact = JSON.parse(fs.readFileSync(artifactPath, 'utf8'));
+        return artifact.abi;
+      }
+    }
+
+    throw new Error(
+      'Contract ABI not found. Please compile contracts first:\n' +
+      '  cd contracts && npx hardhat compile'
+    );
   }
 
   /**
@@ -398,14 +449,81 @@ export class MaterialVerifier {
   }
 
   private async verifyCredentialSignature(credential: Credential): Promise<boolean> {
-    // In production, this would:
-    // 1. Get the issuer's public key from a registry
-    // 2. Reconstruct the canonical credential payload
-    // 3. Verify the signature
-    
-    // For now, return true (signature verification would be implemented with actual keys)
-    console.log(`Verifying signature for credential ${credential.credentialId}`);
-    return true;
+    try {
+      // 1. Get the issuer's public key from registry
+      const publicKey = await this.issuerRegistry.getPublicKey(credential.issuerId);
+      if (!publicKey) {
+        console.error(`Public key not found for issuer: ${credential.issuerId}`);
+        return false;
+      }
+
+      // 2. Reconstruct the canonical credential payload
+      const payload = {
+        credentialType: credential.credentialType,
+        materialId: credential.materialId,
+        issuerId: credential.issuerId,
+        issuedAt: credential.issuedAt,
+        validUntil: credential.validUntil,
+        artifactRefs: credential.artifactRefs,
+        commitmentHash: credential.commitmentHash
+      };
+
+      // 3. Get signature (from storage or inline)
+      const signature = await this.getSignature(credential.signatureRef);
+      if (!signature) {
+        console.error(`Signature not found for credential ${credential.credentialId}`);
+        return false;
+      }
+
+      // 4. Verify signature using elliptic curve cryptography
+      const canonical = canonicalize(payload);
+      if (!canonical) {
+        console.error('Failed to canonicalize credential payload');
+        return false;
+      }
+
+      const hash = crypto.createHash('sha256').update(canonical).digest('hex');
+      const key = ec.keyFromPublic(publicKey, 'hex');
+      const isValid = key.verify(hash, signature);
+
+      if (!isValid) {
+        console.error(`Invalid signature for credential ${credential.credentialId}`);
+      }
+
+      return isValid;
+    } catch (error: any) {
+      console.error(`Signature verification failed for credential ${credential.credentialId}: ${error.message}`);
+      return false;
+    }
+  }
+
+  /**
+   * Get signature from storage or inline reference
+   */
+  private async getSignature(signatureRef: string): Promise<string | null> {
+    try {
+      // If signature is stored in S3/MinIO
+      if (signatureRef.startsWith('s3://')) {
+        const objectKey = this.cidToObjectKey(signatureRef);
+        const chunks: Buffer[] = [];
+        const stream = await this.storage.getObject(this.config.storageBucket, objectKey);
+
+        return new Promise((resolve, reject) => {
+          stream.on('data', (chunk: Buffer) => chunks.push(chunk));
+          stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf-8')));
+          stream.on('error', (error) => {
+            console.error(`Failed to fetch signature from storage: ${error.message}`);
+            resolve(null);
+          });
+        });
+      }
+
+      // Otherwise assume it's an inline signature
+      return signatureRef;
+    } catch (error: any) {
+      console.error(`Failed to get signature: ${error.message}`);
+      return null;
+    }
   }
 
   private async verifyArtifactIntegrity(
@@ -505,23 +623,123 @@ export class MaterialVerifier {
     };
   }
 
-  // Simulated chain queries (would connect to PureChain in production)
+  /**
+   * Query material from PureChain blockchain
+   */
   private async getMaterial(materialId: string): Promise<Material | null> {
-    // In production, query PureChain
-    console.log(`Querying material: ${materialId}`);
-    return null; // Would return actual material
+    try {
+      console.log(`Querying material from blockchain: ${materialId}`);
+      const result = await this.queryWithRetry(() => this.contract.getMaterial(materialId));
+
+      if (!result || result.materialId === '') {
+        return null;
+      }
+
+      // Parse Solidity enum to string
+      const statusMap = ['ACTIVE', 'QUARANTINED', 'REVOKED'];
+
+      return {
+        materialId: result.materialId,
+        materialType: result.materialType,
+        metadataHash: ethers.hexlify(result.metadataHash),
+        ownerOrg: result.ownerOrg,
+        status: statusMap[result.status] || 'UNKNOWN',
+        createdAt: new Date(Number(result.createdAt) * 1000).toISOString(),
+        updatedAt: new Date(Number(result.updatedAt) * 1000).toISOString()
+      };
+    } catch (error: any) {
+      console.error(`Failed to query material ${materialId}: ${error.message}`);
+      return null;
+    }
   }
 
+  /**
+   * Query credentials for a material from PureChain blockchain
+   */
   private async getCredentialsForMaterial(materialId: string): Promise<Credential[]> {
-    // In production, query PureChain
-    console.log(`Querying credentials for: ${materialId}`);
-    return []; // Would return actual credentials
+    try {
+      console.log(`Querying credentials from blockchain for: ${materialId}`);
+      const results = await this.queryWithRetry(() => this.contract.getCredentials(materialId));
+
+      if (!results || results.length === 0) {
+        return [];
+      }
+
+      const credTypeMap = ['IDENTITY', 'QC_MYCO', 'USAGE_RIGHTS'];
+
+      return results.map((cred: any) => ({
+        materialId: cred.materialId,
+        credentialId: cred.credentialId,
+        credentialType: credTypeMap[cred.credType] || 'UNKNOWN',
+        commitmentHash: ethers.hexlify(cred.commitmentHash),
+        issuerId: cred.issuerId,
+        issuedAt: new Date(Number(cred.issuedAt) * 1000).toISOString(),
+        validUntil: new Date(Number(cred.validUntil) * 1000).toISOString(),
+        artifactRefs: [{
+          cid: cred.artifactCid,
+          hash: ethers.hexlify(cred.artifactHash)
+        }],
+        signatureRef: cred.signatureRef || '',
+        revoked: cred.revoked,
+        revokedAt: cred.revoked ? new Date().toISOString() : undefined,
+        revokedReason: cred.revoked ? 'Revoked on-chain' : undefined
+      }));
+    } catch (error: any) {
+      console.error(`Failed to query credentials for ${materialId}: ${error.message}`);
+      return [];
+    }
   }
 
+  /**
+   * Query transfer history for a material from PureChain blockchain
+   */
   private async getTransfersForMaterial(materialId: string): Promise<TransferEvent[]> {
-    // In production, query PureChain
-    console.log(`Querying transfers for: ${materialId}`);
-    return []; // Would return actual transfers
+    try {
+      console.log(`Querying transfers from blockchain for: ${materialId}`);
+      const results = await this.queryWithRetry(() => this.contract.getTransfers(materialId));
+
+      if (!results || results.length === 0) {
+        return [];
+      }
+
+      return results.map((transfer: any) => ({
+        transferId: transfer.transferId,
+        materialId: transfer.materialId,
+        from: transfer.fromOrg,
+        to: transfer.toOrg,
+        shipmentHash: ethers.hexlify(transfer.shipmentHash),
+        timestamp: new Date(Number(transfer.timestamp) * 1000).toISOString(),
+        accepted: transfer.accepted,
+        acceptedAt: transfer.accepted ? new Date(Number(transfer.timestamp) * 1000).toISOString() : undefined
+      }));
+    } catch (error: any) {
+      console.error(`Failed to query transfers for ${materialId}: ${error.message}`);
+      return [];
+    }
+  }
+
+  /**
+   * Retry wrapper for blockchain queries
+   */
+  private async queryWithRetry<T>(
+    queryFn: () => Promise<T>,
+    maxRetries: number = 3,
+    baseDelay: number = 1000
+  ): Promise<T> {
+    for (let attempt = 0; attempt <= maxRetries; attempt++) {
+      try {
+        return await queryFn();
+      } catch (error: any) {
+        if (attempt === maxRetries) {
+          throw error;
+        }
+
+        const delay = baseDelay * Math.pow(2, attempt);
+        console.warn(`Query failed (attempt ${attempt + 1}/${maxRetries}), retrying in ${delay}ms...`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+      }
+    }
+    throw new Error('Unreachable');
   }
 }
 
@@ -530,13 +748,22 @@ export class MaterialVerifier {
  */
 export function createVerifier(config?: Partial<VerifierConfig>): MaterialVerifier {
   const fullConfig: VerifierConfig = {
-    purechainEndpoint: config?.purechainEndpoint || process.env.PURECHAIN_ENDPOINT || 'localhost:7051',
+    purechainEndpoint: config?.purechainEndpoint || process.env.RPC_URL || 'https://purechainnode.com:8547',
+    contractAddress: config?.contractAddress || process.env.CONTRACT_ADDRESS || '',
     storageEndpoint: config?.storageEndpoint || process.env.STORAGE_ENDPOINT || 'localhost',
     storagePort: config?.storagePort || parseInt(process.env.STORAGE_PORT || '9000'),
     storageBucket: config?.storageBucket || process.env.STORAGE_BUCKET || 'biopassport',
     storageAccessKey: config?.storageAccessKey || process.env.STORAGE_ACCESS_KEY || 'minioadmin',
     storageSecretKey: config?.storageSecretKey || process.env.STORAGE_SECRET_KEY || 'minioadmin',
-    trustedIssuers: config?.trustedIssuers || process.env.TRUSTED_ISSUERS?.split(',')
+    trustedIssuers: config?.trustedIssuers || process.env.TRUSTED_ISSUERS?.split(','),
+    issuerRegistryPath: config?.issuerRegistryPath || process.env.ISSUER_REGISTRY_PATH
   };
+
+  if (!fullConfig.contractAddress) {
+    throw new Error(
+      'Contract address is required. Set CONTRACT_ADDRESS environment variable or provide in config.'
+    );
+  }
+
   return new MaterialVerifier(fullConfig);
 }

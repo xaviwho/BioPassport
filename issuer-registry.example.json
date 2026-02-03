@@ -1,0 +1,18 @@
+{
+  "$schema": "Issuer Registry Configuration",
+  "$comment": "This file maps issuer IDs to their public keys for credential signature verification",
+  "issuers": {
+    "Org1MSP": {
+      "issuerId": "Org1MSP",
+      "publicKey": "REPLACE_WITH_ACTUAL_PUBLIC_KEY_IN_HEX_FORMAT",
+      "addedAt": "2026-02-03T00:00:00Z",
+      "description": "Research Laboratory A - Main credential issuer"
+    },
+    "QCLab": {
+      "issuerId": "QCLab",
+      "publicKey": "REPLACE_WITH_ACTUAL_PUBLIC_KEY_IN_HEX_FORMAT",
+      "addedAt": "2026-02-03T00:00:00Z",
+      "description": "Quality Control Laboratory - QC credential issuer"
+    }
+  }
+}
