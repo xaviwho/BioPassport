@@ -13,6 +13,7 @@
     "cli": "ts-node src/cli.ts",
     "register": "ts-node src/cli.ts register",
     "issue": "ts-node src/cli.ts issue",
+    "generate-keypair": "ts-node scripts/generate-keypair.ts",
     "test": "jest",
     "lint": "eslint src/**/*.ts"
   },

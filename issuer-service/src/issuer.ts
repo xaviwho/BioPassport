@@ -413,10 +413,20 @@ export function createIssuer(config: Partial<IssuerConfig> = {}): CredentialIssu
     storageBucket: config.storageBucket || process.env.STORAGE_BUCKET || 'biopassport'
   };
 
-  // For demo/testing, generate key from org ID if no key path provided
-  const privateKey = fullConfig.privateKeyPath 
-    ? require('./crypto').loadPrivateKey(fullConfig.privateKeyPath)
-    : keyFromSeed(fullConfig.orgId);
+  // SECURITY FIX: Require explicit private key path - no predictable key derivation
+  if (!fullConfig.privateKeyPath) {
+    throw new Error(
+      '❌ SECURITY ERROR: Private key path is required.\n\n' +
+      'Set ISSUER_PRIVATE_KEY environment variable or provide privateKeyPath in config.\n' +
+      'Never use predictable key derivation in production.\n\n' +
+      'To generate a secure keypair, run:\n' +
+      '  npm run generate-keypair -- ' + fullConfig.orgId + ' ./keys\n\n' +
+      'Then set: export ISSUER_PRIVATE_KEY=./keys/' + fullConfig.orgId + '-private.pem'
+    );
+  }
+
+  const { loadPrivateKey } = require('./crypto');
+  const privateKey = loadPrivateKey(fullConfig.privateKeyPath);
 
   const storage = createStorage({
     endpoint: fullConfig.storageEndpoint,
