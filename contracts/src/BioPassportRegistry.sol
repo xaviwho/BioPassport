@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: MIT
-pragma solidity ^0.8.19;
+pragma solidity ^0.8.20;
 
-import "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+import "@openzeppelin/contracts/utils/ReentrancyGuard.sol";
 import "@openzeppelin/contracts/access/AccessControl.sol";
-import "@openzeppelin/contracts/security/Pausable.sol";
+import "@openzeppelin/contracts/utils/Pausable.sol";
 
 /**
  * @title BioPassportRegistry V3
@@ -43,6 +43,13 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
     error NoPendingTransfer();
     error NotTransferRecipient();
     error InvalidHistoryIndex();
+    error DeviceNotEnrolled();
+    error DeviceAlreadyEnrolled();
+    error DeviceRevoked();
+    error InvalidDeviceSignature();
+    error AttestationReplay();
+    error AttestationStale();
+    error InvalidCaptureTs();
     
     // ==================== Types ====================
     
@@ -92,6 +99,22 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
         bool canIssueQC;
         bool canIssueUsageRights;
     }
+
+    struct Device {
+        bytes32 deviceId;
+        address deviceAddress;
+        address enroller;
+        uint256 enrolledAt;
+        uint256 revokedAt;
+        string instrumentType;
+        uint256 lastCaptureTs;
+    }
+
+    struct Attestation {
+        bytes32 deviceId;
+        uint256 captureTs;
+        bytes32 attestationHash;
+    }
     
     // ==================== Roles ====================
 
@@ -99,6 +122,7 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
     bytes32 public constant REGISTRAR_ROLE = keccak256("REGISTRAR_ROLE");
     bytes32 public constant AUDITOR_ROLE = keccak256("AUDITOR_ROLE");
     bytes32 public constant ISSUER_MANAGER_ROLE = keccak256("ISSUER_MANAGER_ROLE");
+    bytes32 public constant DEVICE_MANAGER_ROLE = keccak256("DEVICE_MANAGER_ROLE");
 
     // ==================== State ====================
 
@@ -120,6 +144,11 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
     // Issuer authorization with revocation tracking
     mapping(address => IssuerPermission) public issuerPermissions;
     mapping(address => uint256) public issuerRevokedAt; // 0 = not revoked, >0 = revocation timestamp
+
+    mapping(bytes32 => Device) public devices;
+    mapping(bytes32 => bool) public deviceExists;
+
+    mapping(string => Attestation) public credentialAttestations;
     
     // History events (for audit trail)
     mapping(string => bytes32[]) public materialHistory;
@@ -193,6 +222,27 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
     );
     
     event IssuerRevocationRecorded(address indexed issuer, uint256 revokedAt);
+
+    event DeviceEnrolled(
+        bytes32 indexed deviceId,
+        address indexed deviceAddress,
+        string instrumentType,
+        address indexed enroller,
+        uint256 timestamp
+    );
+
+    event DeviceRevocationRecorded(
+        bytes32 indexed deviceId,
+        address indexed revoker,
+        uint256 timestamp
+    );
+
+    event AttestationVerified(
+        string indexed credentialId,
+        bytes32 indexed deviceId,
+        bytes32 attestationHash,
+        uint256 captureTs
+    );
     
     // ==================== Modifiers ====================
 
@@ -203,8 +253,8 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
     }
 
     modifier onlyApprovedIssuer() {
-        if (!issuerPermissions[msg.sender].isApproved) revert NotApprovedIssuer();
         if (issuerRevokedAt[msg.sender] != 0) revert IssuerRevoked();
+        if (!issuerPermissions[msg.sender].isApproved) revert NotApprovedIssuer();
         _;
     }
 
@@ -221,6 +271,7 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
         _grantRole(REGISTRAR_ROLE, msg.sender);
         _grantRole(ISSUER_MANAGER_ROLE, msg.sender);
         _grantRole(AUDITOR_ROLE, msg.sender);
+        _grantRole(DEVICE_MANAGER_ROLE, msg.sender);
 
         // Deployer is automatically an approved issuer with all permissions
         issuerPermissions[msg.sender] = IssuerPermission({
@@ -263,6 +314,129 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
         issuerRevokedAt[issuer] = block.timestamp;
         
         emit IssuerRevocationRecorded(issuer, block.timestamp);
+    }
+
+    // ==================== Device Registry Functions ====================
+
+    /**
+     * @notice Enroll an instrument edge node with a device-bound key
+     * @param deviceId keccak256 of the device identifier (e.g., "device:olympus:SN12345")
+     * @param deviceAddress Ethereum address derived from the device's secp256k1 pubkey
+     * @param instrumentType Instrument category ("MICROSCOPE", "PCR", "MYCO_DETECTOR")
+     */
+    function enrollDevice(
+        bytes32 deviceId,
+        address deviceAddress,
+        string memory instrumentType
+    ) external nonReentrant whenNotPaused onlyRole(DEVICE_MANAGER_ROLE) {
+        if (deviceExists[deviceId]) revert DeviceAlreadyEnrolled();
+        if (deviceAddress == address(0)) revert InvalidDeviceSignature();
+
+        devices[deviceId] = Device({
+            deviceId: deviceId,
+            deviceAddress: deviceAddress,
+            enroller: msg.sender,
+            enrolledAt: block.timestamp,
+            revokedAt: 0,
+            instrumentType: instrumentType,
+            lastCaptureTs: 0
+        });
+        deviceExists[deviceId] = true;
+
+        emit DeviceEnrolled(deviceId, deviceAddress, instrumentType, msg.sender, block.timestamp);
+    }
+
+    /**
+     * @notice Revoke an enrolled device (e.g., on compromise)
+     */
+    function revokeDevice(bytes32 deviceId) external nonReentrant whenNotPaused onlyRole(DEVICE_MANAGER_ROLE) {
+        if (!deviceExists[deviceId]) revert DeviceNotEnrolled();
+        if (devices[deviceId].revokedAt != 0) revert DeviceRevoked();
+
+        devices[deviceId].revokedAt = block.timestamp;
+        emit DeviceRevocationRecorded(deviceId, msg.sender, block.timestamp);
+    }
+
+    /**
+     * @notice Compute the attestation message hash for a QC credential.
+     * @dev Off-chain IEN must sign this exact hash with the device key.
+     *      Uses EIP-191 prefix so ethers.js / web3.js signing works naturally.
+     */
+    function attestationHash(
+        bytes32 deviceId,
+        string memory materialId,
+        CredentialType credType,
+        bytes32 commitmentHash,
+        bytes32 artifactHash,
+        uint256 captureTs
+    ) public pure returns (bytes32) {
+        bytes32 payload = keccak256(abi.encode(
+            deviceId, materialId, credType, commitmentHash, artifactHash, captureTs
+        ));
+        return keccak256(abi.encodePacked(
+            "\x19Ethereum Signed Message:\n32", payload
+        ));
+    }
+
+    /**
+     * @notice Recover signer from an EIP-191 signature over the attestation payload.
+     */
+    function _recoverAttestationSigner(
+        bytes32 msgHash,
+        bytes memory signature
+    ) internal pure returns (address) {
+        if (signature.length != 65) return address(0);
+
+        bytes32 r;
+        bytes32 s;
+        uint8 v;
+        assembly {
+            r := mload(add(signature, 32))
+            s := mload(add(signature, 64))
+            v := byte(0, mload(add(signature, 96)))
+        }
+        if (v < 27) v += 27;
+        return ecrecover(msgHash, v, r, s);
+    }
+
+    function _enforceIssuerPermission(CredentialType credType) internal view {
+        IssuerPermission memory perm = issuerPermissions[msg.sender];
+        if (credType == CredentialType.IDENTITY) {
+            if (!perm.canIssueIdentity) revert NotAuthorizedForCredentialType();
+        } else if (credType == CredentialType.QC_MYCO) {
+            if (!perm.canIssueQC) revert NotAuthorizedForCredentialType();
+        } else if (credType == CredentialType.USAGE_RIGHTS) {
+            if (!perm.canIssueUsageRights) revert NotAuthorizedForCredentialType();
+        }
+    }
+
+    function _createCredential(
+        string memory materialId,
+        CredentialType credType,
+        bytes32 commitmentHash,
+        uint256 validUntil,
+        string memory artifactCid,
+        bytes32 artifactHash,
+        string memory issuerId
+    ) internal returns (string memory credentialId) {
+        credentialCount++;
+        credentialId = string(abi.encodePacked("cred:", uint2str(credentialCount)));
+
+        credentials[credentialId] = Credential({
+            credentialId: credentialId,
+            materialId: materialId,
+            credType: credType,
+            commitmentHash: commitmentHash,
+            issuer: msg.sender,
+            issuerId: issuerId,
+            issuedAt: block.timestamp,
+            validUntil: validUntil,
+            artifactCid: artifactCid,
+            artifactHash: artifactHash,
+            revoked: false
+        });
+
+        materialCredentials[materialId].push(credentialId);
     }
     
     // ==================== Material Functions ====================
@@ -317,6 +491,52 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
         emit MaterialRegistered(materialId, materialType, msg.sender, ownerOrg, block.timestamp);
         
         return materialId;
+    }
+
+    /**
+     * @notice Register multiple biomaterials in one transaction.
+     */
+    function batchRegisterMaterials(
+        string[] memory materialTypes,
+        bytes32[] memory metadataHashes,
+        string[] memory ownerOrgs
+    ) external nonReentrant whenNotPaused returns (string[] memory materialIds) {
+        uint256 batchSize = materialTypes.length;
+        require(batchSize <= 100, "Batch size exceeds limit (100)");
+        require(metadataHashes.length == batchSize && ownerOrgs.length == batchSize, "Array length mismatch");
+
+        materialIds = new string[](batchSize);
+        for (uint256 i = 0; i < batchSize; i++) {
+            bytes32 mtHash = keccak256(bytes(materialTypes[i]));
+            if (mtHash != CELL_LINE_HASH && mtHash != PLASMID_HASH) {
+                revert InvalidMaterialType();
+            }
+            if (metadataHashes[i] == bytes32(0)) revert InvalidCommitmentHash();
+
+            materialCount++;
+            string memory typePrefix = (mtHash == CELL_LINE_HASH) ? "cell_line" : "plasmid";
+            string memory materialId = string(abi.encodePacked("bio:", typePrefix, ":", uint2str(materialCount)));
+            if (materialExists[materialId]) revert MaterialAlreadyExists();
+
+            materials[materialId] = Material({
+                materialId: materialId,
+                materialType: materialTypes[i],
+                metadataHash: metadataHashes[i],
+                owner: msg.sender,
+                ownerOrg: ownerOrgs[i],
+                status: MaterialStatus.ACTIVE,
+                createdAt: block.timestamp,
+                updatedAt: block.timestamp
+            });
+
+            materialExists[materialId] = true;
+            materialHistory[materialId].push(keccak256(abi.encodePacked(
+                "REGISTERED", msg.sender, block.timestamp
+            )));
+
+            materialIds[i] = materialId;
+            emit MaterialRegistered(materialId, materialTypes[i], msg.sender, ownerOrgs[i], block.timestamp);
+        }
     }
     
     /**
@@ -398,34 +618,16 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
         if (artifactHash == bytes32(0)) revert InvalidArtifactHash();
         if (validUntil != 0 && validUntil <= block.timestamp) revert InvalidValidUntil();
         
-        // Check issuer has permission for this credential type
-        IssuerPermission memory perm = issuerPermissions[msg.sender];
-        if (credType == CredentialType.IDENTITY) {
-            if (!perm.canIssueIdentity) revert NotAuthorizedForCredentialType();
-        } else if (credType == CredentialType.QC_MYCO) {
-            if (!perm.canIssueQC) revert NotAuthorizedForCredentialType();
-        } else if (credType == CredentialType.USAGE_RIGHTS) {
-            if (!perm.canIssueUsageRights) revert NotAuthorizedForCredentialType();
-        }
-        
-        credentialCount++;
-        credentialId = string(abi.encodePacked("cred:", uint2str(credentialCount)));
-        
-        credentials[credentialId] = Credential({
-            credentialId: credentialId,
-            materialId: materialId,
-            credType: credType,
-            commitmentHash: commitmentHash,
-            issuer: msg.sender,
-            issuerId: issuerId,
-            issuedAt: block.timestamp,
-            validUntil: validUntil,
-            artifactCid: artifactCid,
-            artifactHash: artifactHash,
-            revoked: false
-        });
-        
-        materialCredentials[materialId].push(credentialId);
+        _enforceIssuerPermission(credType);
+        credentialId = _createCredential(
+            materialId,
+            credType,
+            commitmentHash,
+            validUntil,
+            artifactCid,
+            artifactHash,
+            issuerId
+        );
         
         materialHistory[materialId].push(keccak256(abi.encodePacked(
             "CREDENTIAL_ISSUED", credentialId, uint8(credType), block.timestamp
@@ -434,6 +636,119 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
         emit CredentialIssued(credentialId, materialId, credType, msg.sender, validUntil);
         
         return credentialId;
+    }
+
+    /**
+     * @notice Issue a QC credential with instrument-rooted edge attestation (IEA).
+     * @dev Enforces INV-9: signature must recover to the enrolled device address,
+     *      captureTs must be strictly greater than the device's lastCaptureTs,
+     *      and the device must not be revoked.
+     */
+    function issueCredentialWithAttestation(
+        string memory materialId,
+        CredentialType credType,
+        bytes32 commitmentHash,
+        uint256 validUntil,
+        string memory artifactCid,
+        bytes32 artifactHash,
+        string memory issuerId,
+        bytes32 deviceId,
+        uint256 captureTs,
+        bytes memory deviceSig
+    ) external nonReentrant whenNotPaused onlyApprovedIssuer materialMustExist(materialId) returns (string memory credentialId) {
+        if (commitmentHash == bytes32(0)) revert InvalidCommitmentHash();
+        if (artifactHash == bytes32(0)) revert InvalidArtifactHash();
+        if (validUntil != 0 && validUntil <= block.timestamp) revert InvalidValidUntil();
+
+        if (!deviceExists[deviceId]) revert DeviceNotEnrolled();
+        Device storage dev = devices[deviceId];
+        if (dev.revokedAt != 0) revert DeviceRevoked();
+        if (captureTs == 0 || captureTs > block.timestamp) revert InvalidCaptureTs();
+        if (captureTs <= dev.lastCaptureTs) revert AttestationReplay();
+
+        _enforceIssuerPermission(credType);
+
+        bytes32 msgHash = attestationHash(deviceId, materialId, credType, commitmentHash, artifactHash, captureTs);
+        address recovered = _recoverAttestationSigner(msgHash, deviceSig);
+        if (recovered == address(0) || recovered != dev.deviceAddress) revert InvalidDeviceSignature();
+
+        dev.lastCaptureTs = captureTs;
+
+        credentialId = _createCredential(
+            materialId,
+            credType,
+            commitmentHash,
+            validUntil,
+            artifactCid,
+            artifactHash,
+            issuerId
+        );
+
+        credentialAttestations[credentialId] = Attestation({
+            deviceId: deviceId,
+            captureTs: captureTs,
+            attestationHash: msgHash
+        });
+
+        materialHistory[materialId].push(keccak256(abi.encodePacked(
+            "CREDENTIAL_ISSUED_WITH_ATTESTATION", credentialId, uint8(credType), deviceId, block.timestamp
+        )));
+
+        emit CredentialIssued(credentialId, materialId, credType, msg.sender, validUntil);
+        emit AttestationVerified(credentialId, deviceId, msgHash, captureTs);
+
+        return credentialId;
+    }
+
+    /**
+     * @notice Issue multiple credentials in one transaction.
+     */
+    function batchIssueCredentials(
+        string[] memory materialIds,
+        CredentialType[] memory credTypes,
+        bytes32[] memory commitmentHashes,
+        uint256[] memory validUntils,
+        string[] memory artifactCids,
+        bytes32[] memory artifactHashes,
+        string[] memory issuerIds
+    ) external nonReentrant whenNotPaused onlyApprovedIssuer returns (string[] memory credentialIds) {
+        uint256 batchSize = materialIds.length;
+        require(batchSize <= 50, "Batch size exceeds limit (50)");
+        require(
+            credTypes.length == batchSize &&
+            commitmentHashes.length == batchSize &&
+            validUntils.length == batchSize &&
+            artifactCids.length == batchSize &&
+            artifactHashes.length == batchSize &&
+            issuerIds.length == batchSize,
+            "Array length mismatch"
+        );
+
+        credentialIds = new string[](batchSize);
+        for (uint256 i = 0; i < batchSize; i++) {
+            if (!materialExists[materialIds[i]]) revert MaterialNotFound();
+            if (commitmentHashes[i] == bytes32(0)) revert InvalidCommitmentHash();
+            if (artifactHashes[i] == bytes32(0)) revert InvalidArtifactHash();
+            if (validUntils[i] != 0 && validUntils[i] <= block.timestamp) revert InvalidValidUntil();
+
+            _enforceIssuerPermission(credTypes[i]);
+            string memory credentialId = _createCredential(
+                materialIds[i],
+                credTypes[i],
+                commitmentHashes[i],
+                validUntils[i],
+                artifactCids[i],
+                artifactHashes[i],
+                issuerIds[i]
+            );
+
+            materialHistory[materialIds[i]].push(keccak256(abi.encodePacked(
+                "CREDENTIAL_ISSUED", credentialId, uint8(credTypes[i]), block.timestamp
+            )));
+
+            credentialIds[i] = credentialId;
+            emit CredentialIssued(credentialId, materialIds[i], credTypes[i], msg.sender, validUntils[i]);
+        }
     }
     
     /**
@@ -523,186 +838,6 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
         emit TransferAccepted(pending.transferId, materialId, msg.sender, block.timestamp);
     }
 
-    // ==================== Batch Operations (Gas Optimized) ====================
-
-    /**
-     * @notice Register multiple materials in a single transaction
-     * @dev 10-15x gas savings compared to individual transactions
-     * @return materialIds Array of registered material IDs
-     */
-    function batchRegisterMaterials(
-        string[] memory materialTypes,
-        bytes32[] memory metadataHashes,
-        string[] memory ownerOrgs
-    ) external nonReentrant whenNotPaused returns (string[] memory materialIds) {
-        uint256 count = materialTypes.length;
-
-        // Validate input arrays have same length
-        if (count != metadataHashes.length || count != ownerOrgs.length) {
-            revert("Array length mismatch");
-        }
-
-        // Limit batch size to prevent gas limit issues
-        if (count > 100) revert("Batch size exceeds limit (100)");
-
-        materialIds = new string[](count);
-
-        unchecked {
-            for (uint256 i = 0; i < count; ++i) {
-                // Validate materialType
-                bytes32 mtHash = keccak256(bytes(materialTypes[i]));
-                if (mtHash != CELL_LINE_HASH && mtHash != PLASMID_HASH) {
-                    revert InvalidMaterialType();
-                }
-
-                // Validate metadataHash
-                if (metadataHashes[i] == bytes32(0)) revert InvalidCommitmentHash();
-
-                materialCount++;
-
-                // Generate standardized material ID
-                string memory typePrefix = (mtHash == CELL_LINE_HASH) ? "cell_line" : "plasmid";
-                string memory materialId = string(abi.encodePacked("bio:", typePrefix, ":", uint2str(materialCount)));
-
-                if (materialExists[materialId]) revert MaterialAlreadyExists();
-
-                materials[materialId] = Material({
-                    materialId: materialId,
-                    materialType: materialTypes[i],
-                    metadataHash: metadataHashes[i],
-                    owner: msg.sender,
-                    ownerOrg: ownerOrgs[i],
-                    status: MaterialStatus.ACTIVE,
-                    createdAt: block.timestamp,
-                    updatedAt: block.timestamp
-                });
-
-                materialExists[materialId] = true;
-
-                // Record in history
-                materialHistory[materialId].push(keccak256(abi.encodePacked(
-                    "REGISTERED", msg.sender, block.timestamp
-                )));
-
-                emit MaterialRegistered(materialId, materialTypes[i], msg.sender, ownerOrgs[i], block.timestamp);
-
-                materialIds[i] = materialId;
-            }
-        }
-
-        return materialIds;
-    }
-
-    /**
-     * @notice Issue multiple credentials in a single transaction
-     * @dev 10-15x gas savings compared to individual transactions
-     * @return credentialIds Array of issued credential IDs
-     */
-    function batchIssueCredentials(
-        string[] memory materialIds,
-        CredentialType[] memory credTypes,
-        bytes32[] memory commitmentHashes,
-        uint256[] memory validUntils,
-        string[] memory artifactCids,
-        bytes32[] memory artifactHashes,
-        string[] memory issuerIds
-    ) external nonReentrant whenNotPaused onlyApprovedIssuer returns (string[] memory credentialIds) {
-        uint256 count = materialIds.length;
-
-        // Validate input arrays have same length
-        if (count != credTypes.length || count != commitmentHashes.length ||
-            count != validUntils.length || count != artifactCids.length ||
-            count != artifactHashes.length || count != issuerIds.length) {
-            revert("Array length mismatch");
-        }
-
-        // Limit batch size to prevent gas limit issues
-        if (count > 50) revert("Batch size exceeds limit (50)");
-
-        credentialIds = new string[](count);
-
-        // Check issuer permissions once (gas optimization)
-        IssuerPermission memory perm = issuerPermissions[msg.sender];
-
-        unchecked {
-            for (uint256 i = 0; i < count; ++i) {
-                // Validate material exists
-                if (!materialExists[materialIds[i]]) revert MaterialNotFound();
-
-                // Validate inputs
-                if (commitmentHashes[i] == bytes32(0)) revert InvalidCommitmentHash();
-                if (artifactHashes[i] == bytes32(0)) revert InvalidArtifactHash();
-                if (validUntils[i] != 0 && validUntils[i] <= block.timestamp) revert InvalidValidUntil();
-
-                // Check issuer has permission for this credential type
-                if (credTypes[i] == CredentialType.IDENTITY) {
-                    if (!perm.canIssueIdentity) revert NotAuthorizedForCredentialType();
-                } else if (credTypes[i] == CredentialType.QC_MYCO) {
-                    if (!perm.canIssueQC) revert NotAuthorizedForCredentialType();
-                } else if (credTypes[i] == CredentialType.USAGE_RIGHTS) {
-                    if (!perm.canIssueUsageRights) revert NotAuthorizedForCredentialType();
-                }
-
-                credentialCount++;
-                string memory credentialId = string(abi.encodePacked("cred:", uint2str(credentialCount)));
-
-                credentials[credentialId] = Credential({
-                    credentialId: credentialId,
-                    materialId: materialIds[i],
-                    credType: credTypes[i],
-                    commitmentHash: commitmentHashes[i],
-                    issuer: msg.sender,
-                    issuerId: issuerIds[i],
-                    issuedAt: block.timestamp,
-                    validUntil: validUntils[i],
-                    artifactCid: artifactCids[i],
-                    artifactHash: artifactHashes[i],
-                    revoked: false
-                });
-
-                materialCredentials[materialIds[i]].push(credentialId);
-
-                materialHistory[materialIds[i]].push(keccak256(abi.encodePacked(
-                    "CREDENTIAL_ISSUED", credentialId, uint8(credTypes[i]), block.timestamp
-                )));
-
-                emit CredentialIssued(credentialId, materialIds[i], credTypes[i], msg.sender, validUntils[i]);
-
-                credentialIds[i] = credentialId;
-            }
-        }
-
-        return credentialIds;
-    }
-
-    /**
-     * @notice Verify multiple materials in a single call (view function - free)
-     * @dev Returns verification results for all materials
-     * @return passes Array of boolean pass/fail results
-     * @return allReasons Array of reason arrays (one per material)
-     */
-    function batchVerifyMaterials(
-        string[] memory materialIds
-    ) external view returns (bool[] memory passes, string[][] memory allReasons) {
-        uint256 count = materialIds.length;
-
-        // Limit batch size
-        if (count > 100) revert("Batch size exceeds limit (100)");
-
-        passes = new bool[](count);
-        allReasons = new string[][](count);
-
-        unchecked {
-            for (uint256 i = 0; i < count; ++i) {
-                (bool pass, string[] memory reasons) = this.verifyMaterial(materialIds[i]);
-                passes[i] = pass;
-                allReasons[i] = reasons;
-            }
-        }
-
-        return (passes, allReasons);
-    }
-
     // ==================== Query Functions ====================
     
     function getMaterial(string memory materialId) 
@@ -776,6 +911,24 @@ contract BioPassportRegistry is ReentrancyGuard, AccessControl, Pausable {
         returns (bool pass, string[] memory reasons) 
     {
         return _verifyMaterialAt(materialId, atTime);
+    }
+
+    /**
+     * @notice Verify multiple materials at the current block timestamp.
+     */
+    function batchVerifyMaterials(string[] memory materialIds)
+        external view
+        returns (bool[] memory passes, string[][] memory allReasons)
+    {
+        uint256 batchSize = materialIds.length;
+        require(batchSize <= 100, "Batch size exceeds limit (100)");
+
+        passes = new bool[](batchSize);
+        allReasons = new string[][](batchSize);
+        for (uint256 i = 0; i < batchSize; i++) {
+            if (!materialExists[materialIds[i]]) revert MaterialNotFound();
+            (passes[i], allReasons[i]) = _verifyMaterialAt(materialIds[i], block.timestamp);
+        }
     }
     
     function _verifyMaterialAt(string memory materialId, uint256 atTime) 

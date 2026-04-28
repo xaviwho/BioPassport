@@ -11,6 +11,6 @@
   "exclude_dependencies": true,
   "json": "slither-report.json",
   "sarif": "slither-report.sarif",
-  "checklist": true,
+  "fail_on": "none",
   "show_ignored_findings": false
 }

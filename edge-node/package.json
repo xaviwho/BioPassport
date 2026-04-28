@@ -1,0 +1,22 @@
+{
+  "name": "@biopassport/edge-node",
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "build": "tsc",
+    "dev": "node --loader ts-node/esm src/daemon.ts",
+    "bench": "node --loader ts-node/esm benchmarks/edge-overhead.ts"
+  },
+  "dependencies": {
+    "canonicalize": "^2.0.0",
+    "chokidar": "^3.6.0",
+    "ethers": "^6.11.0",
+    "node-fetch": "^3.3.2",
+    "pino": "^8.19.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.11.0",
+    "ts-node": "^10.9.0",
+    "typescript": "^5.3.0"
+  }
+}

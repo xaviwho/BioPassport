@@ -63,6 +63,27 @@ export interface IssuanceResult {
   issuedAt: string;
 }
 
+export type EdgeCredentialType = 'IDENTITY' | 'QC_MYCO' | 'USAGE_RIGHTS';
+
+export interface AttestationPayload {
+  deviceId: string;
+  instrumentId: string;
+  materialId: string;
+  materialType: 'CELL_LINE' | 'PLASMID';
+  credentialType: EdgeCredentialType;
+  rawArtifactHash: string;
+  captureTs: number;
+  freshnessBeacon?: string;
+}
+
+export interface SignedAttestation {
+  payload: AttestationPayload;
+  payloadCanonical: string;
+  attestationHash: string;
+  signature: string;
+  signerAddress: string;
+}
+
 export interface RegistrationResult {
   materialId: string;
   materialType: string;

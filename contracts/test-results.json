@@ -1,0 +1,132 @@
+{
+  "network": "purechain",
+  "chainId": 900520900520,
+  "rpcUrl": "https://purechainnode.com:8547",
+  "timestamp": "2026-03-06T13:36:20.036Z",
+  "signer": "0xAA3DFc054293Dd3731892A1Ba0366D6e6FB1Ee51",
+  "contracts": {
+    "BioPassportRegistry": "0x8fC7e91A24A8CfAefc3DCB5E04d9c81f5F825b34",
+    "BioPassportV2": "0x01877E8f9b87528787a3fcEE90915E80981F463B"
+  },
+  "testCount": 20,
+  "results": [
+    {
+      "test": "Register Material",
+      "tx": "0xa6b6aa38a463fd165fc8bcc18b53960b204f9834e7bca498997b0ae51cfd07e4",
+      "block": 937145,
+      "data": {
+        "materialId": "bio:cell_line:2"
+      }
+    },
+    {
+      "test": "Query Material",
+      "data": {
+        "type": "CELL_LINE",
+        "status": "ACTIVE",
+        "owner": "0xAA3DFc054293Dd3731892A1Ba0366D6e6FB1Ee51"
+      }
+    },
+    {
+      "test": "Issue IDENTITY",
+      "tx": "0x0b39cb0bbdf8de47a1fb60cafbe7122c65d3f25bde90431651bb7339c50dd725",
+      "block": 937147
+    },
+    {
+      "test": "Issue QC_MYCO",
+      "tx": "0xd36c87689fac8db7a50a0982cc522936a2e5205bc210780cda70fd4eb6d8037a",
+      "block": 937148
+    },
+    {
+      "test": "Verify Material",
+      "data": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    {
+      "test": "Query Credentials",
+      "data": {
+        "count": 2
+      }
+    },
+    {
+      "test": "Issue USAGE_RIGHTS",
+      "tx": "0xeb5b75d5816d65f75e53d79e0d3b237373806b7469450a92de38769fcf837554",
+      "block": 937151
+    },
+    {
+      "test": "Initiate Transfer",
+      "tx": "0xe162700a7158082a551f22d5db068ee24212010715fb87ddcfbb5992c6ae08ed",
+      "block": 937153
+    },
+    {
+      "test": "Accept Transfer",
+      "tx": "0x345fe1a4fd39f5d819a6243cb3c38dc7caca1d8ec95d4b0dbe5120b50cf4223a",
+      "block": 937155
+    },
+    {
+      "test": "History Count",
+      "data": {
+        "count": 6
+      }
+    },
+    {
+      "test": "Quarantine",
+      "tx": "0x7be2be127aa1eb634e58a26f255a717919f78b89d5547b3baf4617bfd62334aa",
+      "data": {
+        "status": "QUARANTINED"
+      }
+    },
+    {
+      "test": "Restore Active",
+      "tx": "0x45743072ea1e23db440f512b95014543e4d785596563a99584aa8ac0e440690c"
+    },
+    {
+      "test": "Final Verify",
+      "data": {
+        "pass": true,
+        "reasons": []
+      }
+    },
+    {
+      "test": "V2 Register Asset",
+      "tx": "0xd94d04993735a2f1ffbc28ad6206f1589d66ed4f48f45c43779804f73633dcfa",
+      "block": 937165
+    },
+    {
+      "test": "V2 Credential #1",
+      "tx": "0x4cd5a324725377c7aef62e20d4dcf0a0de42a139446c43c05b711cc263edf067",
+      "block": 937167
+    },
+    {
+      "test": "V2 Credential #2 (chained)",
+      "tx": "0xdf845d5f605a27a6d89f0bb09cd1357417d74278fedfc9f4ae6578d1c96d0cf6",
+      "block": 937169
+    },
+    {
+      "test": "V2 Chain Linkage",
+      "data": {
+        "cred1": true,
+        "cred2": true
+      }
+    },
+    {
+      "test": "V2 Open Exception",
+      "tx": "0x1a21af463ff01528a4b16e7b607f106d87bcdf726e9e8ec43978dd30835aee2e",
+      "data": {
+        "exceptionId": 1
+      }
+    },
+    {
+      "test": "V2 Close Exception",
+      "tx": "0x77b6442b56721e3d100b4ddef128b2cd23a4edeb4bf1399a7669d6f12d6c8e33"
+    },
+    {
+      "test": "V2 Final State",
+      "data": {
+        "credentialCount": 2,
+        "exists": true
+      }
+    }
+  ]
+}

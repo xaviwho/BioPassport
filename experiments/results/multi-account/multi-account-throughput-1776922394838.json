@@ -1,0 +1,249 @@
+{
+  "summary": {
+    "registryAddress": "0x22cC5D83D8a62c9cdA5959fd1EDBd1e380996FfC",
+    "chainId": 900520900520,
+    "accounts": 1,
+    "opsPerAccount": 20,
+    "submitted": 20,
+    "successful": 20,
+    "failed": 0,
+    "failureReasons": {},
+    "wallClockS": 87.22587879999999,
+    "aggregateOpsPerSec": 0.22928975064680004,
+    "latencyMs": {
+      "n": 20,
+      "p50": 4354.952099999995,
+      "p99": 4406.7579,
+      "mean": 4358.737230000001
+    },
+    "blockWindow": {
+      "before": {
+        "number": 1033608,
+        "timestamp": 1776922307
+      },
+      "after": {
+        "number": 1033695,
+        "timestamp": 1776922394
+      },
+      "blockCount": 87,
+      "seconds": 87
+    },
+    "perAccount": [
+      {
+        "accountIndex": 0,
+        "address": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+        "submitted": 20,
+        "successful": 20,
+        "failed": 0,
+        "latencyMs": {
+          "n": 20,
+          "p50": 4354.952099999995,
+          "p99": 4406.7579,
+          "mean": 4358.737230000001
+        }
+      }
+    ]
+  },
+  "samples": [
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 0,
+      "materialId": "bio:cell_line:704",
+      "success": true,
+      "latencyMs": 4406.7579,
+      "txHash": "0xb2a18ca8d38e8f366b3754d4f084ec611f7f0f064f58b83badbe2c9f471ce59c",
+      "blockNumber": 1033610
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 1,
+      "materialId": "bio:cell_line:724",
+      "success": true,
+      "latencyMs": 4392.197399999999,
+      "txHash": "0xd9d977e6be529d65d768d0e2c88ee50d887a6692fdd11353fa89ae93dd79f599",
+      "blockNumber": 1033615
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 2,
+      "materialId": "bio:cell_line:744",
+      "success": true,
+      "latencyMs": 4351.697100000001,
+      "txHash": "0x73915bb84b801bac2ce8331a128bd81a35f6a22b6ce97431f2b1efc6fdc3bf4e",
+      "blockNumber": 1033619
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 3,
+      "materialId": "bio:cell_line:764",
+      "success": true,
+      "latencyMs": 4349.6777,
+      "txHash": "0xc0deca6139329821fb9251afa1db0c14b0f0b2efa92db2363d74d818973f7ef1",
+      "blockNumber": 1033623
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 4,
+      "materialId": "bio:cell_line:784",
+      "success": true,
+      "latencyMs": 4353.652300000002,
+      "txHash": "0x9c3e8076fd312eba706eea3a48017efbfc948ed913772284ff753993074fbda2",
+      "blockNumber": 1033628
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 5,
+      "materialId": "bio:cell_line:804",
+      "success": true,
+      "latencyMs": 4359.584600000002,
+      "txHash": "0xfe5812bb251be8f01ce1d818924af76eeafc7c3fe40cc31a302a5ae1a2f3b44a",
+      "blockNumber": 1033632
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 6,
+      "materialId": "bio:cell_line:836",
+      "success": true,
+      "latencyMs": 4339.029900000001,
+      "txHash": "0x0afe0418ce7ffcbf8e9e1f65e6569cc1d082a41bcb223f7497a0e41d3ab72787",
+      "blockNumber": 1033636
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 7,
+      "materialId": "bio:cell_line:844",
+      "success": true,
+      "latencyMs": 4378.642500000002,
+      "txHash": "0x2de75319046f9aa44d4605eb9e9bc8c33369ca6752bb318a0e841dc175995071",
+      "blockNumber": 1033641
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 8,
+      "materialId": "bio:cell_line:864",
+      "success": true,
+      "latencyMs": 4361.631000000001,
+      "txHash": "0x19c2b90d1415ddf6ce91d3e1b0ed42bfffc9bec867c50631fdbaa6e4064a233e",
+      "blockNumber": 1033645
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 9,
+      "materialId": "bio:cell_line:884",
+      "success": true,
+      "latencyMs": 4359.472699999998,
+      "txHash": "0x9d8608a563c02bbed78874b919eabc33dc4fbae043395a32003f31262be6fdec",
+      "blockNumber": 1033650
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 10,
+      "materialId": "bio:cell_line:904",
+      "success": true,
+      "latencyMs": 4345.354599999999,
+      "txHash": "0xca765430b7bd39bcd1374fb4b12fcfda35d5edde1ccbcf071e04d13c3059cf0b",
+      "blockNumber": 1033654
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 11,
+      "materialId": "bio:cell_line:924",
+      "success": true,
+      "latencyMs": 4342.461600000002,
+      "txHash": "0x612acc11032b2a217c78268969e6555a195cba878fd080ec3fb827f637b0ea9b",
+      "blockNumber": 1033658
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 12,
+      "materialId": "bio:cell_line:945",
+      "success": true,
+      "latencyMs": 4374.803500000002,
+      "txHash": "0x03baefa46753974362e53611f8315729650ff28454405227bc3398046ed6858a",
+      "blockNumber": 1033662
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 13,
+      "materialId": "bio:cell_line:968",
+      "success": true,
+      "latencyMs": 4368.840400000001,
+      "txHash": "0xdef35e87eadcc6b97dc3f3621afafd234bd183baf0385b21a4685951cdbd1e44",
+      "blockNumber": 1033667
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 14,
+      "materialId": "bio:cell_line:984",
+      "success": true,
+      "latencyMs": 4336.432099999998,
+      "txHash": "0xacc3100b8ef49d2c81c542c1728d3732ec12865cceb4259fd316ce26aad3dc4d",
+      "blockNumber": 1033671
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 15,
+      "materialId": "bio:cell_line:1004",
+      "success": true,
+      "latencyMs": 4363.384300000005,
+      "txHash": "0x194b0a2bb81893019a26f8d035039529630fff402aed2cb7d0460af0036c025b",
+      "blockNumber": 1033676
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 16,
+      "materialId": "bio:cell_line:1024",
+      "success": true,
+      "latencyMs": 4349.106899999999,
+      "txHash": "0x435904949d24e6fa038a651e5d3780062cf7a0c7de39e9fd902c1a08d3155bec",
+      "blockNumber": 1033680
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 17,
+      "materialId": "bio:cell_line:1044",
+      "success": true,
+      "latencyMs": 4342.7359,
+      "txHash": "0xd09a94a14b8a78651f128d73ec4c6d43db539a11a84a6407dca30478f1829fd2",
+      "blockNumber": 1033684
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 18,
+      "materialId": "bio:cell_line:1065",
+      "success": true,
+      "latencyMs": 4354.952099999995,
+      "txHash": "0x3dd4862876c5ef07a61346842daffb91d6fd3dccbb033ec9e0e2e7997bb541f2",
+      "blockNumber": 1033689
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 19,
+      "materialId": "bio:cell_line:1085",
+      "success": true,
+      "latencyMs": 4344.3301000000065,
+      "txHash": "0x7429373ce86149c962fee7b9be258a2b8f5a33d71ea5028b064ff0d2f971218b",
+      "blockNumber": 1033693
+    }
+  ]
+}

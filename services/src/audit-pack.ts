@@ -269,7 +269,7 @@ export async function generateAuditPack(
     
     chainProof: {
       contractAddress: contract?.target?.toString() || process.env.CONTRACT_ADDRESS || '',
-      networkId: process.env.NETWORK_ID || 'hardhat-31337',
+      networkId: process.env.NETWORK_ID || 'purechain-900520900520',
       blockRange: {
         from: blockNumbers.length > 0 ? Math.min(...blockNumbers) : 0,
         to: blockNumbers.length > 0 ? Math.max(...blockNumbers) : 0,

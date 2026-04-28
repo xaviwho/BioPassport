@@ -26,9 +26,9 @@ if (result.error) {
   }
 }
 
-// Debug: Show if private key was loaded
+// Show key presence without leaking key material.
 if (process.env.PURECHAIN_PRIVATE_KEY) {
-  console.log(`Private key loaded: ${process.env.PURECHAIN_PRIVATE_KEY.substring(0, 8)}...`);
+  console.log('PureChain private key loaded from environment');
 } else {
   console.log('WARNING: PURECHAIN_PRIVATE_KEY not found in environment');
 }
@@ -131,6 +131,16 @@ export interface Material {
   updatedAt: string;
 }
 
+export interface DeviceInfo {
+  deviceId: string;
+  deviceAddress: string;
+  enroller: string;
+  enrolledAt: bigint;
+  revokedAt: bigint;
+  instrumentType: string;
+  lastCaptureTs: bigint;
+}
+
 export interface Credential {
   materialId: string;
   credentialId: string;
@@ -195,11 +205,15 @@ export class PureChainClient {
     
     if (this.config.privateKey) {
       this.wallet = new Wallet(this.config.privateKey, this.provider);
+    } else if (process.env.PURECHAIN_PRIVATE_KEY) {
+      const pk = process.env.PURECHAIN_PRIVATE_KEY.startsWith('0x')
+        ? process.env.PURECHAIN_PRIVATE_KEY
+        : `0x${process.env.PURECHAIN_PRIVATE_KEY}`;
+      this.wallet = new Wallet(pk, this.provider);
     } else {
-      // Use Hardhat's first pre-funded account (10000 ETH)
-      const HARDHAT_ACCOUNT_0 = '0xac0974bec39a17e36ba4a6b4d238ff944bacb478cbed5efcae784d7bf4f2ff80';
-      this.wallet = new Wallet(HARDHAT_ACCOUNT_0, this.provider);
-      console.log(`Using Hardhat account: ${this.wallet.address}`);
+      throw new Error(
+        'No private key provided. Set PURECHAIN_PRIVATE_KEY in .env or pass privateKey in config.'
+      );
     }
 
     // Check connection by getting balance
@@ -261,19 +275,63 @@ export class PureChainClient {
    */
   async attachToContract(address: string): Promise<void> {
     if (!this.wallet) throw new Error('Not connected');
-    
+
     const { abi } = this.getBioPassportRegistryABI();
     this.contract = new Contract(address, abi, this.wallet);
     console.log(`Attached to BioPassport Registry at: ${address}`);
+
+    // Sync counters from on-chain state
+    try {
+      this._materialCount = Number(await this.contract.materialCount());
+      this._credentialCount = Number(await this.contract.credentialCount());
+      console.log(`  Synced counters: materials=${this._materialCount}, credentials=${this._credentialCount}`);
+    } catch {
+      console.log('  Could not sync counters from contract (non-critical)');
+    }
   }
   
   // Proper async lock for transaction serialization
   private _txLock: Promise<void> = Promise.resolve();
   private _nextNonce: number = -1;
+
+  private isNonceExpiredError(error: any): boolean {
+    const errMsg = error?.message || '';
+    return (
+      error?.code === 'NONCE_EXPIRED' ||
+      errMsg.includes('nonce has already been used') ||
+      errMsg.includes('nonce too low') ||
+      errMsg.includes('NONCE_EXPIRED')
+    );
+  }
+
+  private async syncNonceFromChain(reason: string, forceLog = false): Promise<number> {
+    if (!this.wallet || !this.provider) throw new Error('Not connected');
+    const address = await this.wallet.getAddress();
+    const chainNonce = await this.provider.getTransactionCount(address, 'pending');
+    const previousNonce = this._nextNonce;
+
+    if (this._nextNonce < chainNonce || this._nextNonce < 0) {
+      this._nextNonce = chainNonce;
+    }
+
+    if (forceLog || previousNonce !== this._nextNonce) {
+      console.log(`[TX] nonce sync (${reason}): local=${previousNonce} pending=${chainNonce} next=${this._nextNonce}`);
+    }
+
+    return this._nextNonce;
+  }
+
+  /**
+   * Public hook for scripts that send helper transactions outside this client.
+   */
+  async resyncNonce(reason = 'manual'): Promise<number> {
+    return this.syncNonceFromChain(reason, true);
+  }
   
   /**
    * Execute contract method with timing metrics
-   * Uses proper lock to serialize all transactions and manual nonce tracking
+   * Uses proper lock to serialize transactions and resyncs manual nonce tracking
+   * against the chain before sends and after nonce-expired races.
    */
   private async executeWithMetrics(
     methodName: string,
@@ -292,17 +350,7 @@ export class PureChainClient {
     
     try {
       const start = performance.now();
-      
-      // Initialize nonce from blockchain on first call
-      if (this._nextNonce < 0) {
-        this._nextNonce = await this.wallet!.getNonce();
-      }
-      
-      // Use our tracked nonce (not ethers cache which can be stale)
-      const nonce = this._nextNonce;
-      
-      console.log(`[TX] ${methodName} nonce=${nonce}`);
-      
+
       // Manually encode and send transaction to avoid ethers v6 argument parsing issues
       const contractAddress = await this.contract!.getAddress();
       let data: string;
@@ -312,33 +360,57 @@ export class PureChainClient {
         console.log(`  [ENCODE ERROR] ${methodName}: ${encodeError.message}`);
         throw encodeError;
       }
-      
-      const txRequest = {
-        to: contractAddress,
-        data: data,
-        gasPrice: PURECHAIN_GAS_PRICE,
-        gasLimit: 500000,
-        nonce: nonce
-      };
-      
-      const tx = await this.wallet!.sendTransaction(txRequest);
-      const receipt = await tx.wait();
-      const duration = performance.now() - start;
-      
-      if (!receipt) {
-        throw new Error('Transaction failed - no receipt');
+
+      let lastError: any;
+      for (let attempt = 0; attempt < 2; attempt++) {
+        await this.syncNonceFromChain(`${methodName}:preflight`);
+        const nonce = this._nextNonce;
+
+        console.log(`[TX] ${methodName} nonce=${nonce}${attempt > 0 ? ' retry=1' : ''}`);
+
+        const txRequest = {
+          to: contractAddress,
+          data: data,
+          gasPrice: PURECHAIN_GAS_PRICE,
+          gasLimit: 500000,
+          nonce: nonce
+        };
+
+        try {
+          const tx = await this.wallet!.sendTransaction(txRequest);
+          const receipt = await tx.wait();
+          const duration = performance.now() - start;
+
+          if (!receipt) {
+            throw new Error('Transaction failed - no receipt');
+          }
+
+          // Only increment nonce AFTER successful confirmation.
+          this._nextNonce = Math.max(this._nextNonce + 1, nonce + 1);
+
+          console.log(`[TX] ${methodName} confirmed block=${receipt.blockNumber}`);
+
+          return { receipt, metrics: { duration } };
+        } catch (error: any) {
+          lastError = error;
+          const errMsg = error?.message || '';
+          console.log(`  [DEBUG] ${methodName} failed: ${errMsg.substring(0, 120)}`);
+
+          if (this.isNonceExpiredError(error) && attempt === 0) {
+            await new Promise((r) => setTimeout(r, 500));
+            await this.syncNonceFromChain(`${methodName}:nonce-retry`, true);
+            continue;
+          }
+
+          if (!this.isNonceExpiredError(error)) {
+            await this.syncNonceFromChain(`${methodName}:failure`, true);
+          }
+
+          throw error;
+        }
       }
-      
-      // Only increment nonce AFTER successful confirmation
-      this._nextNonce++;
-      
-      console.log(`[TX] ${methodName} confirmed block=${receipt.blockNumber}`);
-      
-      return { receipt, metrics: { duration } };
-    } catch (error) {
-      // On failure, resync nonce from blockchain
-      this._nextNonce = await this.wallet!.getNonce();
-      throw error;
+
+      throw lastError;
     } finally {
       // Release lock for next transaction
       releaseLock!();
@@ -465,6 +537,80 @@ export class PureChainClient {
     }
   }
 
+  async issueCredentialWithAttestation(args: {
+    materialId: string;
+    credType: 'IDENTITY' | 'QC_MYCO' | 'USAGE_RIGHTS';
+    commitmentHash: string;
+    validUntil: number;
+    artifactCid: string;
+    artifactHash: string;
+    issuerId: string;
+    deviceId: string;
+    captureTs: number;
+    deviceSig: string;
+  }): Promise<{ credentialId: string; txHash: string; latencyMs: number }> {
+    this.ensureConnected();
+
+    const credTypeIdx = this.credentialTypeToIndex(args.credType);
+    const commitmentBytes32 = this.toBytes32(args.commitmentHash);
+    const artifactBytes32 = this.toBytes32(args.artifactHash);
+
+    const { receipt, metrics } = await this.executeWithMetrics(
+      'issueCredentialWithAttestation',
+      args.materialId,
+      credTypeIdx,
+      commitmentBytes32,
+      args.validUntil,
+      args.artifactCid,
+      artifactBytes32,
+      args.issuerId,
+      args.deviceId,
+      args.captureTs,
+      args.deviceSig
+    );
+
+    this.assertFinality(receipt);
+
+    const iface = this.contract!.interface;
+    const parsed = (receipt.logs || [])
+      .map((l: any) => {
+        try {
+          return iface.parseLog(l);
+        } catch {
+          return null;
+        }
+      })
+      .filter(Boolean)
+      .find((l: any) => l.name === 'CredentialIssued');
+
+    this._credentialCount++;
+    const credentialId = parsed?.args?.credentialId || `cred:${this._credentialCount}`;
+
+    return {
+      credentialId,
+      txHash: receipt.hash,
+      latencyMs: metrics.duration,
+    };
+  }
+
+  async getDevice(deviceId: string): Promise<DeviceInfo | null> {
+    this.ensureConnected();
+
+    const exists = await this.contract!.deviceExists(deviceId);
+    if (!exists) return null;
+
+    const data = await this.contract!.devices(deviceId);
+    return {
+      deviceId: data.deviceId || data[0],
+      deviceAddress: data.deviceAddress || data[1],
+      enroller: data.enroller || data[2],
+      enrolledAt: BigInt(data.enrolledAt ?? data[3]),
+      revokedAt: BigInt(data.revokedAt ?? data[4]),
+      instrumentType: data.instrumentType || data[5],
+      lastCaptureTs: BigInt(data.lastCaptureTs ?? data[6]),
+    };
+  }
+
   /**
    * Transfer material to another organization
    */
@@ -556,11 +702,11 @@ export class PureChainClient {
 
   /**
    * Set material status (QUARANTINE/REVOKE)
-   * 
+   *
    * Solidity signature:
-   *   setStatus(string materialId, MaterialStatus status, string reasonHash)
+   *   setStatusByAuthority(string materialId, MaterialStatus newStatus, bytes32 reasonHash)
    *   where MaterialStatus is enum { ACTIVE=0, QUARANTINED=1, REVOKED=2 }
-   * 
+   *
    * @param status - Must be 'ACTIVE', 'QUARANTINED', or 'REVOKED'
    */
   async setStatus(
@@ -569,7 +715,7 @@ export class PureChainClient {
     reasonHash: string
   ): Promise<TransactionResult> {
     this.ensureConnected();
-    
+
     // Convert status string to enum index
     const statusIndex = MATERIAL_STATUS[status];
     if (statusIndex === undefined) {
@@ -579,13 +725,16 @@ export class PureChainClient {
         error: `Invalid status: ${status}. Must be ACTIVE, QUARANTINED, or REVOKED`
       };
     }
-    
+
     try {
+      // Convert reasonHash to bytes32 format
+      const reasonBytes32 = this.toBytes32(reasonHash);
+
       const { receipt, metrics } = await this.executeWithMetrics(
-        'setStatus',
+        'setStatusByAuthority',
         materialId,
         statusIndex,             // enum index (uint8)
-        reasonHash
+        reasonBytes32            // bytes32
       );
 
       // Finality assertion
@@ -607,18 +756,18 @@ export class PureChainClient {
 
   /**
    * Revoke a credential
+   * Solidity signature: revokeCredential(string credentialId)
    */
   async revokeCredential(
     credentialId: string,
-    reason: string
+    _reason?: string
   ): Promise<TransactionResult> {
     this.ensureConnected();
-    
+
     try {
       const { receipt, metrics } = await this.executeWithMetrics(
         'revokeCredential',
-        credentialId,
-        reason
+        credentialId
       );
 
       // Finality assertion
@@ -727,12 +876,13 @@ export class PureChainClient {
 
   /**
    * Get all credentials for a material
+   * Solidity: getCredentials(string materialId) returns (Credential[])
    */
   async getCredentialsForMaterial(materialId: string): Promise<Credential[]> {
     this.ensureConnected();
-    
+
     try {
-      const result = await this.contract!.getCredentialsForMaterial(materialId);
+      const result = await this.contract!.getCredentials(materialId);
       return (result || []).map((c: any) => this.parseCredential(c));
     } catch {
       return [];
@@ -740,13 +890,17 @@ export class PureChainClient {
   }
 
   /**
-   * Get material history
+   * Get material history (on-chain hash trail)
+   * Solidity: getHistoryCount(string) + getHistorySlice(string, uint256, uint256)
    */
   async getHistory(materialId: string): Promise<unknown> {
     this.ensureConnected();
-    
+
     try {
-      return await this.contract!.getHistory(materialId);
+      const count = await this.contract!.getHistoryCount(materialId);
+      if (Number(count) === 0) return { materialId, events: [] };
+      const hashes = await this.contract!.getHistorySlice(materialId, 0, Number(count));
+      return { materialId, events: hashes };
     } catch {
       return { materialId, events: [] };
     }
@@ -754,16 +908,13 @@ export class PureChainClient {
 
   /**
    * Get all materials for an organization
+   * Note: Not available as a single contract call. Query events off-chain instead.
    */
-  async getMaterialsByOrg(orgId: string): Promise<Material[]> {
-    this.ensureConnected();
-    
-    try {
-      const result = await this.contract!.getMaterialsByOrg(orgId);
-      return (result || []).map((m: any) => this.parseMaterial(m));
-    } catch {
-      return [];
-    }
+  async getMaterialsByOrg(_orgId: string): Promise<Material[]> {
+    // BioPassportRegistry doesn't have a getMaterialsByOrg view function.
+    // Materials must be tracked via events or an off-chain indexer.
+    console.warn('getMaterialsByOrg: Not available on-chain. Use the indexer service.');
+    return [];
   }
 
   /**

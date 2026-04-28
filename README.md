@@ -10,6 +10,7 @@ A **policy-enforced credential anchoring architecture** for biomaterial provenan
 2. **Role-based credential issuance** with issuer revocation semantics that preserve pre-revocation credential validity
 3. **Authority-controlled status management** preventing owner abuse of quarantine/revocation
 4. **Quantified security tradeoffs** under normal, drift, and adversarial conditions
+5. **Instrument edge attestation** binding QC measurements to enrolled device keys at capture time
 
 ## Overview
 
@@ -17,6 +18,7 @@ BioPassport provides:
 1. **Material Registration** - Register biomaterials (cell lines, plasmids) with stable on-chain IDs
 2. **Credential Anchoring** - Anchor credentials (identity, QC, passage, transfer, usage rights) as hash commitments + issuer signatures
 3. **Policy Enforcement** - Enforce & verify policies (QC expiry, revocation/quarantine, transfer constraints) with deterministic PASS/FAIL verification
+4. **Edge Attestation** - Sign QC measurements on instrument edge nodes and verify enrolled device signatures on-chain
 
 ## PureChain Network
 
@@ -116,6 +118,23 @@ A material is **VALID** only if:
 - Has a `QC_MYCO` credential not past `validUntil`
 - Status is not `QUARANTINED` or `REVOKED`
 - Transfer chain is continuous (no missing links)
+
+## Edge Attestation
+
+BioPassport now includes an Instrument Edge Node (IEN) layer for QC credentials. An enrolled device signs the on-chain-compatible attestation digest at capture time, and `BioPassportRegistry.issueCredentialWithAttestation` verifies that the signature recovers to the enrolled device address before anchoring the credential.
+
+Run the edge node locally:
+
+```bash
+cd edge-node
+npm install
+npm run build
+mkdir keys watch
+node -e "console.log('0x' + require('crypto').randomBytes(32).toString('hex'))" > keys/device.key
+npm run dev
+```
+
+The issuer service accepts edge submissions at `POST /v1/attested-credential` as multipart form data with `attestation` JSON and an `artifact` file. Production deployments should replace the software signer with TPM or secure-element signing and enroll the derived device address on PureChain with `enrollDevice`.
 
 ## Quick Start
 
@@ -271,6 +290,7 @@ See [`contracts/INVARIANTS.md`](contracts/INVARIANTS.md) for formal specificatio
 - INV-6: Material Type Validation
 - INV-7: Commitment Hash Integrity
 - INV-8: History Immutability
+- INV-9: Edge Attestation Authenticity
 
 ## Baselines
 

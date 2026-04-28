@@ -169,6 +169,29 @@ registerMaterial(materialType, ...):
 
 ---
 
+### INV-9: Edge Attestation Authenticity
+
+**Statement:** Every QC credential issued via `issueCredentialWithAttestation` must carry a signature that recovers to the enrolled device's address, and the captureTs must be strictly greater than the device's lastCaptureTs.
+
+```solidity
+forall credential c issued with attestation (deviceId, captureTs, sig):
+    devices[deviceId].deviceAddress = ecrecover(attestationHash(...), sig)
+    and captureTs > devices[deviceId].lastCaptureTs
+    and devices[deviceId].revokedAt = 0
+```
+
+**Enforcement:** `issueCredentialWithAttestation()` verifies the signature with `ecrecover`, enforces monotonic `captureTs`, rejects future timestamps, and rejects revoked or unenrolled devices.
+
+**Test Coverage:**
+- `accepts a valid device-signed QC credential`
+- `rejects signature from wrong device`
+- `rejects replay: captureTs must be strictly increasing`
+- `rejects attestation from revoked device`
+- `rejects future captureTs`
+- `testFuzz_attestation_forgery_resistance()`
+
+---
+
 ## Verification Evidence
 
 ### Static Analysis (Slither)

@@ -1,0 +1,69 @@
+{
+  "summary": {
+    "registryAddress": "0x22cC5D83D8a62c9cdA5959fd1EDBd1e380996FfC",
+    "chainId": 900520900520,
+    "accounts": 1,
+    "opsPerAccount": 2,
+    "submitted": 2,
+    "successful": 2,
+    "failed": 0,
+    "failureReasons": {},
+    "wallClockS": 8.825994099999999,
+    "aggregateOpsPerSec": 0.22660336924539753,
+    "latencyMs": {
+      "n": 2,
+      "p50": 4388.806599999999,
+      "p99": 4388.806599999999,
+      "mean": 4378.145549999999
+    },
+    "blockWindow": {
+      "before": {
+        "number": 1033569,
+        "timestamp": 1776922268
+      },
+      "after": {
+        "number": 1033578,
+        "timestamp": 1776922277
+      },
+      "blockCount": 9,
+      "seconds": 9
+    },
+    "perAccount": [
+      {
+        "accountIndex": 0,
+        "address": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+        "submitted": 2,
+        "successful": 2,
+        "failed": 0,
+        "latencyMs": {
+          "n": 2,
+          "p50": 4388.806599999999,
+          "p99": 4388.806599999999,
+          "mean": 4378.145549999999
+        }
+      }
+    ]
+  },
+  "samples": [
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 0,
+      "materialId": "bio:cell_line:704",
+      "success": true,
+      "latencyMs": 4367.4845000000005,
+      "txHash": "0x62a10521fd6089296200af0adb5d85bdc065c976a451fecfde29480bd3cfcf82",
+      "blockNumber": 1033571
+    },
+    {
+      "accountIndex": 0,
+      "account": "0x98DA678f40C55163C37A099F06c59A9cbe938541",
+      "opIndex": 1,
+      "materialId": "bio:cell_line:724",
+      "success": true,
+      "latencyMs": 4388.806599999999,
+      "txHash": "0x570925017ed8d943761ad1c41999d9baf7d9afe7de09c9b7778a7b7656352939",
+      "blockNumber": 1033575
+    }
+  ]
+}

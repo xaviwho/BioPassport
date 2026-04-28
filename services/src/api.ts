@@ -11,7 +11,7 @@ import { Pool } from 'pg';
 import { ethers } from 'ethers';
 import { z } from 'zod';
 import { v4 as uuidv4 } from 'uuid';
-import { generateAuditPack } from './audit-pack';
+import { generateAuditPack, generateAuditPackPDF } from './audit-pack';
 import { computeCredentialHash, computeEvidenceRoot } from './crypto';
 
 // ==================== Configuration ====================
@@ -404,10 +404,16 @@ app.get('/audit-pack/:assetId', asyncHandler(async (req, res) => {
   const pack = await generateAuditPack(req.params.assetId, db, contract);
   
   if (format === 'pdf') {
+    const os = await import('os');
+    const path = await import('path');
+    const fs = await import('fs');
+    const tmpPath = path.join(os.tmpdir(), `audit-pack-${Date.now()}.pdf`);
+    await generateAuditPackPDF(pack, tmpPath);
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Disposition', `attachment; filename="audit-pack-${req.params.assetId}.pdf"`);
-    // TODO: Generate PDF using pdfkit
-    res.status(501).json({ error: 'PDF generation not yet implemented' });
+    const stream = fs.createReadStream(tmpPath);
+    stream.pipe(res);
+    stream.on('end', () => fs.unlink(tmpPath, () => {}));
   } else {
     res.json(pack);
   }
@@ -415,9 +421,30 @@ app.get('/audit-pack/:assetId', asyncHandler(async (req, res) => {
 
 // ==================== Webhook Registration (stub) ====================
 
+const WebhookSchema = z.object({
+  url: z.string().url(),
+  eventTypes: z.array(z.enum(['AssetRegistered', 'CredentialIssued', 'ExceptionOpened', 'ExceptionClosed'])).min(1),
+  secret: z.string().optional(),
+});
+
 app.post('/webhooks', asyncHandler(async (req, res) => {
-  // TODO: Implement webhook registration
-  res.status(501).json({ error: 'Webhook registration not yet implemented' });
+  const data = WebhookSchema.parse(req.body);
+
+  const result = await db.query(`
+    INSERT INTO webhooks (url, event_types, secret)
+    VALUES ($1, $2, $3)
+    RETURNING id, url, event_types, is_active, created_at
+  `, [data.url, data.eventTypes, data.secret || null]);
+
+  res.status(201).json({
+    success: true,
+    webhook: result.rows[0],
+  });
+}));
+
+app.delete('/webhooks/:id', asyncHandler(async (req, res) => {
+  await db.query('UPDATE webhooks SET is_active = FALSE WHERE id = $1', [req.params.id]);
+  res.json({ success: true });
 }));
 
 // ==================== Error Handler ====================
@@ -445,7 +472,8 @@ async function start() {
   // Initialize blockchain connection
   provider = new ethers.JsonRpcProvider(
     RPC_URL,
-    { chainId: CHAIN_ID, name: 'purechain' }
+    { chainId: CHAIN_ID, name: 'purechain' },
+    { staticNetwork: true }
   );
   
   if (PRIVATE_KEY) {

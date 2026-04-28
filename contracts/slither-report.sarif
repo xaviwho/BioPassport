@@ -1,0 +1,443 @@
+{
+  "$schema": "https://raw.githubusercontent.com/oasis-tcs/sarif-spec/master/Schemata/sarif-schema-2.1.0.json",
+  "version": "2.1.0",
+  "runs": [
+    {
+      "tool": {
+        "driver": {
+          "name": "Slither",
+          "informationUri": "https://github.com/crytic/slither",
+          "version": "0.11.5",
+          "rules": [
+            {
+              "id": "0-0-uninitialized-state",
+              "name": "uninitialized-state",
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "8.0"
+              },
+              "shortDescription": {
+                "text": "Uninitialized state variables"
+              },
+              "help": {
+                "text": "\nInitialize all the variables. If a variable is meant to be initialized to zero, explicitly set it to zero to improve code readability.\n"
+              }
+            },
+            {
+              "id": "1-1-divide-before-multiply",
+              "name": "divide-before-multiply",
+              "properties": {
+                "precision": "high",
+                "security-severity": "4.0"
+              },
+              "shortDescription": {
+                "text": "Divide before multiply"
+              },
+              "help": {
+                "text": "Consider ordering multiplication before division."
+              }
+            },
+            {
+              "id": "1-0-incorrect-equality",
+              "name": "incorrect-equality",
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "4.0"
+              },
+              "shortDescription": {
+                "text": "Dangerous strict equalities"
+              },
+              "help": {
+                "text": "Don't use strict equality to determine if an account has enough Ether or tokens."
+              }
+            },
+            {
+              "id": "2-1-timestamp",
+              "name": "timestamp",
+              "properties": {
+                "precision": "high",
+                "security-severity": "3.0"
+              },
+              "shortDescription": {
+                "text": "Block timestamp"
+              },
+              "help": {
+                "text": "Avoid relying on `block.timestamp`."
+              }
+            },
+            {
+              "id": "3-0-assembly",
+              "name": "assembly",
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "0.0"
+              },
+              "shortDescription": {
+                "text": "Assembly usage"
+              },
+              "help": {
+                "text": "Do not use `evm` assembly."
+              }
+            },
+            {
+              "id": "3-0-cyclomatic-complexity",
+              "name": "cyclomatic-complexity",
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "0.0"
+              },
+              "shortDescription": {
+                "text": "Cyclomatic complexity"
+              },
+              "help": {
+                "text": "Reduce cyclomatic complexity by splitting the function into several smaller subroutines."
+              }
+            },
+            {
+              "id": "3-0-naming-convention",
+              "name": "naming-convention",
+              "properties": {
+                "precision": "very-high",
+                "security-severity": "0.0"
+              },
+              "shortDescription": {
+                "text": "Conformance to Solidity naming conventions"
+              },
+              "help": {
+                "text": "Follow the Solidity [naming convention](https://solidity.readthedocs.io/en/v0.4.25/style-guide.html#naming-conventions)."
+              }
+            },
+            {
+              "id": "3-1-too-many-digits",
+              "name": "too-many-digits",
+              "properties": {
+                "precision": "high",
+                "security-severity": "0.0"
+              },
+              "shortDescription": {
+                "text": "Too many digits"
+              },
+              "help": {
+                "text": "\nUse:\n- [Ether suffix](https://solidity.readthedocs.io/en/latest/units-and-global-variables.html#ether-units),\n- [Time suffix](https://solidity.readthedocs.io/en/latest/units-and-global-variables.html#time-units), or\n- [The scientific notation](https://solidity.readthedocs.io/en/latest/types.html#rational-and-integer-literals)\n"
+              }
+            }
+          ]
+        }
+      },
+      "results": [
+        {
+          "ruleId": "0-0-uninitialized-state",
+          "message": {
+            "text": "BioPassportRegistry.materialTransfers (src/BioPassportRegistry.sol#139-141) is never initialized. It is used in:\n\t- BioPassportRegistry.initiateTransfer(string,address,string,bytes32) (src/BioPassportRegistry.sol#668-705)\n\t- BioPassportRegistry.acceptTransfer(string) (src/BioPassportRegistry.sol#707-732)\n\t- BioPassportRegistry.getTransfers(string) (src/BioPassportRegistry.sol#772-779)\n\t- BioPassportRegistry._verifyMaterialAt(string,uint256) (src/BioPassportRegistry.sol#803-889)\n",
+            "markdown": "[BioPassportRegistry.materialTransfers](src/BioPassportRegistry.sol#L139-L141) is never initialized. It is used in:\n\t- [BioPassportRegistry.initiateTransfer(string,address,string,bytes32)](src/BioPassportRegistry.sol#L668-L705)\n\t- [BioPassportRegistry.acceptTransfer(string)](src/BioPassportRegistry.sol#L707-L732)\n\t- [BioPassportRegistry.getTransfers(string)](src/BioPassportRegistry.sol#L772-L779)\n\t- [BioPassportRegistry._verifyMaterialAt(string,uint256)](src/BioPassportRegistry.sol#L803-L889)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 139,
+                  "endLine": 141
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "848a282812cc09fa4a8ee23a7c2e77debaca5ef46200bfb1269b674e72c59d76"
+          }
+        },
+        {
+          "ruleId": "1-1-divide-before-multiply",
+          "message": {
+            "text": "BioPassportRegistry.uint2str(uint256) (src/BioPassportRegistry.sol#951-1001) performs a multiplication on the result of a division:\n\t- temp_scope_2 = (48 + uint8(_i - _i / 10 * 10)) (src/BioPassportRegistry.sol#995-998)\n",
+            "markdown": "[BioPassportRegistry.uint2str(uint256)](src/BioPassportRegistry.sol#L951-L1001) performs a multiplication on the result of a division:\n\t- [temp_scope_2 = (48 + uint8(_i - _i / 10 * 10))](src/BioPassportRegistry.sol#L995-L998)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 951,
+                  "endLine": 1001
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "8bfb905dcdb2176eedab4216b4502f8433d9f0e01d8025fd600b183f78ae0f0b"
+          }
+        },
+        {
+          "ruleId": "1-0-incorrect-equality",
+          "message": {
+            "text": "BioPassportRegistry.getCredential(string) (src/BioPassportRegistry.sol#760-771) uses a dangerous strict equality:\n\t- bytes(credentials[credentialId].credentialId).length == 0 (src/BioPassportRegistry.sol#765-769)\n",
+            "markdown": "[BioPassportRegistry.getCredential(string)](src/BioPassportRegistry.sol#L760-L771) uses a dangerous strict equality:\n\t- [bytes(credentials[credentialId].credentialId).length == 0](src/BioPassportRegistry.sol#L765-L769)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 760,
+                  "endLine": 771
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "18bbf40e9437e7dd0c502c7e37bb3312b07dcdefc822311acdbb2553a7e2fcb5"
+          }
+        },
+        {
+          "ruleId": "1-0-incorrect-equality",
+          "message": {
+            "text": "BioPassportRegistry._verifyMaterialAt(string,uint256) (src/BioPassportRegistry.sol#803-889) uses a dangerous strict equality:\n\t- mat.status == MaterialStatus.REVOKED (src/BioPassportRegistry.sol#812-813)\n",
+            "markdown": "[BioPassportRegistry._verifyMaterialAt(string,uint256)](src/BioPassportRegistry.sol#L803-L889) uses a dangerous strict equality:\n\t- [mat.status == MaterialStatus.REVOKED](src/BioPassportRegistry.sol#L812-L813)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 803,
+                  "endLine": 889
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "9e52b000c0567e66500432c8ba7f5a52cb078865ab3b14e6e4066dbef88f758c"
+          }
+        },
+        {
+          "ruleId": "1-0-incorrect-equality",
+          "message": {
+            "text": "BioPassportRegistry._verifyMaterialAt(string,uint256) (src/BioPassportRegistry.sol#803-889) uses a dangerous strict equality:\n\t- mat.status == MaterialStatus.QUARANTINED (src/BioPassportRegistry.sol#816)\n",
+            "markdown": "[BioPassportRegistry._verifyMaterialAt(string,uint256)](src/BioPassportRegistry.sol#L803-L889) uses a dangerous strict equality:\n\t- [mat.status == MaterialStatus.QUARANTINED](src/BioPassportRegistry.sol#L816)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 803,
+                  "endLine": 889
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "e992bff27a38e0e1672223c89b7e3df97f2e9a3ed0d2739f5803470dd3921abe"
+          }
+        },
+        {
+          "ruleId": "2-1-timestamp",
+          "message": {
+            "text": "BioPassportRegistry.issueCredential(string,BioPassportRegistry.CredentialType,bytes32,uint256,string,bytes32,string) (src/BioPassportRegistry.sol#552-582) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- validUntil != 0 && validUntil <= block.timestamp (src/BioPassportRegistry.sol#568-569)\n",
+            "markdown": "[BioPassportRegistry.issueCredential(string,BioPassportRegistry.CredentialType,bytes32,uint256,string,bytes32,string)](src/BioPassportRegistry.sol#L552-L582) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- [validUntil != 0 && validUntil <= block.timestamp](src/BioPassportRegistry.sol#L568-L569)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 552,
+                  "endLine": 582
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "3efbb79eb33ee2e72bbda62ff579fd2011133dfdf7a6cd35ff48caab46208439"
+          }
+        },
+        {
+          "ruleId": "2-1-timestamp",
+          "message": {
+            "text": "BioPassportRegistry._verifyMaterialAt(string,uint256) (src/BioPassportRegistry.sol#803-889) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- mat.status == MaterialStatus.REVOKED (src/BioPassportRegistry.sol#812-813)\n\t- mat.status == MaterialStatus.QUARANTINED (src/BioPassportRegistry.sol#816)\n\t- issuerWasRevokedBeforeIssuance = (issuerRevokeTime != 0 && cred.issuedAt >= issuerRevokeTime) (src/BioPassportRegistry.sol#840-843)\n\t- cred.credType == CredentialType.IDENTITY && ! cred.revoked && ! issuerWasRevokedBeforeIssuance (src/BioPassportRegistry.sol#843-846)\n\t- hasValidQC = (latestQcIssuedAt != 0 && latestQcValidUntil >= atTime && ! latestQcFromRevokedIssuer) (src/BioPassportRegistry.sol#860-863)\n",
+            "markdown": "[BioPassportRegistry._verifyMaterialAt(string,uint256)](src/BioPassportRegistry.sol#L803-L889) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- [mat.status == MaterialStatus.REVOKED](src/BioPassportRegistry.sol#L812-L813)\n\t- [mat.status == MaterialStatus.QUARANTINED](src/BioPassportRegistry.sol#L816)\n\t- [issuerWasRevokedBeforeIssuance = (issuerRevokeTime != 0 && cred.issuedAt >= issuerRevokeTime)](src/BioPassportRegistry.sol#L840-L843)\n\t- [cred.credType == CredentialType.IDENTITY && ! cred.revoked && ! issuerWasRevokedBeforeIssuance](src/BioPassportRegistry.sol#L843-L846)\n\t- [hasValidQC = (latestQcIssuedAt != 0 && latestQcValidUntil >= atTime && ! latestQcFromRevokedIssuer)](src/BioPassportRegistry.sol#L860-L863)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 803,
+                  "endLine": 889
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "b89c1af4991c4b353640ac28585769bd6b7d44aec7a8ed8ac8207b1130e4b805"
+          }
+        },
+        {
+          "ruleId": "2-1-timestamp",
+          "message": {
+            "text": "BioPassportRegistry.issueCredentialWithAttestation(string,BioPassportRegistry.CredentialType,bytes32,uint256,string,bytes32,string,bytes32,uint256,bytes) (src/BioPassportRegistry.sol#590-647) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- validUntil != 0 && validUntil <= block.timestamp (src/BioPassportRegistry.sol#609-610)\n\t- captureTs == 0 || captureTs > block.timestamp (src/BioPassportRegistry.sol#613-614)\n",
+            "markdown": "[BioPassportRegistry.issueCredentialWithAttestation(string,BioPassportRegistry.CredentialType,bytes32,uint256,string,bytes32,string,bytes32,uint256,bytes)](src/BioPassportRegistry.sol#L590-L647) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- [validUntil != 0 && validUntil <= block.timestamp](src/BioPassportRegistry.sol#L609-L610)\n\t- [captureTs == 0 || captureTs > block.timestamp](src/BioPassportRegistry.sol#L613-L614)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 590,
+                  "endLine": 647
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "c69a16b8c16d01eb6703488921b86cc3c76c0711f095c75714622d28a06da768"
+          }
+        },
+        {
+          "ruleId": "2-1-timestamp",
+          "message": {
+            "text": "BioPassportRegistry.getCredential(string) (src/BioPassportRegistry.sol#760-771) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- bytes(credentials[credentialId].credentialId).length == 0 (src/BioPassportRegistry.sol#765-769)\n",
+            "markdown": "[BioPassportRegistry.getCredential(string)](src/BioPassportRegistry.sol#L760-L771) uses timestamp for comparisons\n\tDangerous comparisons:\n\t- [bytes(credentials[credentialId].credentialId).length == 0](src/BioPassportRegistry.sol#L765-L769)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 760,
+                  "endLine": 771
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "fb15e58ecba6a89892fc1bfad6cb6dfe5aa0274382d22e14306b08c62e874568"
+          }
+        },
+        {
+          "ruleId": "3-0-assembly",
+          "message": {
+            "text": "BioPassportRegistry._recoverAttestationSigner(bytes32,bytes) (src/BioPassportRegistry.sol#375-393) uses assembly\n\t- INLINE ASM (src/BioPassportRegistry.sol#384-388)\n",
+            "markdown": "[BioPassportRegistry._recoverAttestationSigner(bytes32,bytes)](src/BioPassportRegistry.sol#L375-L393) uses assembly\n\t- [INLINE ASM](src/BioPassportRegistry.sol#L384-L388)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 375,
+                  "endLine": 393
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "b72039ab63fe540342a0a028abd7413d1d61c04c81ab03fb8021489b0e232301"
+          }
+        },
+        {
+          "ruleId": "3-0-cyclomatic-complexity",
+          "message": {
+            "text": "BioPassportRegistry._verifyMaterialAt(string,uint256) (src/BioPassportRegistry.sol#803-889) has a high cyclomatic complexity (13).\n",
+            "markdown": "[BioPassportRegistry._verifyMaterialAt(string,uint256)](src/BioPassportRegistry.sol#L803-L889) has a high cyclomatic complexity (13).\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 803,
+                  "endLine": 889
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "5a2053876a26a1c23ea859089be00b3177f230faecff95762ce2fb6f3f0e7652"
+          }
+        },
+        {
+          "ruleId": "3-0-naming-convention",
+          "message": {
+            "text": "Parameter BioPassportRegistry.uint2str(uint256)._i (src/BioPassportRegistry.sol#951) is not in mixedCase\n",
+            "markdown": "Parameter [BioPassportRegistry.uint2str(uint256)._i](src/BioPassportRegistry.sol#L951) is not in mixedCase\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 951,
+                  "endLine": 951
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "7d1c7d3be79789dd14963ceda873e86a90a60f12f8f9174ceae36a4602df5c5f"
+          }
+        },
+        {
+          "ruleId": "3-1-too-many-digits",
+          "message": {
+            "text": "BioPassportRegistry.uint2str(uint256) (src/BioPassportRegistry.sol#951-1001) uses literals with too many digits:\n\t- _i < 1000000 (src/BioPassportRegistry.sol#963-965)\n",
+            "markdown": "[BioPassportRegistry.uint2str(uint256)](src/BioPassportRegistry.sol#L951-L1001) uses literals with too many digits:\n\t- [_i < 1000000](src/BioPassportRegistry.sol#L963-L965)\n"
+          },
+          "level": "warning",
+          "locations": [
+            {
+              "physicalLocation": {
+                "artifactLocation": {
+                  "uri": "src/BioPassportRegistry.sol"
+                },
+                "region": {
+                  "startLine": 951,
+                  "endLine": 1001
+                }
+              }
+            }
+          ],
+          "partialFingerprints": {
+            "id": "c1778a8871333778ef068e2a3467dd999853661de9314449d7146e69cb6d8411"
+          }
+        }
+      ]
+    }
+  ]
+}

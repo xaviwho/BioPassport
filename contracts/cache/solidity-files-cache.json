@@ -2,51 +2,16 @@
   "_format": "hh-sol-cache-2",
   "files": {
     "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\src\\BioPassportRegistry.sol": {
-      "lastModificationDate": 1767876294877,
-      "contentHash": "f344d337200738202a6ac9beb6028224",
+      "lastModificationDate": 1776746553839,
+      "contentHash": "d03195e508b03375b4e5290fcc899ed6",
       "sourceName": "src/BioPassportRegistry.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
+          "viaIR": true,
           "optimizer": {
             "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        "^0.8.19"
-      ],
-      "artifacts": [
-        "BioPassportRegistry"
-      ]
-    },
-    "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\src\\BioPassportV2.sol": {
-      "lastModificationDate": 1768978818816,
-      "contentHash": "6fb2a146f3815e62d21d02fdaa79f1eb",
-      "sourceName": "src/BioPassportV2.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
+            "runs": 50
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -66,26 +31,106 @@
         }
       },
       "imports": [
+        "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
         "@openzeppelin/contracts/access/AccessControl.sol",
-        "@openzeppelin/contracts/utils/ReentrancyGuard.sol"
+        "@openzeppelin/contracts/utils/Pausable.sol"
       ],
       "versionPragmas": [
         "^0.8.20"
       ],
       "artifacts": [
-        "BioPassportV2"
+        "BioPassportRegistry"
+      ]
+    },
+    "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\ReentrancyGuard.sol": {
+      "lastModificationDate": 1776737435484,
+      "contentHash": "6e5efb502dd6652d12ad15eea2c5bdf4",
+      "sourceName": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "viaIR": true,
+          "optimizer": {
+            "enabled": true,
+            "runs": 50
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "./StorageSlot.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "ReentrancyGuard"
+      ]
+    },
+    "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Pausable.sol": {
+      "lastModificationDate": 1776737435484,
+      "contentHash": "0d47b53e10b1985efbb396f937626279",
+      "sourceName": "@openzeppelin/contracts/utils/Pausable.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "viaIR": true,
+          "optimizer": {
+            "enabled": true,
+            "runs": 50
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "../utils/Context.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "Pausable"
       ]
     },
     "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\access\\AccessControl.sol": {
-      "lastModificationDate": 1768978758032,
-      "contentHash": "d0e2c05f09a3aea7cd299bbd4a435ee2",
+      "lastModificationDate": 1776737435414,
+      "contentHash": "798a29e3c30dbd3eda1a67add26571e2",
       "sourceName": "@openzeppelin/contracts/access/AccessControl.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
+          "viaIR": true,
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 50
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -116,16 +161,17 @@
         "AccessControl"
       ]
     },
-    "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\ReentrancyGuard.sol": {
-      "lastModificationDate": 1768978758324,
-      "contentHash": "190613e556d509d9e9a0ea43dc5d891d",
-      "sourceName": "@openzeppelin/contracts/utils/ReentrancyGuard.sol",
+    "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\StorageSlot.sol": {
+      "lastModificationDate": 1776737435485,
+      "contentHash": "e656d64c4ce918f3d13030b91c935134",
+      "sourceName": "@openzeppelin/contracts/utils/StorageSlot.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
+          "viaIR": true,
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 50
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -149,19 +195,20 @@
         "^0.8.20"
       ],
       "artifacts": [
-        "ReentrancyGuard"
+        "StorageSlot"
       ]
     },
     "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\Context.sol": {
-      "lastModificationDate": 1768978758093,
+      "lastModificationDate": 1776737435478,
       "contentHash": "67bfbc07588eb8683b3fd8f6f909563e",
       "sourceName": "@openzeppelin/contracts/utils/Context.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
+          "viaIR": true,
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 50
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -188,52 +235,17 @@
         "Context"
       ]
     },
-    "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\access\\IAccessControl.sol": {
-      "lastModificationDate": 1768978758213,
-      "contentHash": "def1e8f7b6cac577cf2600655bf3bdf8",
-      "sourceName": "@openzeppelin/contracts/access/IAccessControl.sol",
-      "solcConfig": {
-        "version": "0.8.20",
-        "settings": {
-          "optimizer": {
-            "enabled": true,
-            "runs": 200
-          },
-          "evmVersion": "paris",
-          "outputSelection": {
-            "*": {
-              "*": [
-                "abi",
-                "evm.bytecode",
-                "evm.deployedBytecode",
-                "evm.methodIdentifiers",
-                "metadata"
-              ],
-              "": [
-                "ast"
-              ]
-            }
-          }
-        }
-      },
-      "imports": [],
-      "versionPragmas": [
-        ">=0.8.4"
-      ],
-      "artifacts": [
-        "IAccessControl"
-      ]
-    },
     "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\ERC165.sol": {
-      "lastModificationDate": 1768978758147,
+      "lastModificationDate": 1776737435482,
       "contentHash": "0906d06dca25210d4696dcef6dad2909",
       "sourceName": "@openzeppelin/contracts/utils/introspection/ERC165.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
+          "viaIR": true,
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 50
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -262,16 +274,54 @@
         "ERC165"
       ]
     },
+    "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\access\\IAccessControl.sol": {
+      "lastModificationDate": 1776737435415,
+      "contentHash": "def1e8f7b6cac577cf2600655bf3bdf8",
+      "sourceName": "@openzeppelin/contracts/access/IAccessControl.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "viaIR": true,
+          "optimizer": {
+            "enabled": true,
+            "runs": 50
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [],
+      "versionPragmas": [
+        ">=0.8.4"
+      ],
+      "artifacts": [
+        "IAccessControl"
+      ]
+    },
     "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\node_modules\\@openzeppelin\\contracts\\utils\\introspection\\IERC165.sol": {
-      "lastModificationDate": 1768978758240,
+      "lastModificationDate": 1776737435483,
       "contentHash": "7074c93b1ea0a122063f26ddd1db1032",
       "sourceName": "@openzeppelin/contracts/utils/introspection/IERC165.sol",
       "solcConfig": {
         "version": "0.8.20",
         "settings": {
+          "viaIR": true,
           "optimizer": {
             "enabled": true,
-            "runs": 200
+            "runs": 50
           },
           "evmVersion": "paris",
           "outputSelection": {
@@ -296,6 +346,46 @@
       ],
       "artifacts": [
         "IERC165"
+      ]
+    },
+    "C:\\Users\\Xavie\\Downloads\\BioPassport\\contracts\\src\\BioPassportV2.sol": {
+      "lastModificationDate": 1776737438159,
+      "contentHash": "6fb2a146f3815e62d21d02fdaa79f1eb",
+      "sourceName": "src/BioPassportV2.sol",
+      "solcConfig": {
+        "version": "0.8.20",
+        "settings": {
+          "viaIR": true,
+          "optimizer": {
+            "enabled": true,
+            "runs": 50
+          },
+          "evmVersion": "paris",
+          "outputSelection": {
+            "*": {
+              "*": [
+                "abi",
+                "evm.bytecode",
+                "evm.deployedBytecode",
+                "evm.methodIdentifiers",
+                "metadata"
+              ],
+              "": [
+                "ast"
+              ]
+            }
+          }
+        }
+      },
+      "imports": [
+        "@openzeppelin/contracts/access/AccessControl.sol",
+        "@openzeppelin/contracts/utils/ReentrancyGuard.sol"
+      ],
+      "versionPragmas": [
+        "^0.8.20"
+      ],
+      "artifacts": [
+        "BioPassportV2"
       ]
     }
   }

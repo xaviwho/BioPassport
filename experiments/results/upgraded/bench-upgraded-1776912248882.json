@@ -1,0 +1,227 @@
+{
+  "args": {
+    "READS": 2,
+    "WRITES": 2,
+    "WARMUP": 0,
+    "BOOTSTRAP": 10
+  },
+  "report": {
+    "registerMaterial": {
+      "op": "registerMaterial",
+      "n": 2,
+      "mean": 4282.163950000001,
+      "std": 2.3645500000011452,
+      "p50": {
+        "point": 4284.528500000002,
+        "ciLow": 4279.7994,
+        "ciHigh": 4284.528500000002
+      },
+      "p95": {
+        "point": 4284.528500000002,
+        "ciLow": 4279.7994,
+        "ciHigh": 4284.528500000002
+      },
+      "p99": {
+        "point": 4284.528500000002,
+        "ciLow": 4279.7994,
+        "ciHigh": 4284.528500000002
+      },
+      "coldOnly": {
+        "n": 0,
+        "meanMs": 0
+      },
+      "warmOnly": {
+        "n": 2,
+        "meanMs": 4282.163950000001
+      }
+    },
+    "issueCredential": {
+      "op": "issueCredential",
+      "n": 2,
+      "mean": 4252.409350000002,
+      "std": 2.322650000001886,
+      "p50": {
+        "point": 4254.732000000004,
+        "ciLow": 4254.732000000004,
+        "ciHigh": 4254.732000000004
+      },
+      "p95": {
+        "point": 4254.732000000004,
+        "ciLow": 4254.732000000004,
+        "ciHigh": 4254.732000000004
+      },
+      "p99": {
+        "point": 4254.732000000004,
+        "ciLow": 4250.0867,
+        "ciHigh": 4254.732000000004
+      },
+      "coldOnly": {
+        "n": 0,
+        "meanMs": 0
+      },
+      "warmOnly": {
+        "n": 2,
+        "meanMs": 4252.409350000002
+      }
+    },
+    "issueCredentialWithAttestation": {
+      "op": "issueCredentialWithAttestation",
+      "n": 2,
+      "mean": 4251.462650000001,
+      "std": 3.2141499999997905,
+      "p50": {
+        "point": 4254.676800000001,
+        "ciLow": 4248.2485000000015,
+        "ciHigh": 4254.676800000001
+      },
+      "p95": {
+        "point": 4254.676800000001,
+        "ciLow": 4248.2485000000015,
+        "ciHigh": 4254.676800000001
+      },
+      "p99": {
+        "point": 4254.676800000001,
+        "ciLow": 4248.2485000000015,
+        "ciHigh": 4254.676800000001
+      },
+      "coldOnly": {
+        "n": 0,
+        "meanMs": 0
+      },
+      "warmOnly": {
+        "n": 2,
+        "meanMs": 4251.462650000001
+      }
+    },
+    "verifyOnChain": {
+      "op": "verifyOnChain",
+      "n": 2,
+      "mean": 27.044599999999264,
+      "std": 0.014400000000023283,
+      "p50": {
+        "point": 27.058999999999287,
+        "ciLow": 27.03019999999924,
+        "ciHigh": 27.058999999999287
+      },
+      "p95": {
+        "point": 27.058999999999287,
+        "ciLow": 27.03019999999924,
+        "ciHigh": 27.058999999999287
+      },
+      "p99": {
+        "point": 27.058999999999287,
+        "ciLow": 27.03019999999924,
+        "ciHigh": 27.058999999999287
+      },
+      "coldOnly": {
+        "n": 0,
+        "meanMs": 0
+      },
+      "warmOnly": {
+        "n": 2,
+        "meanMs": 27.044599999999264
+      }
+    },
+    "verifyFull": {
+      "op": "verifyFull",
+      "n": 2,
+      "mean": 74.59379999999965,
+      "std": 4.735799999999472,
+      "p50": {
+        "point": 79.32959999999912,
+        "ciLow": 69.85800000000017,
+        "ciHigh": 79.32959999999912
+      },
+      "p95": {
+        "point": 79.32959999999912,
+        "ciLow": 69.85800000000017,
+        "ciHigh": 79.32959999999912
+      },
+      "p99": {
+        "point": 79.32959999999912,
+        "ciLow": 69.85800000000017,
+        "ciHigh": 79.32959999999912
+      },
+      "coldOnly": {
+        "n": 0,
+        "meanMs": 0
+      },
+      "warmOnly": {
+        "n": 2,
+        "meanMs": 74.59379999999965
+      }
+    }
+  },
+  "samples": {
+    "registerMaterial": [
+      {
+        "op": "registerMaterial",
+        "latencyMs": 4284.528500000002,
+        "cold": false,
+        "ts": 1776912206132
+      },
+      {
+        "op": "registerMaterial",
+        "latencyMs": 4279.7994,
+        "cold": false,
+        "ts": 1776912210412
+      }
+    ],
+    "issueCredential": [
+      {
+        "op": "issueCredential",
+        "latencyMs": 4250.0867,
+        "cold": false,
+        "ts": 1776912218928
+      },
+      {
+        "op": "issueCredential",
+        "latencyMs": 4254.732000000004,
+        "cold": false,
+        "ts": 1776912227445
+      }
+    ],
+    "issueCredentialWithAttestation": [
+      {
+        "op": "issueCredentialWithAttestation",
+        "latencyMs": 4248.2485000000015,
+        "cold": false,
+        "ts": 1776912240370
+      },
+      {
+        "op": "issueCredentialWithAttestation",
+        "latencyMs": 4254.676800000001,
+        "cold": false,
+        "ts": 1776912248881
+      }
+    ],
+    "verifyOnChain": [
+      {
+        "op": "verifyOnChain",
+        "latencyMs": 27.058999999999287,
+        "cold": false,
+        "ts": 1776912201671
+      },
+      {
+        "op": "verifyOnChain",
+        "latencyMs": 27.03019999999924,
+        "cold": false,
+        "ts": 1776912201698
+      }
+    ],
+    "verifyFull": [
+      {
+        "op": "verifyFull",
+        "latencyMs": 79.32959999999912,
+        "cold": false,
+        "ts": 1776912201778
+      },
+      {
+        "op": "verifyFull",
+        "latencyMs": 69.85800000000017,
+        "cold": false,
+        "ts": 1776912201847
+      }
+    ]
+  }
+}

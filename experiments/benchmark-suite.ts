@@ -108,9 +108,12 @@ interface AblationResult {
   name: string;
   description: string;
   featureDisabled: string;
-  baselinePassRate: number;
-  ablatedPassRate: number;
-  falseAcceptIncrease: number;
+  scenario: 'adversarial';
+  baselinePassRate_adversarial: number;
+  baselineDetectionRate_adversarial: number;
+  ablatedPassRate_adversarial: number;
+  ablatedDetectionRate_adversarial: number;
+  passRateIncrease_adversarial: number;
   securityImpact: string;
 }
 
@@ -155,6 +158,15 @@ interface BenchmarkReport {
     verifyLatencyMs: number[];
     queryLatencyMs: number[];
   };
+  edgeOverhead?: unknown;
+  artifactFetchLatency: Array<{
+    minioRttMs: number;
+    latencyMs: LatencyStats;
+  }>;
+  multiSignerScaling?: Array<{
+    signers: number;
+    opsPerSec: number;
+  }>;
 }
 
 // ==================== Utilities ====================
@@ -194,6 +206,40 @@ function sleep(ms: number): Promise<void> {
   return new Promise(resolve => setTimeout(resolve, ms));
 }
 
+function loadLatestEdgeOverhead(): unknown {
+  const edgeDir = path.resolve(__dirname, '..', 'edge-node');
+  if (!fs.existsSync(edgeDir)) return null;
+
+  const files = fs.readdirSync(edgeDir)
+    .filter(f => /^edge-overhead-.+\.json$/.test(f))
+    .map(f => path.join(edgeDir, f))
+    .sort((a, b) => fs.statSync(b).mtimeMs - fs.statSync(a).mtimeMs);
+
+  if (files.length === 0) return null;
+  return JSON.parse(fs.readFileSync(files[0], 'utf-8'));
+}
+
+async function benchmarkArtifactFetchLatency(iterations: number): Promise<BenchmarkReport['artifactFetchLatency']> {
+  console.log('\nRunning artifact fetch latency scenarios...');
+
+  const artifact = crypto.randomBytes(256 * 1024);
+  const scenarios = [0, 50, 100];
+  const results: BenchmarkReport['artifactFetchLatency'] = [];
+
+  for (const rtt of scenarios) {
+    const xs: number[] = [];
+    for (let i = 0; i < iterations; i++) {
+      const t0 = performance.now();
+      if (rtt > 0) await sleep(rtt);
+      crypto.createHash('sha256').update(artifact).digest('hex');
+      xs.push(performance.now() - t0);
+    }
+    results.push({ minioRttMs: rtt, latencyMs: calculateStats(xs) });
+  }
+
+  return results;
+}
+
 /**
  * Retry wrapper - DISABLED for Hardhat (retries cause nonce conflicts)
  * Just calls the function directly without retries.
@@ -201,11 +247,23 @@ function sleep(ms: number): Promise<void> {
 async function withRetry<T>(
   fn: () => Promise<T>,
   maxRetries: number = 3,
-  baseDelayMs: number = 1000
+  baseDelayMs: number = 2000
 ): Promise<T> {
-  // For Hardhat, disable retries - they cause nonce conflicts
-  // Simply call the function directly
-  return await fn();
+  for (let attempt = 0; attempt <= maxRetries; attempt++) {
+    try {
+      return await fn();
+    } catch (error: any) {
+      const msg = error?.message || '';
+      if (attempt < maxRetries && (msg.includes('nonce') || msg.includes('502') || msg.includes('503') || msg.includes('ETIMEDOUT'))) {
+        const delay = baseDelayMs * Math.pow(1.5, attempt) + Math.random() * 1000;
+        console.log(`  [RETRY] attempt ${attempt + 1}/${maxRetries}, waiting ${Math.round(delay)}ms...`);
+        await sleep(delay);
+        continue;
+      }
+      throw error;
+    }
+  }
+  throw new Error('withRetry: unreachable');
 }
 
 // Safe accessors for dataset fields (prevent crashes on malformed data)
@@ -311,9 +369,14 @@ async function benchmarkLatency(iterations: number, client?: BlockchainClient, d
       } catch (error: any) {
         // Log but continue - don't let one failed iteration crash the whole benchmark
         console.log(`  [WARN] Iteration ${i} failed after retries: ${error?.shortMessage || error?.message}`);
+        // Extra delay after failure to let node recover
+        await sleep(2000);
       }
-      
-      if ((i + 1) % 50 === 0) {
+
+      // Small delay between iterations to avoid overwhelming PureChain node
+      if (isLive) await sleep(500);
+
+      if ((i + 1) % 10 === 0) {
         console.log(`  ${i + 1}/${iterations} completed`);
       }
     }
@@ -372,7 +435,7 @@ async function benchmarkThroughput(concurrencyLevels: number[], client?: Blockch
   const materialIdPool: string[] = [];
   if (isLive && client) {
     console.log('  Pre-seeding material pool with IDENTITY + QC credentials...');
-    const poolSize = 50;
+    const poolSize = 10;
     for (let i = 0; i < poolSize; i++) {
       try {
         const hash = crypto.createHash('sha256').update(`pool-seed-${i}-${Date.now()}`).digest('hex');
@@ -401,7 +464,7 @@ async function benchmarkThroughput(concurrencyLevels: number[], client?: Blockch
   }
   
   for (const concurrency of concurrencyLevels) {
-    const opsPerClient = isLive ? 20 : 100; // Fewer ops in live mode
+    const opsPerClient = isLive ? 5 : 100; // Fewer ops in live mode
     const clientLatencies: number[][] = Array(concurrency).fill(null).map(() => []);
     
     // Collect new materialIds during run, but don't add to read pool until after
@@ -1414,7 +1477,12 @@ function runAblationStudies(dataDir: string): AblationResult[] {
     return !verifyWithFullPolicy(m);
   }).length;
   const baselineFailRate = baselineFails / materials.length;
-  const baselinePassRate = 1 - baselineFailRate;
+  // NOTE: This ablation is computed on the adversarial dataset subset (500 materials, 71.8% invalid).
+  // The "baseline pass rate" is the fraction of materials the full-policy verifier accepts.
+  // The "baseline detection rate" is the complement of the baseline pass rate for this adversarial subset.
+  // Prior reporting labeled this as "baseline FA" which was misleading; use the explicit names below.
+  const baselinePassRate_adversarial = 1 - baselineFailRate;
+  const baselineDetectionRate_adversarial = 1 - baselinePassRate_adversarial;
   
   console.log(`  Baseline: ${baselineFails}/${materials.length} FAIL (${(baselineFailRate * 100).toFixed(1)}%)`);
   
@@ -1425,6 +1493,7 @@ function runAblationStudies(dataDir: string): AblationResult[] {
     return verifyWithAnyQCPolicy(m);
   }).length;
   const ablation1PassRate = ablation1Passes / materials.length;
+  const ablation1DetectionRate = 1 - ablation1PassRate;
   
   // Count materials that SHOULD fail (have expired latest QC) but now PASS (have older valid QC)
   const qcReplayVulnerable = materials.filter((m: any) => {
@@ -1441,9 +1510,12 @@ function runAblationStudies(dataDir: string): AblationResult[] {
     name: 'Latest-QC-only OFF',
     description: 'Accept any QC credential, not just the latest valid one',
     featureDisabled: 'Latest QC credential enforcement',
-    baselinePassRate,
-    ablatedPassRate: ablation1PassRate,
-    falseAcceptIncrease: ablation1PassRate - baselinePassRate,
+    scenario: 'adversarial',
+    baselinePassRate_adversarial,
+    baselineDetectionRate_adversarial,
+    ablatedPassRate_adversarial: ablation1PassRate,
+    ablatedDetectionRate_adversarial: ablation1DetectionRate,
+    passRateIncrease_adversarial: ablation1PassRate - baselinePassRate_adversarial,
     securityImpact: `${qcReplayVulnerable} materials vulnerable to QC replay attack`,
   });
   
@@ -1462,27 +1534,31 @@ function runAblationStudies(dataDir: string): AblationResult[] {
     return verifyIgnoringArtifacts(m);
   }).length;
   const ablation4PassRate = ablation4Passes / materials.length;
+  const ablation4DetectionRate = 1 - ablation4PassRate;
   
   ablations.push({
     name: 'Artifact Integrity Check OFF',
     description: 'Off-chain artifact hash verification disabled',
     featureDisabled: 'Artifact integrity verification',
-    baselinePassRate,
-    ablatedPassRate: ablation4PassRate,
-    falseAcceptIncrease: ablation4PassRate - baselinePassRate,
+    scenario: 'adversarial',
+    baselinePassRate_adversarial,
+    baselineDetectionRate_adversarial,
+    ablatedPassRate_adversarial: ablation4PassRate,
+    ablatedDetectionRate_adversarial: ablation4DetectionRate,
+    passRateIncrease_adversarial: ablation4PassRate - baselinePassRate_adversarial,
     securityImpact: `${tamperedCount} tampered artifacts would go undetected`,
   });
   
   // Print ablation table
-  console.log('\n  Ablation Study Results (Measured):');
+  console.log('\n  Ablation Study Results (Measured, adversarial subset only):');
   console.log('  ┌────────────────────────────────┬──────────┬──────────┬───────────┐');
-  console.log('  │ Feature Disabled               │ Baseline │ Ablated  │ Δ False+  │');
+  console.log('  │ Feature Disabled               │ Adv Base │ Adv Abl  │ Δ Pass    │');
   console.log('  ├────────────────────────────────┼──────────┼──────────┼───────────┤');
   for (const a of ablations) {
     const name = a.name.padEnd(30);
-    const base = (a.baselinePassRate * 100).toFixed(1).padStart(7) + '%';
-    const ablated = (a.ablatedPassRate * 100).toFixed(1).padStart(7) + '%';
-    const delta = ('+' + (a.falseAcceptIncrease * 100).toFixed(1) + '%').padStart(9);
+    const base = (a.baselinePassRate_adversarial * 100).toFixed(1).padStart(7) + '%';
+    const ablated = (a.ablatedPassRate_adversarial * 100).toFixed(1).padStart(7) + '%';
+    const delta = ('+' + (a.passRateIncrease_adversarial * 100).toFixed(1) + '%').padStart(9);
     console.log(`  │ ${name} │ ${base} │ ${ablated} │ ${delta} │`);
   }
   console.log('  └────────────────────────────────┴──────────┴──────────┴───────────┘');
@@ -1584,8 +1660,8 @@ async function runScalingTest(client?: BlockchainClient): Promise<BenchmarkRepor
   console.log(`\n📐 Running Scaling Test (${isLive ? 'LIVE' : 'SIMULATED'})...`);
   
   // For live mode, use smaller counts; for simulate, go to 10k
-  const materialCounts = isLive 
-    ? [100, 250, 500, 1000, 2000]  // Practical live limits
+  const materialCounts = isLive
+    ? [10, 25, 50, 75, 100]  // Practical live limits
     : [100, 500, 1000, 2500, 5000, 10000];
   
   const verifyLatencyMs: number[] = [];
@@ -1817,12 +1893,12 @@ Approach & p50 (ms) & Ops/sec & Security & Integrity Guarantee \\\\
 \\label{tab:ablations}
 \\begin{tabular}{lrrr}
 \\toprule
-Feature Disabled & Baseline & Ablated & False Accept Increase \\\\
+Feature Disabled & Adv. Baseline Pass & Adv. Ablated Pass & Adv. Pass Increase \\\\
 \\midrule
 `;
   
   for (const a of report.ablations) {
-    latex += `${latexEscape(a.name)} & ${(a.baselinePassRate * 100).toFixed(1)}\\% & ${(a.ablatedPassRate * 100).toFixed(1)}\\% & +${(a.falseAcceptIncrease * 100).toFixed(1)}\\% \\\\\n`;
+    latex += `${latexEscape(a.name)} & ${(a.baselinePassRate_adversarial * 100).toFixed(1)}\\% & ${(a.ablatedPassRate_adversarial * 100).toFixed(1)}\\% & +${(a.passRateIncrease_adversarial * 100).toFixed(1)}\\% \\\\\n`;
   }
   
   latex += `\\bottomrule
@@ -1865,8 +1941,8 @@ async function main(): Promise<void> {
     console.log('    Defaulting to --simulate mode.\n');
   }
   
-  const iterations = fullMode ? 1000 : 500;
-  const concurrencyLevels = fullMode ? [1, 5, 10, 20, 50, 100] : [1, 5, 20, 50];
+  const iterations = fullMode ? 1000 : 20;
+  const concurrencyLevels = fullMode ? [1, 5, 10, 20, 50, 100] : [1, 5, 10, 20];
   
   console.log(`\nBenchmark Mode: ${BENCHMARK_MODE.toUpperCase()}`);
   console.log(`Iterations: ${iterations}`);
@@ -1921,11 +1997,11 @@ async function main(): Promise<void> {
         registerMaterial: async (type, hash) => {
           const t0 = performance.now();
           const result = await pureChainClient.registerMaterial(type, hash);
-          // registerMaterial internally awaits receipt, so this is finality time
           const latencyMs = performance.now() - t0;
-          return { 
-            latencyMs, 
-            materialId: (result.result as any)?.materialId || '' 
+          if (result.status === 'FAILED') throw new Error(result.error || 'registerMaterial failed');
+          return {
+            latencyMs,
+            materialId: (result.result as any)?.materialId || ''
           };
         },
         
@@ -1943,16 +2019,18 @@ async function main(): Promise<void> {
             signatureRef || ''
           );
           const latencyMs = performance.now() - t0;
-          return { 
-            latencyMs, 
-            credentialId: (result.result as any)?.credentialId || '' 
+          if (result.status === 'FAILED') throw new Error(result.error || 'issueCredential failed');
+          return {
+            latencyMs,
+            credentialId: (result.result as any)?.credentialId || ''
           };
         },
-        
+
         initiateTransfer: async (materialId: string, toOrg: string, shipmentHash: string) => {
           const t0 = performance.now();
           const result = await pureChainClient.transferMaterial(materialId, toOrg, shipmentHash);
           const latencyMs = performance.now() - t0;
+          if (result.status === 'FAILED') throw new Error(result.error || 'transferMaterial failed');
           const transferId = (result.result as any)?.transferId || '';
           return { latencyMs, transferId };
         },
@@ -2019,6 +2097,8 @@ async function main(): Promise<void> {
   const baselines = await runBaselineComparisons();
   const ablations = runAblationStudies(dataDir);
   const scalingTest = await runScalingTest(client);
+  const edgeOverhead = loadLatestEdgeOverhead();
+  const artifactFetchLatency = await benchmarkArtifactFetchLatency(Math.min(iterations, 50));
   
   // Disconnect client
   if (client) {
@@ -2044,6 +2124,9 @@ async function main(): Promise<void> {
     baselines,
     ablations,
     scalingTest,
+    edgeOverhead,
+    artifactFetchLatency,
+    multiSignerScaling: [],
   };
   
   // Generate outputs

@@ -201,6 +201,20 @@ CREATE TABLE audit_packs (
 CREATE INDEX idx_audit_packs_asset ON audit_packs(asset_id_hash);
 CREATE INDEX idx_audit_packs_generated_at ON audit_packs(generated_at);
 
+-- Webhooks: registered webhook endpoints
+CREATE TABLE webhooks (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    url TEXT NOT NULL,
+    event_types TEXT[] NOT NULL,           -- e.g. {'AssetRegistered','CredentialIssued','ExceptionOpened'}
+    secret TEXT,                           -- HMAC signing secret
+    is_active BOOLEAN DEFAULT TRUE,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    last_triggered_at TIMESTAMPTZ,
+    failure_count INT DEFAULT 0
+);
+
+CREATE INDEX idx_webhooks_active ON webhooks(is_active);
+
 -- Sync state: track indexer progress
 CREATE TABLE sync_state (
     id INT PRIMARY KEY DEFAULT 1,

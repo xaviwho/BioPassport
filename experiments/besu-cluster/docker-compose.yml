@@ -1,0 +1,195 @@
+x-besu-common: &besu-common
+  image: hyperledger/besu:24.5.2
+  networks:
+    besunet: {}
+  command:
+    - --genesis-file=/genesis.json
+    - --network-id=2026
+    - --rpc-http-enabled
+    - --rpc-http-api=ETH,NET,WEB3,CLIQUE,ADMIN
+    - --rpc-http-host=0.0.0.0
+    - --rpc-http-cors-origins=*
+    - --host-allowlist=*
+    - --miner-enabled
+    - --min-gas-price=0
+    - --bootnodes=enode://79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8@172.28.1.11:30303
+
+services:
+  besu-1:
+    <<: *besu-common
+    container_name: besu-1
+    profiles: ["s1", "s3", "s5", "s7"]
+    volumes:
+      - ./node1:/data
+      - ./genesis.json:/genesis.json:ro
+    networks:
+      besunet:
+        ipv4_address: 172.28.1.11
+    command:
+      - --data-path=/data
+      - --genesis-file=/genesis.json
+      - --network-id=2026
+      - --rpc-http-enabled
+      - --rpc-http-api=ETH,NET,WEB3,CLIQUE,ADMIN
+      - --rpc-http-host=0.0.0.0
+      - --rpc-http-cors-origins=*
+      - --host-allowlist=*
+      - --miner-enabled
+      - --miner-coinbase=0x7e5f4552091a69125d5dfcb7b8c2659029395bdf
+      - --min-gas-price=0
+      - --p2p-host=0.0.0.0
+      - --p2p-port=30303
+    ports:
+      - "8545:8545"
+      - "30303:30303"
+
+  besu-2:
+    <<: *besu-common
+    container_name: besu-2
+    profiles: ["s3", "s5", "s7"]
+    volumes:
+      - ./node2:/data
+      - ./genesis.json:/genesis.json:ro
+    networks:
+      besunet:
+        ipv4_address: 172.28.1.12
+    command:
+      - --data-path=/data
+      - --genesis-file=/genesis.json
+      - --network-id=2026
+      - --rpc-http-enabled
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --miner-enabled
+      - --miner-coinbase=0x2b5ad5c4795c026514f8317c7a215e218dccd6cf
+      - --min-gas-price=0
+      - --p2p-host=0.0.0.0
+      - --p2p-port=30304
+      - --bootnodes=enode://79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8@172.28.1.11:30303
+
+  besu-3:
+    <<: *besu-common
+    container_name: besu-3
+    profiles: ["s3", "s5", "s7"]
+    volumes:
+      - ./node3:/data
+      - ./genesis.json:/genesis.json:ro
+    networks:
+      besunet:
+        ipv4_address: 172.28.1.13
+    command:
+      - --data-path=/data
+      - --genesis-file=/genesis.json
+      - --network-id=2026
+      - --rpc-http-enabled
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --miner-enabled
+      - --miner-coinbase=0x6813eb9362372eef6200f3b1dbc3f819671cba69
+      - --min-gas-price=0
+      - --p2p-host=0.0.0.0
+      - --p2p-port=30305
+      - --bootnodes=enode://79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8@172.28.1.11:30303
+
+  besu-4:
+    <<: *besu-common
+    container_name: besu-4
+    profiles: ["s5", "s7"]
+    volumes:
+      - ./node4:/data
+      - ./genesis.json:/genesis.json:ro
+    networks:
+      besunet:
+        ipv4_address: 172.28.1.14
+    command:
+      - --data-path=/data
+      - --genesis-file=/genesis.json
+      - --network-id=2026
+      - --rpc-http-enabled
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --miner-enabled
+      - --miner-coinbase=0x1eff47bc3a10a45d4b230b5d10e37751fe6aa718
+      - --min-gas-price=0
+      - --p2p-host=0.0.0.0
+      - --p2p-port=30306
+      - --bootnodes=enode://79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8@172.28.1.11:30303
+
+  besu-5:
+    <<: *besu-common
+    container_name: besu-5
+    profiles: ["s5", "s7"]
+    volumes:
+      - ./node5:/data
+      - ./genesis.json:/genesis.json:ro
+    networks:
+      besunet:
+        ipv4_address: 172.28.1.15
+    command:
+      - --data-path=/data
+      - --genesis-file=/genesis.json
+      - --network-id=2026
+      - --rpc-http-enabled
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --miner-enabled
+      - --miner-coinbase=0xe1ab8145f7e55dc933d51a18c793f901a3a0b276
+      - --min-gas-price=0
+      - --p2p-host=0.0.0.0
+      - --p2p-port=30307
+      - --bootnodes=enode://79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8@172.28.1.11:30303
+
+  besu-6:
+    <<: *besu-common
+    container_name: besu-6
+    profiles: ["s7"]
+    volumes:
+      - ./node6:/data
+      - ./genesis.json:/genesis.json:ro
+    networks:
+      besunet:
+        ipv4_address: 172.28.1.16
+    command:
+      - --data-path=/data
+      - --genesis-file=/genesis.json
+      - --network-id=2026
+      - --rpc-http-enabled
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --miner-enabled
+      - --miner-coinbase=0xe57bfe9f44b819898f47bf37e5af72a0783e1141
+      - --min-gas-price=0
+      - --p2p-host=0.0.0.0
+      - --p2p-port=30308
+      - --bootnodes=enode://79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8@172.28.1.11:30303
+
+  besu-7:
+    <<: *besu-common
+    container_name: besu-7
+    profiles: ["s7"]
+    volumes:
+      - ./node7:/data
+      - ./genesis.json:/genesis.json:ro
+    networks:
+      besunet:
+        ipv4_address: 172.28.1.17
+    command:
+      - --data-path=/data
+      - --genesis-file=/genesis.json
+      - --network-id=2026
+      - --rpc-http-enabled
+      - --rpc-http-host=0.0.0.0
+      - --host-allowlist=*
+      - --miner-enabled
+      - --miner-coinbase=0xd41c057fd1c78805aac12b0a94a405c0461a6fbb
+      - --min-gas-price=0
+      - --p2p-host=0.0.0.0
+      - --p2p-port=30309
+      - --bootnodes=enode://79be667ef9dcbbac55a06295ce870b07029bfcdb2dce28d959f2815b16f81798483ada7726a3c4655da4fbfc0e1108a8fd17b448a68554199c47d08ffb10d4b8@172.28.1.11:30303
+
+networks:
+  besunet:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.28.1.0/24

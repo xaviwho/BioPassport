@@ -133,11 +133,24 @@ export declare namespace BioPassportRegistry {
 export interface BioPassportRegistryInterface extends Interface {
   getFunction(
     nameOrSignature:
+      | "ADMIN_ROLE"
+      | "AUDITOR_ROLE"
+      | "DEFAULT_ADMIN_ROLE"
+      | "DEVICE_MANAGER_ROLE"
+      | "ISSUER_MANAGER_ROLE"
+      | "REGISTRAR_ROLE"
       | "acceptTransfer"
-      | "admin"
+      | "attestationHash"
       | "authorizeIssuer"
+      | "batchIssueCredentials"
+      | "batchRegisterMaterials"
+      | "batchVerifyMaterials"
+      | "credentialAttestations"
       | "credentialCount"
       | "credentials"
+      | "deviceExists"
+      | "devices"
+      | "enrollDevice"
       | "getCredential"
       | "getCredentialIds"
       | "getCredentials"
@@ -145,9 +158,13 @@ export interface BioPassportRegistryInterface extends Interface {
       | "getHistoryCount"
       | "getHistorySlice"
       | "getMaterial"
+      | "getRoleAdmin"
       | "getTransfers"
+      | "grantRole"
+      | "hasRole"
       | "initiateTransfer"
       | "issueCredential"
+      | "issueCredentialWithAttestation"
       | "issuerPermissions"
       | "issuerRevokedAt"
       | "materialCount"
@@ -156,43 +173,125 @@ export interface BioPassportRegistryInterface extends Interface {
       | "materialHistory"
       | "materialTransfers"
       | "materials"
+      | "pause"
+      | "paused"
       | "registerMaterial"
+      | "renounceRole"
       | "revokeCredential"
+      | "revokeDevice"
       | "revokeIssuer"
+      | "revokeRole"
       | "setStatusByAuthority"
       | "setStatusByOwner"
+      | "supportsInterface"
       | "transferCount"
+      | "unpause"
       | "verifyMaterial"
       | "verifyMaterialAt"
   ): FunctionFragment;
 
   getEvent(
     nameOrSignatureOrTopic:
+      | "AttestationVerified"
       | "CredentialIssued"
       | "CredentialRevoked"
+      | "DeviceEnrolled"
+      | "DeviceRevocationRecorded"
       | "IssuerAuthorized"
       | "IssuerRevocationRecorded"
       | "MaterialRegistered"
+      | "Paused"
+      | "RoleAdminChanged"
+      | "RoleGranted"
+      | "RoleRevoked"
       | "StatusChangedByAuthority"
       | "StatusChangedByOwner"
       | "TransferAccepted"
       | "TransferInitiated"
+      | "Unpaused"
   ): EventFragment;
 
+  encodeFunctionData(
+    functionFragment: "ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "AUDITOR_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "DEVICE_MANAGER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "ISSUER_MANAGER_ROLE",
+    values?: undefined
+  ): string;
+  encodeFunctionData(
+    functionFragment: "REGISTRAR_ROLE",
+    values?: undefined
+  ): string;
   encodeFunctionData(
     functionFragment: "acceptTransfer",
     values: [string]
   ): string;
-  encodeFunctionData(functionFragment: "admin", values?: undefined): string;
+  encodeFunctionData(
+    functionFragment: "attestationHash",
+    values: [
+      BytesLike,
+      string,
+      BigNumberish,
+      BytesLike,
+      BytesLike,
+      BigNumberish
+    ]
+  ): string;
   encodeFunctionData(
     functionFragment: "authorizeIssuer",
     values: [AddressLike, boolean, boolean, boolean]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batchIssueCredentials",
+    values: [
+      string[],
+      BigNumberish[],
+      BytesLike[],
+      BigNumberish[],
+      string[],
+      BytesLike[],
+      string[]
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batchRegisterMaterials",
+    values: [string[], BytesLike[], string[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "batchVerifyMaterials",
+    values: [string[]]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "credentialAttestations",
+    values: [string]
   ): string;
   encodeFunctionData(
     functionFragment: "credentialCount",
     values?: undefined
   ): string;
   encodeFunctionData(functionFragment: "credentials", values: [string]): string;
+  encodeFunctionData(
+    functionFragment: "deviceExists",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(functionFragment: "devices", values: [BytesLike]): string;
+  encodeFunctionData(
+    functionFragment: "enrollDevice",
+    values: [BytesLike, AddressLike, string]
+  ): string;
   encodeFunctionData(
     functionFragment: "getCredential",
     values: [string]
@@ -219,8 +318,20 @@ export interface BioPassportRegistryInterface extends Interface {
   ): string;
   encodeFunctionData(functionFragment: "getMaterial", values: [string]): string;
   encodeFunctionData(
+    functionFragment: "getRoleAdmin",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "getTransfers",
     values: [string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "grantRole",
+    values: [BytesLike, AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "hasRole",
+    values: [BytesLike, AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "initiateTransfer",
@@ -236,6 +347,21 @@ export interface BioPassportRegistryInterface extends Interface {
       string,
       BytesLike,
       string
+    ]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "issueCredentialWithAttestation",
+    values: [
+      string,
+      BigNumberish,
+      BytesLike,
+      BigNumberish,
+      string,
+      BytesLike,
+      string,
+      BytesLike,
+      BigNumberish,
+      BytesLike
     ]
   ): string;
   encodeFunctionData(
@@ -267,17 +393,31 @@ export interface BioPassportRegistryInterface extends Interface {
     values: [string, BigNumberish]
   ): string;
   encodeFunctionData(functionFragment: "materials", values: [string]): string;
+  encodeFunctionData(functionFragment: "pause", values?: undefined): string;
+  encodeFunctionData(functionFragment: "paused", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "registerMaterial",
     values: [string, BytesLike, string]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "renounceRole",
+    values: [BytesLike, AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "revokeCredential",
     values: [string]
   ): string;
   encodeFunctionData(
+    functionFragment: "revokeDevice",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "revokeIssuer",
     values: [AddressLike]
+  ): string;
+  encodeFunctionData(
+    functionFragment: "revokeRole",
+    values: [BytesLike, AddressLike]
   ): string;
   encodeFunctionData(
     functionFragment: "setStatusByAuthority",
@@ -288,9 +428,14 @@ export interface BioPassportRegistryInterface extends Interface {
     values: [string, BigNumberish, BytesLike]
   ): string;
   encodeFunctionData(
+    functionFragment: "supportsInterface",
+    values: [BytesLike]
+  ): string;
+  encodeFunctionData(
     functionFragment: "transferCount",
     values?: undefined
   ): string;
+  encodeFunctionData(functionFragment: "unpause", values?: undefined): string;
   encodeFunctionData(
     functionFragment: "verifyMaterial",
     values: [string]
@@ -300,13 +445,53 @@ export interface BioPassportRegistryInterface extends Interface {
     values: [string, BigNumberish]
   ): string;
 
+  decodeFunctionResult(functionFragment: "ADMIN_ROLE", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "AUDITOR_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEFAULT_ADMIN_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "DEVICE_MANAGER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "ISSUER_MANAGER_ROLE",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "REGISTRAR_ROLE",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "acceptTransfer",
     data: BytesLike
   ): Result;
-  decodeFunctionResult(functionFragment: "admin", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "attestationHash",
+    data: BytesLike
+  ): Result;
   decodeFunctionResult(
     functionFragment: "authorizeIssuer",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "batchIssueCredentials",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "batchRegisterMaterials",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "batchVerifyMaterials",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "credentialAttestations",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -315,6 +500,15 @@ export interface BioPassportRegistryInterface extends Interface {
   ): Result;
   decodeFunctionResult(
     functionFragment: "credentials",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "deviceExists",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(functionFragment: "devices", data: BytesLike): Result;
+  decodeFunctionResult(
+    functionFragment: "enrollDevice",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -346,15 +540,25 @@ export interface BioPassportRegistryInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "getRoleAdmin",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "getTransfers",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "grantRole", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "hasRole", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "initiateTransfer",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
     functionFragment: "issueCredential",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "issueCredentialWithAttestation",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -386,8 +590,14 @@ export interface BioPassportRegistryInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(functionFragment: "materials", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "pause", data: BytesLike): Result;
+  decodeFunctionResult(functionFragment: "paused", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "registerMaterial",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
+    functionFragment: "renounceRole",
     data: BytesLike
   ): Result;
   decodeFunctionResult(
@@ -395,9 +605,14 @@ export interface BioPassportRegistryInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "revokeDevice",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "revokeIssuer",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "revokeRole", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "setStatusByAuthority",
     data: BytesLike
@@ -407,9 +622,14 @@ export interface BioPassportRegistryInterface extends Interface {
     data: BytesLike
   ): Result;
   decodeFunctionResult(
+    functionFragment: "supportsInterface",
+    data: BytesLike
+  ): Result;
+  decodeFunctionResult(
     functionFragment: "transferCount",
     data: BytesLike
   ): Result;
+  decodeFunctionResult(functionFragment: "unpause", data: BytesLike): Result;
   decodeFunctionResult(
     functionFragment: "verifyMaterial",
     data: BytesLike
@@ -418,6 +638,31 @@ export interface BioPassportRegistryInterface extends Interface {
     functionFragment: "verifyMaterialAt",
     data: BytesLike
   ): Result;
+}
+
+export namespace AttestationVerifiedEvent {
+  export type InputTuple = [
+    credentialId: string,
+    deviceId: BytesLike,
+    attestationHash: BytesLike,
+    captureTs: BigNumberish
+  ];
+  export type OutputTuple = [
+    credentialId: string,
+    deviceId: string,
+    attestationHash: string,
+    captureTs: bigint
+  ];
+  export interface OutputObject {
+    credentialId: string;
+    deviceId: string;
+    attestationHash: string;
+    captureTs: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
 }
 
 export namespace CredentialIssuedEvent {
@@ -464,6 +709,56 @@ export namespace CredentialRevokedEvent {
   export interface OutputObject {
     credentialId: string;
     materialId: string;
+    revoker: string;
+    timestamp: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace DeviceEnrolledEvent {
+  export type InputTuple = [
+    deviceId: BytesLike,
+    deviceAddress: AddressLike,
+    instrumentType: string,
+    enroller: AddressLike,
+    timestamp: BigNumberish
+  ];
+  export type OutputTuple = [
+    deviceId: string,
+    deviceAddress: string,
+    instrumentType: string,
+    enroller: string,
+    timestamp: bigint
+  ];
+  export interface OutputObject {
+    deviceId: string;
+    deviceAddress: string;
+    instrumentType: string;
+    enroller: string;
+    timestamp: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace DeviceRevocationRecordedEvent {
+  export type InputTuple = [
+    deviceId: BytesLike,
+    revoker: AddressLike,
+    timestamp: BigNumberish
+  ];
+  export type OutputTuple = [
+    deviceId: string,
+    revoker: string,
+    timestamp: bigint
+  ];
+  export interface OutputObject {
+    deviceId: string;
     revoker: string;
     timestamp: bigint;
   }
@@ -532,6 +827,76 @@ export namespace MaterialRegisteredEvent {
     owner: string;
     ownerOrg: string;
     timestamp: bigint;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace PausedEvent {
+  export type InputTuple = [account: AddressLike];
+  export type OutputTuple = [account: string];
+  export interface OutputObject {
+    account: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RoleAdminChangedEvent {
+  export type InputTuple = [
+    role: BytesLike,
+    previousAdminRole: BytesLike,
+    newAdminRole: BytesLike
+  ];
+  export type OutputTuple = [
+    role: string,
+    previousAdminRole: string,
+    newAdminRole: string
+  ];
+  export interface OutputObject {
+    role: string;
+    previousAdminRole: string;
+    newAdminRole: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RoleGrantedEvent {
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
+  export type OutputTuple = [role: string, account: string, sender: string];
+  export interface OutputObject {
+    role: string;
+    account: string;
+    sender: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
+export namespace RoleRevokedEvent {
+  export type InputTuple = [
+    role: BytesLike,
+    account: AddressLike,
+    sender: AddressLike
+  ];
+  export type OutputTuple = [role: string, account: string, sender: string];
+  export interface OutputObject {
+    role: string;
+    account: string;
+    sender: string;
   }
   export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
   export type Filter = TypedDeferredTopicFilter<Event>;
@@ -651,6 +1016,18 @@ export namespace TransferInitiatedEvent {
   export type LogDescription = TypedLogDescription<Event>;
 }
 
+export namespace UnpausedEvent {
+  export type InputTuple = [account: AddressLike];
+  export type OutputTuple = [account: string];
+  export interface OutputObject {
+    account: string;
+  }
+  export type Event = TypedContractEvent<InputTuple, OutputTuple, OutputObject>;
+  export type Filter = TypedDeferredTopicFilter<Event>;
+  export type Log = TypedEventLog<Event>;
+  export type LogDescription = TypedLogDescription<Event>;
+}
+
 export interface BioPassportRegistry extends BaseContract {
   connect(runner?: ContractRunner | null): BioPassportRegistry;
   waitForDeployment(): Promise<this>;
@@ -694,13 +1071,36 @@ export interface BioPassportRegistry extends BaseContract {
     event?: TCEvent
   ): Promise<this>;
 
+  ADMIN_ROLE: TypedContractMethod<[], [string], "view">;
+
+  AUDITOR_ROLE: TypedContractMethod<[], [string], "view">;
+
+  DEFAULT_ADMIN_ROLE: TypedContractMethod<[], [string], "view">;
+
+  DEVICE_MANAGER_ROLE: TypedContractMethod<[], [string], "view">;
+
+  ISSUER_MANAGER_ROLE: TypedContractMethod<[], [string], "view">;
+
+  REGISTRAR_ROLE: TypedContractMethod<[], [string], "view">;
+
   acceptTransfer: TypedContractMethod<
     [materialId: string],
     [void],
     "nonpayable"
   >;
 
-  admin: TypedContractMethod<[], [string], "view">;
+  attestationHash: TypedContractMethod<
+    [
+      deviceId: BytesLike,
+      materialId: string,
+      credType: BigNumberish,
+      commitmentHash: BytesLike,
+      artifactHash: BytesLike,
+      captureTs: BigNumberish
+    ],
+    [string],
+    "view"
+  >;
 
   authorizeIssuer: TypedContractMethod<
     [
@@ -711,6 +1111,44 @@ export interface BioPassportRegistry extends BaseContract {
     ],
     [void],
     "nonpayable"
+  >;
+
+  batchIssueCredentials: TypedContractMethod<
+    [
+      materialIds: string[],
+      credTypes: BigNumberish[],
+      commitmentHashes: BytesLike[],
+      validUntils: BigNumberish[],
+      artifactCids: string[],
+      artifactHashes: BytesLike[],
+      issuerIds: string[]
+    ],
+    [string[]],
+    "nonpayable"
+  >;
+
+  batchRegisterMaterials: TypedContractMethod<
+    [materialTypes: string[], metadataHashes: BytesLike[], ownerOrgs: string[]],
+    [string[]],
+    "nonpayable"
+  >;
+
+  batchVerifyMaterials: TypedContractMethod<
+    [materialIds: string[]],
+    [[boolean[], string[][]] & { passes: boolean[]; allReasons: string[][] }],
+    "view"
+  >;
+
+  credentialAttestations: TypedContractMethod<
+    [arg0: string],
+    [
+      [string, bigint, string] & {
+        deviceId: string;
+        captureTs: bigint;
+        attestationHash: string;
+      }
+    ],
+    "view"
   >;
 
   credentialCount: TypedContractMethod<[], [bigint], "view">;
@@ -745,6 +1183,30 @@ export interface BioPassportRegistry extends BaseContract {
       }
     ],
     "view"
+  >;
+
+  deviceExists: TypedContractMethod<[arg0: BytesLike], [boolean], "view">;
+
+  devices: TypedContractMethod<
+    [arg0: BytesLike],
+    [
+      [string, string, string, bigint, bigint, string, bigint] & {
+        deviceId: string;
+        deviceAddress: string;
+        enroller: string;
+        enrolledAt: bigint;
+        revokedAt: bigint;
+        instrumentType: string;
+        lastCaptureTs: bigint;
+      }
+    ],
+    "view"
+  >;
+
+  enrollDevice: TypedContractMethod<
+    [deviceId: BytesLike, deviceAddress: AddressLike, instrumentType: string],
+    [void],
+    "nonpayable"
   >;
 
   getCredential: TypedContractMethod<
@@ -785,9 +1247,23 @@ export interface BioPassportRegistry extends BaseContract {
     "view"
   >;
 
+  getRoleAdmin: TypedContractMethod<[role: BytesLike], [string], "view">;
+
   getTransfers: TypedContractMethod<
     [materialId: string],
     [BioPassportRegistry.TransferStructOutput[]],
+    "view"
+  >;
+
+  grantRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  hasRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
     "view"
   >;
 
@@ -811,6 +1287,23 @@ export interface BioPassportRegistry extends BaseContract {
       artifactCid: string,
       artifactHash: BytesLike,
       issuerId: string
+    ],
+    [string],
+    "nonpayable"
+  >;
+
+  issueCredentialWithAttestation: TypedContractMethod<
+    [
+      materialId: string,
+      credType: BigNumberish,
+      commitmentHash: BytesLike,
+      validUntil: BigNumberish,
+      artifactCid: string,
+      artifactHash: BytesLike,
+      issuerId: string,
+      deviceId: BytesLike,
+      captureTs: BigNumberish,
+      deviceSig: BytesLike
     ],
     [string],
     "nonpayable"
@@ -892,9 +1385,19 @@ export interface BioPassportRegistry extends BaseContract {
     "view"
   >;
 
+  pause: TypedContractMethod<[], [void], "nonpayable">;
+
+  paused: TypedContractMethod<[], [boolean], "view">;
+
   registerMaterial: TypedContractMethod<
     [materialType: string, metadataHash: BytesLike, ownerOrg: string],
     [string],
+    "nonpayable"
+  >;
+
+  renounceRole: TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
     "nonpayable"
   >;
 
@@ -904,8 +1407,20 @@ export interface BioPassportRegistry extends BaseContract {
     "nonpayable"
   >;
 
+  revokeDevice: TypedContractMethod<
+    [deviceId: BytesLike],
+    [void],
+    "nonpayable"
+  >;
+
   revokeIssuer: TypedContractMethod<
     [issuer: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+
+  revokeRole: TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
     [void],
     "nonpayable"
   >;
@@ -922,7 +1437,15 @@ export interface BioPassportRegistry extends BaseContract {
     "nonpayable"
   >;
 
+  supportsInterface: TypedContractMethod<
+    [interfaceId: BytesLike],
+    [boolean],
+    "view"
+  >;
+
   transferCount: TypedContractMethod<[], [bigint], "view">;
+
+  unpause: TypedContractMethod<[], [void], "nonpayable">;
 
   verifyMaterial: TypedContractMethod<
     [materialId: string],
@@ -941,11 +1464,40 @@ export interface BioPassportRegistry extends BaseContract {
   ): T;
 
   getFunction(
+    nameOrSignature: "ADMIN_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "AUDITOR_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "DEFAULT_ADMIN_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "DEVICE_MANAGER_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "ISSUER_MANAGER_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
+    nameOrSignature: "REGISTRAR_ROLE"
+  ): TypedContractMethod<[], [string], "view">;
+  getFunction(
     nameOrSignature: "acceptTransfer"
   ): TypedContractMethod<[materialId: string], [void], "nonpayable">;
   getFunction(
-    nameOrSignature: "admin"
-  ): TypedContractMethod<[], [string], "view">;
+    nameOrSignature: "attestationHash"
+  ): TypedContractMethod<
+    [
+      deviceId: BytesLike,
+      materialId: string,
+      credType: BigNumberish,
+      commitmentHash: BytesLike,
+      artifactHash: BytesLike,
+      captureTs: BigNumberish
+    ],
+    [string],
+    "view"
+  >;
   getFunction(
     nameOrSignature: "authorizeIssuer"
   ): TypedContractMethod<
@@ -957,6 +1509,48 @@ export interface BioPassportRegistry extends BaseContract {
     ],
     [void],
     "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "batchIssueCredentials"
+  ): TypedContractMethod<
+    [
+      materialIds: string[],
+      credTypes: BigNumberish[],
+      commitmentHashes: BytesLike[],
+      validUntils: BigNumberish[],
+      artifactCids: string[],
+      artifactHashes: BytesLike[],
+      issuerIds: string[]
+    ],
+    [string[]],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "batchRegisterMaterials"
+  ): TypedContractMethod<
+    [materialTypes: string[], metadataHashes: BytesLike[], ownerOrgs: string[]],
+    [string[]],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "batchVerifyMaterials"
+  ): TypedContractMethod<
+    [materialIds: string[]],
+    [[boolean[], string[][]] & { passes: boolean[]; allReasons: string[][] }],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "credentialAttestations"
+  ): TypedContractMethod<
+    [arg0: string],
+    [
+      [string, bigint, string] & {
+        deviceId: string;
+        captureTs: bigint;
+        attestationHash: string;
+      }
+    ],
+    "view"
   >;
   getFunction(
     nameOrSignature: "credentialCount"
@@ -993,6 +1587,33 @@ export interface BioPassportRegistry extends BaseContract {
       }
     ],
     "view"
+  >;
+  getFunction(
+    nameOrSignature: "deviceExists"
+  ): TypedContractMethod<[arg0: BytesLike], [boolean], "view">;
+  getFunction(
+    nameOrSignature: "devices"
+  ): TypedContractMethod<
+    [arg0: BytesLike],
+    [
+      [string, string, string, bigint, bigint, string, bigint] & {
+        deviceId: string;
+        deviceAddress: string;
+        enroller: string;
+        enrolledAt: bigint;
+        revokedAt: bigint;
+        instrumentType: string;
+        lastCaptureTs: bigint;
+      }
+    ],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "enrollDevice"
+  ): TypedContractMethod<
+    [deviceId: BytesLike, deviceAddress: AddressLike, instrumentType: string],
+    [void],
+    "nonpayable"
   >;
   getFunction(
     nameOrSignature: "getCredential"
@@ -1036,10 +1657,27 @@ export interface BioPassportRegistry extends BaseContract {
     "view"
   >;
   getFunction(
+    nameOrSignature: "getRoleAdmin"
+  ): TypedContractMethod<[role: BytesLike], [string], "view">;
+  getFunction(
     nameOrSignature: "getTransfers"
   ): TypedContractMethod<
     [materialId: string],
     [BioPassportRegistry.TransferStructOutput[]],
+    "view"
+  >;
+  getFunction(
+    nameOrSignature: "grantRole"
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "hasRole"
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [boolean],
     "view"
   >;
   getFunction(
@@ -1065,6 +1703,24 @@ export interface BioPassportRegistry extends BaseContract {
       artifactCid: string,
       artifactHash: BytesLike,
       issuerId: string
+    ],
+    [string],
+    "nonpayable"
+  >;
+  getFunction(
+    nameOrSignature: "issueCredentialWithAttestation"
+  ): TypedContractMethod<
+    [
+      materialId: string,
+      credType: BigNumberish,
+      commitmentHash: BytesLike,
+      validUntil: BigNumberish,
+      artifactCid: string,
+      artifactHash: BytesLike,
+      issuerId: string,
+      deviceId: BytesLike,
+      captureTs: BigNumberish,
+      deviceSig: BytesLike
     ],
     [string],
     "nonpayable"
@@ -1146,6 +1802,12 @@ export interface BioPassportRegistry extends BaseContract {
     "view"
   >;
   getFunction(
+    nameOrSignature: "pause"
+  ): TypedContractMethod<[], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "paused"
+  ): TypedContractMethod<[], [boolean], "view">;
+  getFunction(
     nameOrSignature: "registerMaterial"
   ): TypedContractMethod<
     [materialType: string, metadataHash: BytesLike, ownerOrg: string],
@@ -1153,11 +1815,28 @@ export interface BioPassportRegistry extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "renounceRole"
+  ): TypedContractMethod<
+    [role: BytesLike, callerConfirmation: AddressLike],
+    [void],
+    "nonpayable"
+  >;
+  getFunction(
     nameOrSignature: "revokeCredential"
   ): TypedContractMethod<[credentialId: string], [void], "nonpayable">;
   getFunction(
+    nameOrSignature: "revokeDevice"
+  ): TypedContractMethod<[deviceId: BytesLike], [void], "nonpayable">;
+  getFunction(
     nameOrSignature: "revokeIssuer"
   ): TypedContractMethod<[issuer: AddressLike], [void], "nonpayable">;
+  getFunction(
+    nameOrSignature: "revokeRole"
+  ): TypedContractMethod<
+    [role: BytesLike, account: AddressLike],
+    [void],
+    "nonpayable"
+  >;
   getFunction(
     nameOrSignature: "setStatusByAuthority"
   ): TypedContractMethod<
@@ -1173,8 +1852,14 @@ export interface BioPassportRegistry extends BaseContract {
     "nonpayable"
   >;
   getFunction(
+    nameOrSignature: "supportsInterface"
+  ): TypedContractMethod<[interfaceId: BytesLike], [boolean], "view">;
+  getFunction(
     nameOrSignature: "transferCount"
   ): TypedContractMethod<[], [bigint], "view">;
+  getFunction(
+    nameOrSignature: "unpause"
+  ): TypedContractMethod<[], [void], "nonpayable">;
   getFunction(
     nameOrSignature: "verifyMaterial"
   ): TypedContractMethod<
@@ -1191,6 +1876,13 @@ export interface BioPassportRegistry extends BaseContract {
   >;
 
   getEvent(
+    key: "AttestationVerified"
+  ): TypedContractEvent<
+    AttestationVerifiedEvent.InputTuple,
+    AttestationVerifiedEvent.OutputTuple,
+    AttestationVerifiedEvent.OutputObject
+  >;
+  getEvent(
     key: "CredentialIssued"
   ): TypedContractEvent<
     CredentialIssuedEvent.InputTuple,
@@ -1203,6 +1895,20 @@ export interface BioPassportRegistry extends BaseContract {
     CredentialRevokedEvent.InputTuple,
     CredentialRevokedEvent.OutputTuple,
     CredentialRevokedEvent.OutputObject
+  >;
+  getEvent(
+    key: "DeviceEnrolled"
+  ): TypedContractEvent<
+    DeviceEnrolledEvent.InputTuple,
+    DeviceEnrolledEvent.OutputTuple,
+    DeviceEnrolledEvent.OutputObject
+  >;
+  getEvent(
+    key: "DeviceRevocationRecorded"
+  ): TypedContractEvent<
+    DeviceRevocationRecordedEvent.InputTuple,
+    DeviceRevocationRecordedEvent.OutputTuple,
+    DeviceRevocationRecordedEvent.OutputObject
   >;
   getEvent(
     key: "IssuerAuthorized"
@@ -1224,6 +1930,34 @@ export interface BioPassportRegistry extends BaseContract {
     MaterialRegisteredEvent.InputTuple,
     MaterialRegisteredEvent.OutputTuple,
     MaterialRegisteredEvent.OutputObject
+  >;
+  getEvent(
+    key: "Paused"
+  ): TypedContractEvent<
+    PausedEvent.InputTuple,
+    PausedEvent.OutputTuple,
+    PausedEvent.OutputObject
+  >;
+  getEvent(
+    key: "RoleAdminChanged"
+  ): TypedContractEvent<
+    RoleAdminChangedEvent.InputTuple,
+    RoleAdminChangedEvent.OutputTuple,
+    RoleAdminChangedEvent.OutputObject
+  >;
+  getEvent(
+    key: "RoleGranted"
+  ): TypedContractEvent<
+    RoleGrantedEvent.InputTuple,
+    RoleGrantedEvent.OutputTuple,
+    RoleGrantedEvent.OutputObject
+  >;
+  getEvent(
+    key: "RoleRevoked"
+  ): TypedContractEvent<
+    RoleRevokedEvent.InputTuple,
+    RoleRevokedEvent.OutputTuple,
+    RoleRevokedEvent.OutputObject
   >;
   getEvent(
     key: "StatusChangedByAuthority"
@@ -1253,8 +1987,26 @@ export interface BioPassportRegistry extends BaseContract {
     TransferInitiatedEvent.OutputTuple,
     TransferInitiatedEvent.OutputObject
   >;
+  getEvent(
+    key: "Unpaused"
+  ): TypedContractEvent<
+    UnpausedEvent.InputTuple,
+    UnpausedEvent.OutputTuple,
+    UnpausedEvent.OutputObject
+  >;
 
   filters: {
+    "AttestationVerified(string,bytes32,bytes32,uint256)": TypedContractEvent<
+      AttestationVerifiedEvent.InputTuple,
+      AttestationVerifiedEvent.OutputTuple,
+      AttestationVerifiedEvent.OutputObject
+    >;
+    AttestationVerified: TypedContractEvent<
+      AttestationVerifiedEvent.InputTuple,
+      AttestationVerifiedEvent.OutputTuple,
+      AttestationVerifiedEvent.OutputObject
+    >;
+
     "CredentialIssued(string,string,uint8,address,uint256)": TypedContractEvent<
       CredentialIssuedEvent.InputTuple,
       CredentialIssuedEvent.OutputTuple,
@@ -1275,6 +2027,28 @@ export interface BioPassportRegistry extends BaseContract {
       CredentialRevokedEvent.InputTuple,
       CredentialRevokedEvent.OutputTuple,
       CredentialRevokedEvent.OutputObject
+    >;
+
+    "DeviceEnrolled(bytes32,address,string,address,uint256)": TypedContractEvent<
+      DeviceEnrolledEvent.InputTuple,
+      DeviceEnrolledEvent.OutputTuple,
+      DeviceEnrolledEvent.OutputObject
+    >;
+    DeviceEnrolled: TypedContractEvent<
+      DeviceEnrolledEvent.InputTuple,
+      DeviceEnrolledEvent.OutputTuple,
+      DeviceEnrolledEvent.OutputObject
+    >;
+
+    "DeviceRevocationRecorded(bytes32,address,uint256)": TypedContractEvent<
+      DeviceRevocationRecordedEvent.InputTuple,
+      DeviceRevocationRecordedEvent.OutputTuple,
+      DeviceRevocationRecordedEvent.OutputObject
+    >;
+    DeviceRevocationRecorded: TypedContractEvent<
+      DeviceRevocationRecordedEvent.InputTuple,
+      DeviceRevocationRecordedEvent.OutputTuple,
+      DeviceRevocationRecordedEvent.OutputObject
     >;
 
     "IssuerAuthorized(address,bool,bool,bool)": TypedContractEvent<
@@ -1308,6 +2082,50 @@ export interface BioPassportRegistry extends BaseContract {
       MaterialRegisteredEvent.InputTuple,
       MaterialRegisteredEvent.OutputTuple,
       MaterialRegisteredEvent.OutputObject
+    >;
+
+    "Paused(address)": TypedContractEvent<
+      PausedEvent.InputTuple,
+      PausedEvent.OutputTuple,
+      PausedEvent.OutputObject
+    >;
+    Paused: TypedContractEvent<
+      PausedEvent.InputTuple,
+      PausedEvent.OutputTuple,
+      PausedEvent.OutputObject
+    >;
+
+    "RoleAdminChanged(bytes32,bytes32,bytes32)": TypedContractEvent<
+      RoleAdminChangedEvent.InputTuple,
+      RoleAdminChangedEvent.OutputTuple,
+      RoleAdminChangedEvent.OutputObject
+    >;
+    RoleAdminChanged: TypedContractEvent<
+      RoleAdminChangedEvent.InputTuple,
+      RoleAdminChangedEvent.OutputTuple,
+      RoleAdminChangedEvent.OutputObject
+    >;
+
+    "RoleGranted(bytes32,address,address)": TypedContractEvent<
+      RoleGrantedEvent.InputTuple,
+      RoleGrantedEvent.OutputTuple,
+      RoleGrantedEvent.OutputObject
+    >;
+    RoleGranted: TypedContractEvent<
+      RoleGrantedEvent.InputTuple,
+      RoleGrantedEvent.OutputTuple,
+      RoleGrantedEvent.OutputObject
+    >;
+
+    "RoleRevoked(bytes32,address,address)": TypedContractEvent<
+      RoleRevokedEvent.InputTuple,
+      RoleRevokedEvent.OutputTuple,
+      RoleRevokedEvent.OutputObject
+    >;
+    RoleRevoked: TypedContractEvent<
+      RoleRevokedEvent.InputTuple,
+      RoleRevokedEvent.OutputTuple,
+      RoleRevokedEvent.OutputObject
     >;
 
     "StatusChangedByAuthority(string,uint8,uint8,address,bytes32,uint256)": TypedContractEvent<
@@ -1352,6 +2170,17 @@ export interface BioPassportRegistry extends BaseContract {
       TransferInitiatedEvent.InputTuple,
       TransferInitiatedEvent.OutputTuple,
       TransferInitiatedEvent.OutputObject
+    >;
+
+    "Unpaused(address)": TypedContractEvent<
+      UnpausedEvent.InputTuple,
+      UnpausedEvent.OutputTuple,
+      UnpausedEvent.OutputObject
+    >;
+    Unpaused: TypedContractEvent<
+      UnpausedEvent.InputTuple,
+      UnpausedEvent.OutputTuple,
+      UnpausedEvent.OutputObject
     >;
   };
 }

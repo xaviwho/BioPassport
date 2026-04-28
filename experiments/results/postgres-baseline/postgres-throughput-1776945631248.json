@@ -1,0 +1,222 @@
+{
+  "args": {
+    "concurrencyLevels": [
+      20
+    ],
+    "opsPerClient": 20
+  },
+  "runs": [
+    {
+      "concurrency": 20,
+      "opsPerClient": 20,
+      "totalOps": 400,
+      "successfulOps": 400,
+      "failedOps": 0,
+      "wallClockSeconds": 1.0437151999999996,
+      "opsPerSecond": 383.2463108710117,
+      "perAccount": [
+        {
+          "client": 0,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 42.859500000000025,
+          "p99Ms": 135.85320000000002,
+          "meanMs": 50.66861000000008,
+          "stdMs": 23.77414569182031
+        },
+        {
+          "client": 1,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 43.72830000000022,
+          "p99Ms": 59.22430000000031,
+          "meanMs": 39.708869999999976,
+          "stdMs": 11.285748153317083
+        },
+        {
+          "client": 2,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 43.20749999999998,
+          "p99Ms": 78.20340000000033,
+          "meanMs": 46.294990000000055,
+          "stdMs": 10.121638183362439
+        },
+        {
+          "client": 3,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 43.10739999999987,
+          "p99Ms": 81.67619999999988,
+          "meanMs": 46.76302499999995,
+          "stdMs": 11.402181082752335
+        },
+        {
+          "client": 4,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 42.76420000000007,
+          "p99Ms": 74.89120000000003,
+          "meanMs": 46.299065,
+          "stdMs": 9.78244836450853
+        },
+        {
+          "client": 5,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 44.32310000000007,
+          "p99Ms": 77.84040000000005,
+          "meanMs": 46.27541999999998,
+          "stdMs": 9.778723187338983
+        },
+        {
+          "client": 6,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 45.15110000000004,
+          "p99Ms": 79.56770000000006,
+          "meanMs": 48.785575000000016,
+          "stdMs": 11.432359898545666
+        },
+        {
+          "client": 7,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 44.472899999999754,
+          "p99Ms": 81.05130000000008,
+          "meanMs": 48.720569999999974,
+          "stdMs": 11.8971848850096
+        },
+        {
+          "client": 8,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 44.458100000000286,
+          "p99Ms": 80.43910000000005,
+          "meanMs": 48.726495,
+          "stdMs": 12.071010200951527
+        },
+        {
+          "client": 9,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 43.758800000000065,
+          "p99Ms": 95.9083999999998,
+          "meanMs": 48.29748499999996,
+          "stdMs": 14.165874824918976
+        },
+        {
+          "client": 10,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 44.62429999999995,
+          "p99Ms": 87.05149999999958,
+          "meanMs": 49.58696999999995,
+          "stdMs": 14.327819941362224
+        },
+        {
+          "client": 11,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 42.986399999999776,
+          "p99Ms": 98.33860000000004,
+          "meanMs": 50.06986000000002,
+          "stdMs": 15.889392583903257
+        },
+        {
+          "client": 12,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 45.284000000000106,
+          "p99Ms": 94.99900000000025,
+          "meanMs": 49.62364999999998,
+          "stdMs": 14.62146556913845
+        },
+        {
+          "client": 13,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 44.54269999999997,
+          "p99Ms": 89.0980999999997,
+          "meanMs": 49.64874499999994,
+          "stdMs": 14.389283298117194
+        },
+        {
+          "client": 14,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 44.408100000000104,
+          "p99Ms": 113.21500000000015,
+          "meanMs": 51.004164999999965,
+          "stdMs": 19.405801589377237
+        },
+        {
+          "client": 15,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 44.566699999999855,
+          "p99Ms": 107.72800000000007,
+          "meanMs": 50.66623500000003,
+          "stdMs": 17.812817359285855
+        },
+        {
+          "client": 16,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 43.05439999999999,
+          "p99Ms": 149.69759999999997,
+          "meanMs": 51.48302000000003,
+          "stdMs": 25.814343394740817
+        },
+        {
+          "client": 17,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 42.84699999999975,
+          "p99Ms": 146.81050000000005,
+          "meanMs": 51.566704999999956,
+          "stdMs": 25.183261434382864
+        },
+        {
+          "client": 18,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 43.078899999999976,
+          "p99Ms": 151.57870000000003,
+          "meanMs": 51.975625000000015,
+          "stdMs": 26.163366131365322
+        },
+        {
+          "client": 19,
+          "successes": 20,
+          "failures": 0,
+          "failureReasons": {},
+          "p50Ms": 42.990200000000186,
+          "p99Ms": 148.0324999999998,
+          "meanMs": 51.40296000000003,
+          "stdMs": 25.50280082617196
+        }
+      ],
+      "failureReasons": {}
+    }
+  ]
+}

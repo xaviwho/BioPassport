@@ -1,0 +1,15 @@
+services:
+  postgres-baseline:
+    image: postgres:16
+    environment:
+      POSTGRES_USER: bp
+      POSTGRES_PASSWORD: bp
+      POSTGRES_DB: bp_baseline
+    ports:
+      - "5434:5432"
+    volumes:
+      - ./initdb:/docker-entrypoint-initdb.d
+      - postgres-baseline-data:/var/lib/postgresql/data
+
+volumes:
+  postgres-baseline-data:

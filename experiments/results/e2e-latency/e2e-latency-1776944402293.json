@@ -1,0 +1,5823 @@
+{
+  "scenarios": [
+    {
+      "rttMs": 0,
+      "artifactBytes": 1024,
+      "materialId": "bio:cell_line:1104",
+      "credentialId": "cred:1191",
+      "artifactCid": "s3://artifacts/bio:cell_line:1104/QC_MYCO/fb7df9e4-test-1024.bin",
+      "artifactHash": "0xfb7df9e49a5e997ffbad5609360d30819adbb6ddb759ca88b4c215a57a502418",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 29.360599999999977,
+          "minioFetch": 68.91560000000027,
+          "sha256": 0.033000000003085006,
+          "hashCheck": 0.011699999995471444,
+          "total": 98.3208999999988
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 37.74850000000151,
+          "minioFetch": 7.711999999999534,
+          "sha256": 0.026799999999639113,
+          "hashCheck": 0.010600000001431908,
+          "total": 45.49790000000212
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 24.15230000000156,
+          "minioFetch": 7.120100000000093,
+          "sha256": 0.02810000000317814,
+          "hashCheck": 0.00939999999536667,
+          "total": 31.309900000000198
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 37.791299999997136,
+          "minioFetch": 5.464599999999336,
+          "sha256": 0.025500000003376044,
+          "hashCheck": 0.004099999998288695,
+          "total": 43.28549999999814
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 25.028900000004796,
+          "minioFetch": 6.208800000000338,
+          "sha256": 0.03139999999984866,
+          "hashCheck": 0.005599999996775296,
+          "total": 31.274700000001758
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 24.6788000000015,
+          "minioFetch": 6.337599999998929,
+          "sha256": 0.024900000003981404,
+          "hashCheck": 0.004799999995157123,
+          "total": 31.04609999999957
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 24.140499999994063,
+          "minioFetch": 6.574200000002747,
+          "sha256": 0.027800000003480818,
+          "hashCheck": 0.004899999999906868,
+          "total": 30.747400000000198
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 24.934399999998277,
+          "minioFetch": 6.960500000001048,
+          "sha256": 0.031500000004598405,
+          "hashCheck": 0.005699999994249083,
+          "total": 31.932099999998172
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 39.912499999998545,
+          "minioFetch": 8.269000000000233,
+          "sha256": 0.033600000002479646,
+          "hashCheck": 0.005199999999604188,
+          "total": 48.22030000000086
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 36.654200000004494,
+          "minioFetch": 6.25170000000071,
+          "sha256": 0.026499999999941792,
+          "hashCheck": 0.003299999996670522,
+          "total": 42.935700000001816
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 25.165000000000873,
+          "minioFetch": 5.868900000001304,
+          "sha256": 0.028800000000046566,
+          "hashCheck": 0.0037999999985913746,
+          "total": 31.066500000000815
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 24.66569999999774,
+          "minioFetch": 5.85229999999865,
+          "sha256": 0.026799999999639113,
+          "hashCheck": 0.003700000001117587,
+          "total": 30.548499999997148
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 26.53650000000198,
+          "minioFetch": 22.38119999999617,
+          "sha256": 0.027300000001559965,
+          "hashCheck": 0.0037999999985913746,
+          "total": 48.9487999999983
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 37.20840000000317,
+          "minioFetch": 7.450100000001839,
+          "sha256": 0.027699999998731073,
+          "hashCheck": 0.004899999999906868,
+          "total": 44.691100000003644
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 24.488799999999173,
+          "minioFetch": 22.268800000005285,
+          "sha256": 0.034899999998742715,
+          "hashCheck": 0.004899999999906868,
+          "total": 46.79740000000311
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 35.5425000000032,
+          "minioFetch": 5.573199999998906,
+          "sha256": 0.025600000000849832,
+          "hashCheck": 0.003700000001117587,
+          "total": 41.145000000004075
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 25.019500000002154,
+          "minioFetch": 7.254000000000815,
+          "sha256": 0.041199999999662396,
+          "hashCheck": 0.005299999997077975,
+          "total": 32.31999999999971
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 38.090900000002875,
+          "minioFetch": 6.4913999999989755,
+          "sha256": 0.02960000000166474,
+          "hashCheck": 0.00399999999353895,
+          "total": 44.615899999997055
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 24.42450000000099,
+          "minioFetch": 5.819899999994959,
+          "sha256": 0.046999999998661224,
+          "hashCheck": 0.004000000000814907,
+          "total": 30.295399999995425
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 28.146099999998114,
+          "minioFetch": 15.207799999996496,
+          "sha256": 0.026300000004994217,
+          "hashCheck": 0.003899999996065162,
+          "total": 43.38409999999567
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 38.30599999999686,
+          "minioFetch": 6.793900000004214,
+          "sha256": 0.025900000000547152,
+          "hashCheck": 0.004300000000512227,
+          "total": 45.13010000000213
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 23.33350000000064,
+          "minioFetch": 5.594199999999546,
+          "sha256": 0.02899999999499414,
+          "hashCheck": 0.004100000005564652,
+          "total": 28.960800000000745
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 24.6987999999983,
+          "minioFetch": 6.120199999997567,
+          "sha256": 0.052100000000791624,
+          "hashCheck": 0.004899999999906868,
+          "total": 30.875999999996566
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 25.780399999996007,
+          "minioFetch": 5.342799999998533,
+          "sha256": 0.026499999999941792,
+          "hashCheck": 0.0038000000058673322,
+          "total": 31.15350000000035
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 24.82600000000093,
+          "minioFetch": 5.554400000000896,
+          "sha256": 0.02509999999892898,
+          "hashCheck": 0.00420000000303844,
+          "total": 30.409700000003795
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 25.85899999999674,
+          "minioFetch": 5.596400000002177,
+          "sha256": 0.02870000000257278,
+          "hashCheck": 0.0036999999938416295,
+          "total": 31.48779999999533
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 24.69249999999738,
+          "minioFetch": 7.5702000000019325,
+          "sha256": 0.027699999998731073,
+          "hashCheck": 0.003599999996367842,
+          "total": 32.29399999999441
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 38.74850000000151,
+          "minioFetch": 7.514100000000326,
+          "sha256": 0.042799999995622784,
+          "hashCheck": 0.0039000000033411197,
+          "total": 46.3093000000008
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 38.68859999999404,
+          "minioFetch": 5.1877000000022235,
+          "sha256": 0.02509999999892898,
+          "hashCheck": 0.0037999999985913746,
+          "total": 43.90519999999378
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 24.72660000000178,
+          "minioFetch": 5.419099999999162,
+          "sha256": 0.02470000000175787,
+          "hashCheck": 0.004099999998288695,
+          "total": 30.17450000000099
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 25.53280000000086,
+          "minioFetch": 6.364399999998568,
+          "sha256": 0.04050000000279397,
+          "hashCheck": 0.0054000000018277206,
+          "total": 31.94310000000405
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 38.16139999999723,
+          "minioFetch": 6.9443000000028405,
+          "sha256": 0.02960000000166474,
+          "hashCheck": 0.004999999997380655,
+          "total": 45.140299999999115
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 24.434900000000198,
+          "minioFetch": 5.959199999997509,
+          "sha256": 0.03480000000126893,
+          "hashCheck": 0.004799999995157123,
+          "total": 30.433699999994133
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 24.0512000000017,
+          "minioFetch": 5.771699999997509,
+          "sha256": 0.027000000001862645,
+          "hashCheck": 0.0034999999988940544,
+          "total": 29.853399999999965
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 24.162799999998242,
+          "minioFetch": 5.05460000000312,
+          "sha256": 0.027899999993678648,
+          "hashCheck": 0.0036000000036437996,
+          "total": 29.248899999998685
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 26.392299999999523,
+          "minioFetch": 5.223600000004808,
+          "sha256": 0.029499999996914994,
+          "hashCheck": 0.00450000000273576,
+          "total": 31.64990000000398
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 24.818700000003446,
+          "minioFetch": 6.628100000001723,
+          "sha256": 0.02959999999438878,
+          "hashCheck": 0.0036000000036437996,
+          "total": 31.4800000000032
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 25.040600000000268,
+          "minioFetch": 8.024199999999837,
+          "sha256": 0.028299999998125713,
+          "hashCheck": 0.003700000001117587,
+          "total": 33.09679999999935
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 38.00880000000325,
+          "minioFetch": 6.01759999999922,
+          "sha256": 0.035499999998137355,
+          "hashCheck": 0.004999999997380655,
+          "total": 44.066899999997986
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 25.16089999999531,
+          "minioFetch": 6.169400000006135,
+          "sha256": 0.026199999992968515,
+          "hashCheck": 0.0033000000039464794,
+          "total": 31.35979999999836
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 40.37739999999758,
+          "minioFetch": 23.354800000000978,
+          "sha256": 0.04959999999846332,
+          "hashCheck": 0.006900000000314321,
+          "total": 63.788699999997334
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 36.42140000000654,
+          "minioFetch": 5.920699999995122,
+          "sha256": 0.029099999999743886,
+          "hashCheck": 0.0037999999985913746,
+          "total": 42.375
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 25.09139999999752,
+          "minioFetch": 6.043400000002293,
+          "sha256": 0.028299999998125713,
+          "hashCheck": 0.003700000001117587,
+          "total": 31.166799999999057
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 24.385199999996985,
+          "minioFetch": 5.483000000000175,
+          "sha256": 0.0334999999977299,
+          "hashCheck": 0.005900000003748573,
+          "total": 29.907599999998638
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 25.542700000005425,
+          "minioFetch": 5.604299999999057,
+          "sha256": 0.026999999994586688,
+          "hashCheck": 0.0039000000033411197,
+          "total": 31.17790000000241
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 25.842100000001665,
+          "minioFetch": 5.308400000001711,
+          "sha256": 0.026499999999941792,
+          "hashCheck": 0.003599999996367842,
+          "total": 31.180599999999686
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 25.667799999995623,
+          "minioFetch": 5.867200000000594,
+          "sha256": 0.02840000000287546,
+          "hashCheck": 0.003899999996065162,
+          "total": 31.567299999995157
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 25.76929999999993,
+          "minioFetch": 6.313800000003539,
+          "sha256": 0.028299999998125713,
+          "hashCheck": 0.00480000000243308,
+          "total": 32.11620000000403
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 24.965700000000652,
+          "minioFetch": 6.835400000003574,
+          "sha256": 0.027999999998428393,
+          "hashCheck": 0.004399999997986015,
+          "total": 31.83350000000064
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 24.15860000000248,
+          "minioFetch": 7.450899999996182,
+          "sha256": 0.0290000000022701,
+          "hashCheck": 0.0037999999985913746,
+          "total": 31.642299999999523
+        }
+      ],
+      "p50": {
+        "onChain": 25.165000000000873,
+        "minioFetch": 6.208800000000338,
+        "sha256": 0.028299999998125713,
+        "hashCheck": 0.004099999998288695,
+        "total": 31.64990000000398
+      },
+      "p95": {
+        "onChain": 38.68859999999404,
+        "minioFetch": 22.268800000005285,
+        "sha256": 0.042799999995622784,
+        "hashCheck": 0.006900000000314321,
+        "total": 48.22030000000086
+      },
+      "p99": {
+        "onChain": 39.912499999998545,
+        "minioFetch": 23.354800000000978,
+        "sha256": 0.04959999999846332,
+        "hashCheck": 0.010600000001431908,
+        "total": 63.788699999997334
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 0,
+      "artifactBytes": 1048576,
+      "materialId": "bio:cell_line:1105",
+      "credentialId": "cred:1193",
+      "artifactCid": "s3://artifacts/bio:cell_line:1105/QC_MYCO/6fa7bb87-test-1048576.bin",
+      "artifactHash": "0x6fa7bb879c4979f0b4e4177d07eea0626f4f70aa1ef3c1d78b886aa1e14e4e62",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 28.47520000000077,
+          "minioFetch": 35.64909999999509,
+          "sha256": 2.3149000000048545,
+          "hashCheck": 0.023300000000745058,
+          "total": 66.46250000000146
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 28.858000000000175,
+          "minioFetch": 20.966300000000047,
+          "sha256": 2.3404000000009546,
+          "hashCheck": 0.008600000001024455,
+          "total": 52.1733000000022
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 35.342200000006414,
+          "minioFetch": 17.875599999999395,
+          "sha256": 2.0247999999992317,
+          "hashCheck": 0.006499999995867256,
+          "total": 55.24910000000091
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 28.440300000002026,
+          "minioFetch": 32.012399999999616,
+          "sha256": 2.026499999999942,
+          "hashCheck": 0.005499999999301508,
+          "total": 62.484700000000885
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 25.174400000003516,
+          "minioFetch": 15.966899999999441,
+          "sha256": 2.0502999999953317,
+          "hashCheck": 0.005600000004051253,
+          "total": 43.19720000000234
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 28.358800000001793,
+          "minioFetch": 16.745199999997567,
+          "sha256": 2.087500000001455,
+          "hashCheck": 0.006699999998090789,
+          "total": 47.198199999998906
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 27.186600000000908,
+          "minioFetch": 34.406300000002375,
+          "sha256": 2.067300000002433,
+          "hashCheck": 0.006499999995867256,
+          "total": 63.66670000000158
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 26.253100000001723,
+          "minioFetch": 18.1420999999973,
+          "sha256": 2.0270000000018626,
+          "hashCheck": 0.006600000000617001,
+          "total": 46.4288000000015
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 25.599099999999453,
+          "minioFetch": 15.750800000001618,
+          "sha256": 2.0460999999995693,
+          "hashCheck": 0.007700000001932494,
+          "total": 43.40370000000257
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 27.710400000003574,
+          "minioFetch": 68.53659999999945,
+          "sha256": 2.0317999999970198,
+          "hashCheck": 0.005499999999301508,
+          "total": 98.28429999999935
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 38.36669999999867,
+          "minioFetch": 17.142299999999523,
+          "sha256": 2.0820000000021537,
+          "hashCheck": 0.006600000000617001,
+          "total": 57.597600000000966
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 27.69090000000142,
+          "minioFetch": 18.59219999999914,
+          "sha256": 2.3620000000009895,
+          "hashCheck": 0.00969999999506399,
+          "total": 48.65479999999661
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 38.66350000000239,
+          "minioFetch": 33.677999999999884,
+          "sha256": 2.028699999995297,
+          "hashCheck": 0.0062000000034458935,
+          "total": 74.37640000000101
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 27.236900000003516,
+          "minioFetch": 13.710699999995995,
+          "sha256": 2.032500000001164,
+          "hashCheck": 0.0063999999983934686,
+          "total": 42.98649999999907
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 30.74409999999625,
+          "minioFetch": 35.47729999999865,
+          "sha256": 2.0517000000036205,
+          "hashCheck": 0.008099999999103602,
+          "total": 68.28119999999763
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 25.94090000000142,
+          "minioFetch": 23.854599999998754,
+          "sha256": 2.5504999999975553,
+          "hashCheck": 0.010699999998905696,
+          "total": 52.356699999996636
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 36.21990000000369,
+          "minioFetch": 31.454899999996996,
+          "sha256": 3.3346000000019558,
+          "hashCheck": 0.01569999999628635,
+          "total": 71.02509999999893
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 24.150399999998626,
+          "minioFetch": 34.29980000000069,
+          "sha256": 2.0577999999950407,
+          "hashCheck": 0.006099999998696148,
+          "total": 60.51409999999305
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 29.13119999999617,
+          "minioFetch": 17.76020000000426,
+          "sha256": 2.0296999999991385,
+          "hashCheck": 0.005899999996472616,
+          "total": 48.92699999999604
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 26.218300000000454,
+          "minioFetch": 31.434900000000198,
+          "sha256": 2.050100000000384,
+          "hashCheck": 0.006099999998696148,
+          "total": 59.70939999999973
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 25.893899999995483,
+          "minioFetch": 16.159700000003795,
+          "sha256": 2.055499999994936,
+          "hashCheck": 0.006600000000617001,
+          "total": 44.11569999999483
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 27.94539999999688,
+          "minioFetch": 16.250299999999697,
+          "sha256": 2.152699999998731,
+          "hashCheck": 0.007700000001932494,
+          "total": 46.35609999999724
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 27.217499999998836,
+          "minioFetch": 18.234199999998964,
+          "sha256": 2.510999999998603,
+          "hashCheck": 0.008200000003853347,
+          "total": 47.970900000000256
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 24.29439999999886,
+          "minioFetch": 16.24620000000141,
+          "sha256": 2.040999999997439,
+          "hashCheck": 0.0062000000034458935,
+          "total": 42.58780000000115
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 29.36149999999907,
+          "minioFetch": 16.859700000000885,
+          "sha256": 2.186099999998987,
+          "hashCheck": 0.006600000000617001,
+          "total": 48.41389999999956
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 27.0653999999995,
+          "minioFetch": 16.075199999999313,
+          "sha256": 2.069199999998091,
+          "hashCheck": 0.0062000000034458935,
+          "total": 45.21600000000035
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 33.95119999999588,
+          "minioFetch": 19.67210000000341,
+          "sha256": 2.0570000000006985,
+          "hashCheck": 0.005299999997077975,
+          "total": 55.685599999997066
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 34.545500000000175,
+          "minioFetch": 16.69550000000163,
+          "sha256": 2.0328000000008615,
+          "hashCheck": 0.006199999996169936,
+          "total": 53.279999999998836
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 27.78229999999894,
+          "minioFetch": 17.27150000000256,
+          "sha256": 2.02719999999681,
+          "hashCheck": 0.006500000003143214,
+          "total": 47.087500000001455
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 27.4690000000046,
+          "minioFetch": 19.584499999997206,
+          "sha256": 2.1195000000006985,
+          "hashCheck": 0.010199999996984843,
+          "total": 49.18319999999949
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 37.653299999998126,
+          "minioFetch": 36.4377999999997,
+          "sha256": 2.0446999999985565,
+          "hashCheck": 0.006000000001222361,
+          "total": 76.1417999999976
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 24.315200000004552,
+          "minioFetch": 17.091599999999744,
+          "sha256": 2.0406999999977415,
+          "hashCheck": 0.005599999996775296,
+          "total": 43.45309999999881
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 26.90060000000085,
+          "minioFetch": 21.75239999999758,
+          "sha256": 2.175100000000384,
+          "hashCheck": 0.0070000000050640665,
+          "total": 50.83510000000388
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 38.99919999999838,
+          "minioFetch": 34.797200000000885,
+          "sha256": 3.0648999999975786,
+          "hashCheck": 0.008300000001327135,
+          "total": 76.86959999999817
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 37.18800000000192,
+          "minioFetch": 16.078600000000733,
+          "sha256": 2.0480999999999767,
+          "hashCheck": 0.006900000000314321,
+          "total": 55.321600000002945
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 23.356599999999162,
+          "minioFetch": 17.669800000003306,
+          "sha256": 2.0573999999978696,
+          "hashCheck": 0.005299999997077975,
+          "total": 43.089099999997416
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 31.79200000000128,
+          "minioFetch": 15.040600000000268,
+          "sha256": 2.045799999999872,
+          "hashCheck": 0.00789999999688007,
+          "total": 48.8862999999983
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 29.514799999997194,
+          "minioFetch": 14.434300000000803,
+          "sha256": 2.0754000000015367,
+          "hashCheck": 0.008999999998195563,
+          "total": 46.03349999999773
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 33.61860000000161,
+          "minioFetch": 21.13539999999921,
+          "sha256": 2.0564999999987776,
+          "hashCheck": 0.0051000000021304,
+          "total": 56.81560000000172
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 37.610200000002806,
+          "minioFetch": 15.051699999996345,
+          "sha256": 2.0371000000013737,
+          "hashCheck": 0.006300000000919681,
+          "total": 54.70530000000144
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 29.345200000003388,
+          "minioFetch": 14.536599999999453,
+          "sha256": 2.0244999999995343,
+          "hashCheck": 0.00480000000243308,
+          "total": 45.91110000000481
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 28.86609999999928,
+          "minioFetch": 15.480300000002899,
+          "sha256": 2.036000000000058,
+          "hashCheck": 0.006299999993643723,
+          "total": 46.38869999999588
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 29.321600000002945,
+          "minioFetch": 19.302300000003015,
+          "sha256": 2.060299999997369,
+          "hashCheck": 0.006800000002840534,
+          "total": 50.69100000000617
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 25.046900000001187,
+          "minioFetch": 15.798799999996845,
+          "sha256": 2.0754000000015367,
+          "hashCheck": 0.008500000003550667,
+          "total": 42.92960000000312
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 30.159599999999045,
+          "minioFetch": 16.528700000002573,
+          "sha256": 2.03530000000319,
+          "hashCheck": 0.007299999997485429,
+          "total": 48.73090000000229
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 29.72019999999611,
+          "minioFetch": 32.35779999999795,
+          "sha256": 2.0747000000046683,
+          "hashCheck": 0.0063999999983934686,
+          "total": 64.15909999999712
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 39.60949999999866,
+          "minioFetch": 16.713900000002468,
+          "sha256": 2.151399999995192,
+          "hashCheck": 0.006000000001222361,
+          "total": 58.480799999997544
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 29.042400000005728,
+          "minioFetch": 15.757200000000012,
+          "sha256": 2.073999999993248,
+          "hashCheck": 0.008800000003247987,
+          "total": 46.882400000002235
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 29.630199999999604,
+          "minioFetch": 16.30789999999979,
+          "sha256": 2.0315999999947962,
+          "hashCheck": 0.005000000004656613,
+          "total": 47.97469999999885
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 23.445599999999104,
+          "minioFetch": 38.031300000002375,
+          "sha256": 2.0668000000005122,
+          "hashCheck": 0.005399999994551763,
+          "total": 63.54909999999654
+        }
+      ],
+      "p50": {
+        "onChain": 28.47520000000077,
+        "minioFetch": 17.669800000003306,
+        "sha256": 2.0564999999987776,
+        "hashCheck": 0.006499999995867256,
+        "total": 49.18319999999949
+      },
+      "p95": {
+        "onChain": 38.36669999999867,
+        "minioFetch": 35.64909999999509,
+        "sha256": 2.510999999998603,
+        "hashCheck": 0.010199999996984843,
+        "total": 74.37640000000101
+      },
+      "p99": {
+        "onChain": 38.99919999999838,
+        "minioFetch": 38.031300000002375,
+        "sha256": 3.0648999999975786,
+        "hashCheck": 0.01569999999628635,
+        "total": 76.86959999999817
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 0,
+      "artifactBytes": 10485760,
+      "materialId": "bio:cell_line:1106",
+      "credentialId": "cred:1195",
+      "artifactCid": "s3://artifacts/bio:cell_line:1106/QC_MYCO/d56c1e65-test-10485760.bin",
+      "artifactHash": "0xd56c1e65f5fa171738fbca69875b581c0ce065d73fe14f7b20f426ffe87ec5a9",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 30.6987999999983,
+          "minioFetch": 83.75160000000324,
+          "sha256": 20.984899999995832,
+          "hashCheck": 0.00810000000637956,
+          "total": 135.44340000000375
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 31.65179999999964,
+          "minioFetch": 85.25990000000456,
+          "sha256": 20.83969999999681,
+          "hashCheck": 0.007900000004156027,
+          "total": 137.75930000000517
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 30.808199999999488,
+          "minioFetch": 77.56240000000253,
+          "sha256": 23.47280000000319,
+          "hashCheck": 0.007999999994353857,
+          "total": 131.85139999999956
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 38.23510000000533,
+          "minioFetch": 125.06899999999587,
+          "sha256": 32.77429999999731,
+          "hashCheck": 0.012600000001839362,
+          "total": 196.09100000000035
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 31.54859999999462,
+          "minioFetch": 174.24109999999928,
+          "sha256": 33.377300000000105,
+          "hashCheck": 0.012300000002142042,
+          "total": 239.17929999999615
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 37.38420000000042,
+          "minioFetch": 162.3382000000056,
+          "sha256": 30.949099999997998,
+          "hashCheck": 0.01419999999779975,
+          "total": 230.68570000000182
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 32.295899999997346,
+          "minioFetch": 144.61469999999827,
+          "sha256": 33.14459999999963,
+          "hashCheck": 0.010099999999511056,
+          "total": 210.06529999999475
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 29.822999999996682,
+          "minioFetch": 161.5604999999996,
+          "sha256": 31.599600000001374,
+          "hashCheck": 0.01660000000265427,
+          "total": 222.9997000000003
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 32.20380000000296,
+          "minioFetch": 89.71899999999732,
+          "sha256": 21.03620000000228,
+          "hashCheck": 0.010399999999208376,
+          "total": 142.96940000000177
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 23.46860000000015,
+          "minioFetch": 74.09689999999682,
+          "sha256": 23.41150000000198,
+          "hashCheck": 0.008399999998800922,
+          "total": 120.98539999999775
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 23.436100000006263,
+          "minioFetch": 92.10280000000057,
+          "sha256": 20.385999999998603,
+          "hashCheck": 0.008399999998800922,
+          "total": 135.93330000000424
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 29.04710000000341,
+          "minioFetch": 75.51879999999801,
+          "sha256": 22.782500000001164,
+          "hashCheck": 0.005900000003748573,
+          "total": 127.35430000000633
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 23.61989999999787,
+          "minioFetch": 73.81970000000001,
+          "sha256": 20.462800000001153,
+          "hashCheck": 0.007700000001932494,
+          "total": 117.91010000000097
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 36.64119999999821,
+          "minioFetch": 102.41770000000542,
+          "sha256": 20.65099999999802,
+          "hashCheck": 0.007400000002235174,
+          "total": 159.7173000000039
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 29.462800000001153,
+          "minioFetch": 89.19129999999859,
+          "sha256": 20.599800000003597,
+          "hashCheck": 0.011099999996076804,
+          "total": 139.26499999999942
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 30.441099999996368,
+          "minioFetch": 75.9719000000041,
+          "sha256": 20.36699999999837,
+          "hashCheck": 0.00789999999688007,
+          "total": 126.78789999999572
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 35.84130000000005,
+          "minioFetch": 78.83360000000539,
+          "sha256": 20.46179999999731,
+          "hashCheck": 0.007700000001932494,
+          "total": 135.14440000000468
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 23.29559999999765,
+          "minioFetch": 71.43300000000454,
+          "sha256": 20.44659999999567,
+          "hashCheck": 0.008099999999103602,
+          "total": 115.18329999999696
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 27.15690000000177,
+          "minioFetch": 73.12159999999858,
+          "sha256": 20.350300000005518,
+          "hashCheck": 0.007799999999406282,
+          "total": 120.63660000000527
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 25.817399999999907,
+          "minioFetch": 81.22269999999844,
+          "sha256": 21.60160000000178,
+          "hashCheck": 0.006500000003143214,
+          "total": 128.64820000000327
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 24.070999999996275,
+          "minioFetch": 86.35150000000431,
+          "sha256": 22.98779999999533,
+          "hashCheck": 0.008399999998800922,
+          "total": 133.41869999999471
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 24.876600000003236,
+          "minioFetch": 87.0118999999977,
+          "sha256": 21.94829999999638,
+          "hashCheck": 0.007600000004458707,
+          "total": 133.84440000000177
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 24.17240000000311,
+          "minioFetch": 83.42059999999765,
+          "sha256": 24.19090000000142,
+          "hashCheck": 0.008099999999103602,
+          "total": 131.79200000000128
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 29.317900000001828,
+          "minioFetch": 77.73939999999857,
+          "sha256": 24.672899999997753,
+          "hashCheck": 0.007300000004761387,
+          "total": 131.7375000000029
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 32.52590000000055,
+          "minioFetch": 71.23909999999887,
+          "sha256": 20.309199999996054,
+          "hashCheck": 0.00810000000637956,
+          "total": 124.08230000000185
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 38.797200000000885,
+          "minioFetch": 84.89710000000196,
+          "sha256": 22.499199999998382,
+          "hashCheck": 0.008300000001327135,
+          "total": 146.20180000000255
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 38.28469999999652,
+          "minioFetch": 133.14360000000306,
+          "sha256": 21.404499999996915,
+          "hashCheck": 0.008699999998498242,
+          "total": 192.841499999995
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 31.26650000000518,
+          "minioFetch": 82.90639999999985,
+          "sha256": 26.512199999997392,
+          "hashCheck": 0.008200000003853347,
+          "total": 140.69330000000627
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 31.809199999996054,
+          "minioFetch": 96.06079999999929,
+          "sha256": 20.896400000005087,
+          "hashCheck": 0.010399999999208376,
+          "total": 148.77679999999964
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 38.890400000003865,
+          "minioFetch": 123.22230000000127,
+          "sha256": 31.018599999995786,
+          "hashCheck": 0.010700000006181654,
+          "total": 193.1420000000071
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 24.21519999999873,
+          "minioFetch": 82.08699999999953,
+          "sha256": 21.587100000004284,
+          "hashCheck": 0.00789999999688007,
+          "total": 127.89719999999943
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 33.653299999998126,
+          "minioFetch": 88.50110000000132,
+          "sha256": 24.604599999998754,
+          "hashCheck": 0.009200000000419095,
+          "total": 146.76819999999861
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 24.994599999998172,
+          "minioFetch": 70.74669999999605,
+          "sha256": 20.561600000000908,
+          "hashCheck": 0.007300000004761387,
+          "total": 116.3101999999999
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 32.11300000000483,
+          "minioFetch": 89.66999999999825,
+          "sha256": 25.960100000003877,
+          "hashCheck": 0.007099999995261896,
+          "total": 147.75020000000222
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 23.478200000005018,
+          "minioFetch": 131.5911999999953,
+          "sha256": 37.53110000000015,
+          "hashCheck": 0.010800000003655441,
+          "total": 192.61130000000412
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 25.839599999999336,
+          "minioFetch": 110.99869999999646,
+          "sha256": 20.365700000002107,
+          "hashCheck": 0.007599999997182749,
+          "total": 157.2115999999951
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 26.632000000005064,
+          "minioFetch": 87.16849999999977,
+          "sha256": 20.53299999999581,
+          "hashCheck": 0.007400000002235174,
+          "total": 134.34090000000288
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 25.363899999996647,
+          "minioFetch": 79.82529999999679,
+          "sha256": 20.465400000000955,
+          "hashCheck": 0.00960000000486616,
+          "total": 125.66419999999925
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 26.043100000002596,
+          "minioFetch": 76.69789999999921,
+          "sha256": 24.41870000000199,
+          "hashCheck": 0.006799999995564576,
+          "total": 127.16649999999936
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 37.02590000000055,
+          "minioFetch": 74.91870000000199,
+          "sha256": 20.572699999996985,
+          "hashCheck": 0.008000000001629815,
+          "total": 132.52530000000115
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 26.386599999997998,
+          "minioFetch": 121.6498999999967,
+          "sha256": 25.42210000000341,
+          "hashCheck": 0.011099999996076804,
+          "total": 173.4696999999942
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 23.402399999999034,
+          "minioFetch": 78.17740000000049,
+          "sha256": 22.572500000002037,
+          "hashCheck": 0.012199999997392297,
+          "total": 124.16449999999895
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 37.124500000005355,
+          "minioFetch": 79.76369999999588,
+          "sha256": 22.874100000000908,
+          "hashCheck": 0.006500000003143214,
+          "total": 139.76880000000529
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 40.386899999997695,
+          "minioFetch": 81.95420000000013,
+          "sha256": 21.191500000000815,
+          "hashCheck": 0.007400000002235174,
+          "total": 143.54000000000087
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 33.28209999999672,
+          "minioFetch": 84.50560000000405,
+          "sha256": 25.03809999999794,
+          "hashCheck": 0.010600000001431908,
+          "total": 142.83640000000014
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 23.618499999996857,
+          "minioFetch": 84.0193999999974,
+          "sha256": 23.12039999999979,
+          "hashCheck": 0.007300000004761387,
+          "total": 130.7655999999988
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 23.44380000000092,
+          "minioFetch": 102.17469999999594,
+          "sha256": 22.300999999999476,
+          "hashCheck": 0.0072000000000116415,
+          "total": 147.92669999999634
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 325.46830000000045,
+          "minioFetch": 131.10800000000017,
+          "sha256": 28.85319999999774,
+          "hashCheck": 0.006900000000314321,
+          "total": 485.4363999999987
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 23.929099999993923,
+          "minioFetch": 74.67540000000008,
+          "sha256": 20.609800000005635,
+          "hashCheck": 0.00789999999688007,
+          "total": 119.22219999999652
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 26.09129999999277,
+          "minioFetch": 78.79520000000775,
+          "sha256": 27.927899999995134,
+          "hashCheck": 0.0087000000057742,
+          "total": 132.82310000000143
+        }
+      ],
+      "p50": {
+        "onChain": 29.462800000001153,
+        "minioFetch": 84.0193999999974,
+        "sha256": 22.300999999999476,
+        "hashCheck": 0.008099999999103602,
+        "total": 135.44340000000375
+      },
+      "p95": {
+        "onChain": 38.797200000000885,
+        "minioFetch": 144.61469999999827,
+        "sha256": 32.77429999999731,
+        "hashCheck": 0.012300000002142042,
+        "total": 222.9997000000003
+      },
+      "p99": {
+        "onChain": 40.386899999997695,
+        "minioFetch": 162.3382000000056,
+        "sha256": 33.377300000000105,
+        "hashCheck": 0.01419999999779975,
+        "total": 239.17929999999615
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 1,
+      "artifactBytes": 1024,
+      "materialId": "bio:cell_line:1104",
+      "credentialId": "cred:1191",
+      "artifactCid": "s3://artifacts/bio:cell_line:1104/QC_MYCO/fb7df9e4-test-1024.bin",
+      "artifactHash": "0xfb7df9e49a5e997ffbad5609360d30819adbb6ddb759ca88b4c215a57a502418",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 29.38180000000284,
+          "minioFetch": 8.567799999989802,
+          "sha256": 0.02650000000721775,
+          "hashCheck": 0.004399999990710057,
+          "total": 37.98049999999057
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 38.01019999998971,
+          "minioFetch": 7.428100000004633,
+          "sha256": 0.02659999999741558,
+          "hashCheck": 0.0044000000052619725,
+          "total": 45.46929999999702
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 38.947000000000116,
+          "minioFetch": 7.272599999996601,
+          "sha256": 0.0341000000044005,
+          "hashCheck": 0.004700000004959293,
+          "total": 46.25840000000608
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 38.29059999999299,
+          "minioFetch": 6.840800000005402,
+          "sha256": 0.026400000002468005,
+          "hashCheck": 0.003899999996065162,
+          "total": 45.16169999999693
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 24.116800000003423,
+          "minioFetch": 6.849999999991269,
+          "sha256": 0.03190000000176951,
+          "hashCheck": 0.004500000010011718,
+          "total": 31.003200000006473
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 23.466400000004796,
+          "minioFetch": 7.755399999994552,
+          "sha256": 0.02770000000600703,
+          "hashCheck": 0.003700000001117587,
+          "total": 31.253200000006473
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 37.78040000000328,
+          "minioFetch": 7.523300000000745,
+          "sha256": 0.02959999999438878,
+          "hashCheck": 0.004000000000814907,
+          "total": 45.33729999999923
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 38.913100000005215,
+          "minioFetch": 6.9746999999915715,
+          "sha256": 0.02719999999681022,
+          "hashCheck": 0.0038000000058673322,
+          "total": 45.918799999999464
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 23.944499999997788,
+          "minioFetch": 5.930300000007264,
+          "sha256": 0.025899999993271194,
+          "hashCheck": 0.0038000000058673322,
+          "total": 29.90450000000419
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 25.420200000007753,
+          "minioFetch": 6.643100000001141,
+          "sha256": 0.05049999999755528,
+          "hashCheck": 0.004600000000209548,
+          "total": 32.11840000000666
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 23.966499999994994,
+          "minioFetch": 6.512199999997392,
+          "sha256": 0.027500000011059456,
+          "hashCheck": 0.003899999996065162,
+          "total": 30.51009999999951
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 23.972500000003492,
+          "minioFetch": 7.641300000002957,
+          "sha256": 0.030199999993783422,
+          "hashCheck": 0.004600000000209548,
+          "total": 31.648600000000442
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 37.96250000000873,
+          "minioFetch": 6.527999999991152,
+          "sha256": 0.03460000001359731,
+          "hashCheck": 0.005299999989802018,
+          "total": 44.53040000000328
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 39.352899999998044,
+          "minioFetch": 7.092300000003888,
+          "sha256": 0.02519999998912681,
+          "hashCheck": 0.004300000000512227,
+          "total": 46.47469999999157
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 38.78089999999793,
+          "minioFetch": 6.094800000006217,
+          "sha256": 0.0268999999971129,
+          "hashCheck": 0.004700000004959293,
+          "total": 44.90730000000622
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 41.998400000011316,
+          "minioFetch": 7.060400000002119,
+          "sha256": 0.02669999998761341,
+          "hashCheck": 0.0044000000052619725,
+          "total": 49.08990000000631
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 35.75430000000051,
+          "minioFetch": 6.728900000001886,
+          "sha256": 0.038499999995110556,
+          "hashCheck": 0.005499999999301508,
+          "total": 42.52719999999681
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 24.822299999999814,
+          "minioFetch": 7.368599999987055,
+          "sha256": 0.05980000000272412,
+          "hashCheck": 0.006800000002840534,
+          "total": 32.25749999999243
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 39.09289999998873,
+          "minioFetch": 6.971100000009756,
+          "sha256": 0.037899999995715916,
+          "hashCheck": 0.005799999998998828,
+          "total": 46.1076999999932
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 23.37279999999737,
+          "minioFetch": 6.654300000009243,
+          "sha256": 0.0268999999971129,
+          "hashCheck": 0.004000000000814907,
+          "total": 30.05800000000454
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 38.29969999998866,
+          "minioFetch": 8.936100000006263,
+          "sha256": 0.027900000000954606,
+          "hashCheck": 0.004300000000512227,
+          "total": 47.26799999999639
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 39.60059999999066,
+          "minioFetch": 8.225400000010268,
+          "sha256": 0.02809999999590218,
+          "hashCheck": 0.004000000000814907,
+          "total": 47.85809999999765
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 36.494000000006054,
+          "minioFetch": 7.026999999987311,
+          "sha256": 0.03140000000712462,
+          "hashCheck": 0.004000000000814907,
+          "total": 43.556400000001304
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 23.774499999999534,
+          "minioFetch": 6.559800000002724,
+          "sha256": 0.054199999998672865,
+          "hashCheck": 0.004100000005564652,
+          "total": 30.392600000006496
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 24.009399999995367,
+          "minioFetch": 6.315100000007078,
+          "sha256": 0.030099999989033677,
+          "hashCheck": 0.004700000004959293,
+          "total": 30.359299999996438
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 23.78059999999823,
+          "minioFetch": 7.730100000000675,
+          "sha256": 0.02680000000691507,
+          "hashCheck": 0.004799999995157123,
+          "total": 31.542300000000978
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 37.92080000000715,
+          "minioFetch": 10.189999999987776,
+          "sha256": 0.026700000002165325,
+          "hashCheck": 0.004100000005564652,
+          "total": 48.141600000002654
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 35.596000000005006,
+          "minioFetch": 6.750399999989895,
+          "sha256": 0.02560000000812579,
+          "hashCheck": 0.0046999999904073775,
+          "total": 42.376699999993434
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 24.303700000004028,
+          "minioFetch": 6.2458000000042375,
+          "sha256": 0.02719999999681022,
+          "hashCheck": 0.003899999996065162,
+          "total": 30.58060000000114
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 24.25450000001001,
+          "minioFetch": 7.370599999994738,
+          "sha256": 0.04189999999653082,
+          "hashCheck": 0.007200000007287599,
+          "total": 31.674200000008568
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 38.73369999999704,
+          "minioFetch": 9.01469999999972,
+          "sha256": 0.030599999998230487,
+          "hashCheck": 0.007200000007287599,
+          "total": 47.78620000000228
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 36.433499999999185,
+          "minioFetch": 7.87860000001092,
+          "sha256": 0.053299999999580905,
+          "hashCheck": 0.008999999990919605,
+          "total": 44.374400000000605
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 38.40439999999944,
+          "minioFetch": 7.0767999999952735,
+          "sha256": 0.03880000000935979,
+          "hashCheck": 0.005399999994551763,
+          "total": 45.525399999998626
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 24.43210000000545,
+          "minioFetch": 7.103499999997439,
+          "sha256": 0.028500000000349246,
+          "hashCheck": 0.004700000004959293,
+          "total": 31.568800000008196
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 39.931299999996554,
+          "minioFetch": 7.487200000003213,
+          "sha256": 0.0268999999971129,
+          "hashCheck": 0.0038000000058673322,
+          "total": 47.44920000000275
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 37.17740000000049,
+          "minioFetch": 7.894200000009732,
+          "sha256": 0.027999999991152436,
+          "hashCheck": 0.004000000000814907,
+          "total": 45.10360000000219
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 37.65780000000086,
+          "minioFetch": 6.994700000010198,
+          "sha256": 0.025899999993271194,
+          "hashCheck": 0.003899999996065162,
+          "total": 44.682300000000396
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 24.557400000005146,
+          "minioFetch": 6.729299999991781,
+          "sha256": 0.02710000000661239,
+          "hashCheck": 0.0044999999954598024,
+          "total": 31.318299999999
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 24.27150000000256,
+          "minioFetch": 6.558499999999185,
+          "sha256": 0.02959999999438878,
+          "hashCheck": 0.004100000005564652,
+          "total": 30.8637000000017
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 23.814500000007683,
+          "minioFetch": 6.370299999995041,
+          "sha256": 0.02659999999741558,
+          "hashCheck": 0.0044999999954598024,
+          "total": 30.2158999999956
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 24.70579999999609,
+          "minioFetch": 7.795700000002398,
+          "sha256": 0.027600000001257285,
+          "hashCheck": 0.004300000000512227,
+          "total": 32.533400000000256
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 38.11059999999998,
+          "minioFetch": 7.328499999988708,
+          "sha256": 0.02770000000600703,
+          "hashCheck": 0.004199999995762482,
+          "total": 45.470999999990454
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 23.146900000007008,
+          "minioFetch": 6.642999999996391,
+          "sha256": 0.031000000002677552,
+          "hashCheck": 0.0046999999904073775,
+          "total": 29.825599999996484
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 24.317900000009104,
+          "minioFetch": 6.916700000001583,
+          "sha256": 0.025599999993573874,
+          "hashCheck": 0.003899999996065162,
+          "total": 31.264100000000326
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 23.48530000000028,
+          "minioFetch": 6.644099999990431,
+          "sha256": 0.028800000000046566,
+          "hashCheck": 0.0038000000058673322,
+          "total": 30.161999999996624
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 24.868799999996554,
+          "minioFetch": 7.018200000005891,
+          "sha256": 0.030099999989033677,
+          "hashCheck": 0.005400000009103678,
+          "total": 31.922500000000582
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 38.425299999988056,
+          "minioFetch": 8.268500000005588,
+          "sha256": 0.026700000002165325,
+          "hashCheck": 0.003799999991315417,
+          "total": 46.724299999987124
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 37.702900000003865,
+          "minioFetch": 7.162799999990966,
+          "sha256": 0.03140000000712462,
+          "hashCheck": 0.004799999995157123,
+          "total": 44.90189999999711
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 38.34109999999055,
+          "minioFetch": 6.860800000009476,
+          "sha256": 0.02599999999802094,
+          "hashCheck": 0.004099999991012737,
+          "total": 45.23199999998906
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 39.06919999999809,
+          "minioFetch": 6.593899999992573,
+          "sha256": 0.03500000000349246,
+          "hashCheck": 0.006300000008195639,
+          "total": 45.70440000000235
+        }
+      ],
+      "p50": {
+        "onChain": 35.75430000000051,
+        "minioFetch": 7.018200000005891,
+        "sha256": 0.027900000000954606,
+        "hashCheck": 0.004399999990710057,
+        "total": 42.52719999999681
+      },
+      "p95": {
+        "onChain": 39.352899999998044,
+        "minioFetch": 8.567799999989802,
+        "sha256": 0.05049999999755528,
+        "hashCheck": 0.006800000002840534,
+        "total": 47.78620000000228
+      },
+      "p99": {
+        "onChain": 39.931299999996554,
+        "minioFetch": 9.01469999999972,
+        "sha256": 0.054199999998672865,
+        "hashCheck": 0.007200000007287599,
+        "total": 48.141600000002654
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 1,
+      "artifactBytes": 1048576,
+      "materialId": "bio:cell_line:1105",
+      "credentialId": "cred:1193",
+      "artifactCid": "s3://artifacts/bio:cell_line:1105/QC_MYCO/6fa7bb87-test-1048576.bin",
+      "artifactHash": "0x6fa7bb879c4979f0b4e4177d07eea0626f4f70aa1ef3c1d78b886aa1e14e4e62",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 30.68760000000475,
+          "minioFetch": 38.92149999999674,
+          "sha256": 2.0982999999978347,
+          "hashCheck": 0.0078000000066822395,
+          "total": 71.715200000006
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 33.72729999999865,
+          "minioFetch": 15.813899999993737,
+          "sha256": 2.128599999996368,
+          "hashCheck": 0.006900000007590279,
+          "total": 51.676699999996345
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 30.596799999999348,
+          "minioFetch": 16.8237999999983,
+          "sha256": 2.9994000000006054,
+          "hashCheck": 0.0102000000042608,
+          "total": 50.430200000002515
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 38.62859999999637,
+          "minioFetch": 22.382500000006985,
+          "sha256": 2.2836999999999534,
+          "hashCheck": 0.013999999995576218,
+          "total": 63.30879999999888
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 36.61559999999008,
+          "minioFetch": 15.987900000007357,
+          "sha256": 2.11699999999837,
+          "hashCheck": 0.005999999993946403,
+          "total": 54.726499999989755
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 27.19199999999546,
+          "minioFetch": 17.80680000000575,
+          "sha256": 2.1045999999914784,
+          "hashCheck": 0.009200000000419095,
+          "total": 47.11259999999311
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 25.494999999995343,
+          "minioFetch": 17.58860000000277,
+          "sha256": 2.030799999993178,
+          "hashCheck": 0.0062000000034458935,
+          "total": 45.12059999999474
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 26.454300000012154,
+          "minioFetch": 18.4320000000007,
+          "sha256": 2.1172999999980675,
+          "hashCheck": 0.007700000001932494,
+          "total": 47.01130000001285
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 25.972399999998743,
+          "minioFetch": 21.006999999997788,
+          "sha256": 2.2877000000007683,
+          "hashCheck": 0.008600000001024455,
+          "total": 49.275699999998324
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 38.24120000000403,
+          "minioFetch": 20.77619999999297,
+          "sha256": 2.0826000000088243,
+          "hashCheck": 0.005599999989499338,
+          "total": 61.10559999999532
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 37.74910000000091,
+          "minioFetch": 18.41580000000249,
+          "sha256": 2.0556999999971595,
+          "hashCheck": 0.0060000000084983185,
+          "total": 58.22660000000906
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 25.7783000000054,
+          "minioFetch": 17.722399999998743,
+          "sha256": 2.0925999999890337,
+          "hashCheck": 0.005700000008800998,
+          "total": 45.59900000000198
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 27.16150000000198,
+          "minioFetch": 19.68060000000696,
+          "sha256": 2.0332999999955064,
+          "hashCheck": 0.006299999993643723,
+          "total": 48.88169999999809
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 24.893800000005285,
+          "minioFetch": 18.788300000000163,
+          "sha256": 2.0659000000014203,
+          "hashCheck": 0.006599999993341044,
+          "total": 45.75460000000021
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 24.54429999999411,
+          "minioFetch": 18.838000000003376,
+          "sha256": 2.0993000000016764,
+          "hashCheck": 0.005699999994249083,
+          "total": 45.48729999999341
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 24.081200000000536,
+          "minioFetch": 18.199300000007497,
+          "sha256": 2.075700000001234,
+          "hashCheck": 0.006799999988288619,
+          "total": 44.362999999997555
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 25.631999999997788,
+          "minioFetch": 17.051999999996042,
+          "sha256": 2.1097000000008848,
+          "hashCheck": 0.006999999997788109,
+          "total": 44.8006999999925
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 22.998500000001513,
+          "minioFetch": 18.668900000004214,
+          "sha256": 2.0288999999902444,
+          "hashCheck": 0.005900000003748573,
+          "total": 43.70219999999972
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 28.6820000000007,
+          "minioFetch": 17.91040000000794,
+          "sha256": 2.028999999994994,
+          "hashCheck": 0.005400000009103678,
+          "total": 48.626800000012736
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 33.32650000001013,
+          "minioFetch": 24.95549999999639,
+          "sha256": 2.056700000001001,
+          "hashCheck": 0.005699999994249083,
+          "total": 60.34440000000177
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 27.133300000001327,
+          "minioFetch": 17.523499999995693,
+          "sha256": 2.051400000011199,
+          "hashCheck": 0.007299999997485429,
+          "total": 46.715500000005704
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 26.131099999998696,
+          "minioFetch": 22.532700000010664,
+          "sha256": 2.072699999989709,
+          "hashCheck": 0.005499999999301508,
+          "total": 50.74199999999837
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 36.243900000001304,
+          "minioFetch": 16.609899999995832,
+          "sha256": 2.101599999994505,
+          "hashCheck": 0.006699999998090789,
+          "total": 54.96209999998973
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 28.271799999987707,
+          "minioFetch": 16.82259999999951,
+          "sha256": 2.3139000000082888,
+          "hashCheck": 0.008000000001629815,
+          "total": 47.416299999997136
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 26.434499999988475,
+          "minioFetch": 17.670000000012806,
+          "sha256": 2.2937999999994645,
+          "hashCheck": 0.00849999999627471,
+          "total": 46.40679999999702
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 26.423399999999674,
+          "minioFetch": 19.442699999999604,
+          "sha256": 2.131099999998696,
+          "hashCheck": 0.0078000000066822395,
+          "total": 48.00500000000466
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 24.8466000000044,
+          "minioFetch": 16.642599999991944,
+          "sha256": 2.1222000000125263,
+          "hashCheck": 0.007299999997485429,
+          "total": 43.618700000006356
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 26.26339999999618,
+          "minioFetch": 15.71820000000298,
+          "sha256": 2.052400000000489,
+          "hashCheck": 0.007700000001932494,
+          "total": 44.04170000000158
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 29.60209999998915,
+          "minioFetch": 26.96360000000277,
+          "sha256": 2.029399999999441,
+          "hashCheck": 0.005300000004353933,
+          "total": 58.600399999995716
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 30.715600000010454,
+          "minioFetch": 18.657599999991362,
+          "sha256": 2.0522000000055414,
+          "hashCheck": 0.007299999997485429,
+          "total": 51.43270000000484
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 25.218699999997625,
+          "minioFetch": 18.474400000006426,
+          "sha256": 2.0265999999974156,
+          "hashCheck": 0.005000000004656613,
+          "total": 45.72470000000612
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 24.53269999999611,
+          "minioFetch": 16.86510000000999,
+          "sha256": 2.0745999999926426,
+          "hashCheck": 0.0060000000084983185,
+          "total": 43.47840000000724
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 30.057600000000093,
+          "minioFetch": 34.056700000001,
+          "sha256": 2.3513999999995576,
+          "hashCheck": 0.06769999999960419,
+          "total": 66.53340000000026
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 37.48609999999462,
+          "minioFetch": 17.959400000007008,
+          "sha256": 2.0987000000022817,
+          "hashCheck": 0.006800000002840534,
+          "total": 57.55100000000675
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 26.877800000002026,
+          "minioFetch": 15.769999999989523,
+          "sha256": 2.0758000000059837,
+          "hashCheck": 0.006699999998090789,
+          "total": 44.73029999999562
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 28.278699999995297,
+          "minioFetch": 16.996100000003935,
+          "sha256": 2.0856999999959953,
+          "hashCheck": 0.007700000001932494,
+          "total": 47.36819999999716
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 27.34219999999914,
+          "minioFetch": 18.40700000000652,
+          "sha256": 2.129899999999907,
+          "hashCheck": 0.008000000001629815,
+          "total": 47.887100000007194
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 27.02279999999155,
+          "minioFetch": 18.81050000000687,
+          "sha256": 2.4290000000037253,
+          "hashCheck": 0.011499999993247911,
+          "total": 48.27379999999539
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 23.294599999993807,
+          "minioFetch": 16.933900000003632,
+          "sha256": 2.0296999999991385,
+          "hashCheck": 0.006099999998696148,
+          "total": 42.26429999999527
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 29.771999999997206,
+          "minioFetch": 16.10099999999511,
+          "sha256": 2.0899000000063097,
+          "hashCheck": 0.007199999992735684,
+          "total": 47.97009999999136
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 26.933199999999488,
+          "minioFetch": 15.938500000003842,
+          "sha256": 2.101699999999255,
+          "hashCheck": 0.0087000000057742,
+          "total": 44.98210000000836
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 29.309500000003027,
+          "minioFetch": 18.836300000009942,
+          "sha256": 2.1111999999993714,
+          "hashCheck": 0.007299999997485429,
+          "total": 50.264300000009825
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 26.63509999999951,
+          "minioFetch": 17.61359999999695,
+          "sha256": 2.056299999996554,
+          "hashCheck": 0.008600000001024455,
+          "total": 46.31359999999404
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 26.09079999999085,
+          "minioFetch": 17.663500000009662,
+          "sha256": 3.128899999996065,
+          "hashCheck": 0.0087000000057742,
+          "total": 46.89190000000235
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 23.127899999992223,
+          "minioFetch": 17.95810000000347,
+          "sha256": 2.0469000000011874,
+          "hashCheck": 0.006800000002840534,
+          "total": 43.13969999999972
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 28.321299999995972,
+          "minioFetch": 16.589500000001863,
+          "sha256": 2.096300000004703,
+          "hashCheck": 0.00819999999657739,
+          "total": 47.015299999999115
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 27.72599999999511,
+          "minioFetch": 16.83980000000156,
+          "sha256": 2.0763000000006286,
+          "hashCheck": 0.009200000000419095,
+          "total": 46.65129999999772
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 23.636700000002747,
+          "minioFetch": 18.811900000000605,
+          "sha256": 2.0825000000040745,
+          "hashCheck": 0.005499999999301508,
+          "total": 44.53660000000673
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 29.528800000000047,
+          "minioFetch": 19.238600000011502,
+          "sha256": 2.106499999994412,
+          "hashCheck": 0.006800000002840534,
+          "total": 50.8807000000088
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 27.435799999992014,
+          "minioFetch": 19.30350000000908,
+          "sha256": 2.0951999999961117,
+          "hashCheck": 0.0063999999983934686,
+          "total": 48.8408999999956
+        }
+      ],
+      "p50": {
+        "onChain": 27.133300000001327,
+        "minioFetch": 17.95810000000347,
+        "sha256": 2.0925999999890337,
+        "hashCheck": 0.006900000007590279,
+        "total": 47.36819999999716
+      },
+      "p95": {
+        "onChain": 37.48609999999462,
+        "minioFetch": 24.95549999999639,
+        "sha256": 2.3513999999995576,
+        "hashCheck": 0.0102000000042608,
+        "total": 61.10559999999532
+      },
+      "p99": {
+        "onChain": 38.24120000000403,
+        "minioFetch": 34.056700000001,
+        "sha256": 2.9994000000006054,
+        "hashCheck": 0.013999999995576218,
+        "total": 66.53340000000026
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 1,
+      "artifactBytes": 10485760,
+      "materialId": "bio:cell_line:1106",
+      "credentialId": "cred:1195",
+      "artifactCid": "s3://artifacts/bio:cell_line:1106/QC_MYCO/d56c1e65-test-10485760.bin",
+      "artifactHash": "0xd56c1e65f5fa171738fbca69875b581c0ce065d73fe14f7b20f426ffe87ec5a9",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 29.28880000000936,
+          "minioFetch": 105.8854999999894,
+          "sha256": 21.610100000005332,
+          "hashCheck": 0.006800000002840534,
+          "total": 156.79120000000694
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 23.55020000001241,
+          "minioFetch": 88.62369999999646,
+          "sha256": 20.29759999999078,
+          "hashCheck": 0.0078000000066822395,
+          "total": 132.47930000000633
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 22.90370000000985,
+          "minioFetch": 94.65380000000005,
+          "sha256": 21.090199999991455,
+          "hashCheck": 0.00969999999506399,
+          "total": 138.65739999999641
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 32.935700000001816,
+          "minioFetch": 89.26399999999558,
+          "sha256": 20.42059999999765,
+          "hashCheck": 0.008300000001327135,
+          "total": 142.62859999999637
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 32.977799999993294,
+          "minioFetch": 99.97260000000824,
+          "sha256": 20.80689999999595,
+          "hashCheck": 0.007499999992433004,
+          "total": 153.76479999998992
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 24.47939999999653,
+          "minioFetch": 89.4371000000101,
+          "sha256": 20.283099999986007,
+          "hashCheck": 0.007900000011431985,
+          "total": 134.20750000000407
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 24.30460000000312,
+          "minioFetch": 93.42409999998927,
+          "sha256": 22.962900000013178,
+          "hashCheck": 0.010699999998905696,
+          "total": 140.70230000000447
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 22.95700000000943,
+          "minioFetch": 92.65600000000268,
+          "sha256": 25.183299999989686,
+          "hashCheck": 0.007500000006984919,
+          "total": 140.80380000000878
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 30.16370000000461,
+          "minioFetch": 95.5731999999989,
+          "sha256": 24.61819999999716,
+          "hashCheck": 0.010800000003655441,
+          "total": 150.36590000000433
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 24.20799999999872,
+          "minioFetch": 101.6926999999996,
+          "sha256": 25.785399999993388,
+          "hashCheck": 0.007299999997485429,
+          "total": 151.6933999999892
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 23.13279999999213,
+          "minioFetch": 90.33320000000822,
+          "sha256": 21.28310000000056,
+          "hashCheck": 0.006999999997788109,
+          "total": 134.7560999999987
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 38.692900000009104,
+          "minioFetch": 96.22279999998864,
+          "sha256": 21.106100000004517,
+          "hashCheck": 0.007100000002537854,
+          "total": 156.0289000000048
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 32.14119999999821,
+          "minioFetch": 99.30070000000705,
+          "sha256": 25.160999999992782,
+          "hashCheck": 0.006600000007892959,
+          "total": 156.60950000000594
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 24.69310000000405,
+          "minioFetch": 98.51399999999558,
+          "sha256": 21.972399999998743,
+          "hashCheck": 0.008000000001629815,
+          "total": 145.1875
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 24.805799999987357,
+          "minioFetch": 128.3512000000046,
+          "sha256": 27.646900000007008,
+          "hashCheck": 0.006699999998090789,
+          "total": 180.81059999999707
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 24.22950000000128,
+          "minioFetch": 93.68349999999919,
+          "sha256": 20.5567999999912,
+          "hashCheck": 0.007599999997182749,
+          "total": 138.47739999998885
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 27.064199999993434,
+          "minioFetch": 97.34709999999905,
+          "sha256": 20.768400000000838,
+          "hashCheck": 0.007100000002537854,
+          "total": 145.18679999999586
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 36.33159999999043,
+          "minioFetch": 98.48120000000927,
+          "sha256": 20.425099999993108,
+          "hashCheck": 0.007700000001932494,
+          "total": 155.24559999999474
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 24.695999999996275,
+          "minioFetch": 91.32660000000033,
+          "sha256": 20.354099999996834,
+          "hashCheck": 0.008000000001629815,
+          "total": 136.38469999999506
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 23.85450000000128,
+          "minioFetch": 93.09649999999965,
+          "sha256": 20.83839999999327,
+          "hashCheck": 0.00960000000486616,
+          "total": 137.79899999999907
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 26.09460000001127,
+          "minioFetch": 93.56899999998859,
+          "sha256": 20.41240000000107,
+          "hashCheck": 0.007400000002235174,
+          "total": 140.08340000000317
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 38.403999999994994,
+          "minioFetch": 100.02040000000852,
+          "sha256": 29.908199999990757,
+          "hashCheck": 0.010100000014062971,
+          "total": 168.34270000000834
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 38.23159999999916,
+          "minioFetch": 96.49249999999302,
+          "sha256": 26.826500000010128,
+          "hashCheck": 0.010399999999208376,
+          "total": 161.5610000000015
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 30.507400000002235,
+          "minioFetch": 98.60959999999614,
+          "sha256": 23.84540000000561,
+          "hashCheck": 0.00969999999506399,
+          "total": 152.97209999999905
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 33.1756999999925,
+          "minioFetch": 91.49409999999625,
+          "sha256": 20.96689999999944,
+          "hashCheck": 0.022500000006402843,
+          "total": 145.6591999999946
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 31.132300000012037,
+          "minioFetch": 99.64289999999164,
+          "sha256": 20.536699999996927,
+          "hashCheck": 0.0063999999983934686,
+          "total": 151.318299999999
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 30.60330000000249,
+          "minioFetch": 94.8133000000089,
+          "sha256": 24.29969999998866,
+          "hashCheck": 0.007300000012037344,
+          "total": 149.72360000001208
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 24.401900000011665,
+          "minioFetch": 90.50169999999343,
+          "sha256": 20.27509999999893,
+          "hashCheck": 0.00789999999688007,
+          "total": 135.1866000000009
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 37.03979999999865,
+          "minioFetch": 92.77870000000985,
+          "sha256": 22.19289999999455,
+          "hashCheck": 0.00900000000547152,
+          "total": 152.02040000000852
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 39.16920000000391,
+          "minioFetch": 92.77880000000005,
+          "sha256": 20.417600000000675,
+          "hashCheck": 0.00810000000637956,
+          "total": 152.373700000011
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 27.594200000006822,
+          "minioFetch": 90.50989999999001,
+          "sha256": 26.05940000001283,
+          "hashCheck": 0.00849999999627471,
+          "total": 144.17200000000594
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 24.609899999995832,
+          "minioFetch": 93.76249999999709,
+          "sha256": 20.373399999996764,
+          "hashCheck": 0.00789999999688007,
+          "total": 138.75369999998657
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 24.945999999996275,
+          "minioFetch": 91.04119999999239,
+          "sha256": 22.39240000001155,
+          "hashCheck": 0.0064999999885912985,
+          "total": 138.3860999999888
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 25.051699999996345,
+          "minioFetch": 95.02989999999409,
+          "sha256": 23.200800000005984,
+          "hashCheck": 0.007400000002235174,
+          "total": 143.28979999999865
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 34.662799999990966,
+          "minioFetch": 92.28840000000491,
+          "sha256": 26.925700000007055,
+          "hashCheck": 0.006799999988288619,
+          "total": 153.88369999999122
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 33.250599999999395,
+          "minioFetch": 85.21310000000813,
+          "sha256": 20.516600000002654,
+          "hashCheck": 0.02549999998882413,
+          "total": 139.005799999999
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 26.32839999999851,
+          "minioFetch": 91.65239999999176,
+          "sha256": 20.459400000007008,
+          "hashCheck": 0.00789999999688007,
+          "total": 138.44809999999416
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 37.351699999999255,
+          "minioFetch": 114.57510000000184,
+          "sha256": 22.004000000000815,
+          "hashCheck": 0.006699999998090789,
+          "total": 173.9375
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 23.70789999999397,
+          "minioFetch": 86.68409999999858,
+          "sha256": 20.44090000000142,
+          "hashCheck": 0.007500000006984919,
+          "total": 130.84040000000095
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 26.438399999999092,
+          "minioFetch": 97.32209999999031,
+          "sha256": 28.944100000007893,
+          "hashCheck": 0.006800000002840534,
+          "total": 152.71140000000014
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 29.33169999999518,
+          "minioFetch": 90.76590000001306,
+          "sha256": 20.544799999988754,
+          "hashCheck": 0.00810000000637956,
+          "total": 140.65050000000338
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 30.57239999999001,
+          "minioFetch": 92.16629999999714,
+          "sha256": 26.21140000000014,
+          "hashCheck": 0.007900000011431985,
+          "total": 148.95799999999872
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 35.20260000000417,
+          "minioFetch": 94.74229999999807,
+          "sha256": 22.92500000000291,
+          "hashCheck": 0.008699999991222285,
+          "total": 152.87859999999637
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 37.443299999999,
+          "minioFetch": 90.92160000000149,
+          "sha256": 20.39879999999539,
+          "hashCheck": 0.007300000012037344,
+          "total": 148.77100000000792
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 29.6192999999912,
+          "minioFetch": 122.85940000000119,
+          "sha256": 22.01799999999639,
+          "hashCheck": 0.008000000001629815,
+          "total": 174.5046999999904
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 24.689100000003236,
+          "minioFetch": 93.84789999999339,
+          "sha256": 22.950599999996484,
+          "hashCheck": 0.008500000010826625,
+          "total": 141.49610000000393
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 38.07250000000931,
+          "minioFetch": 95.69349999999395,
+          "sha256": 20.57619999999588,
+          "hashCheck": 0.0078000000066822395,
+          "total": 154.35000000000582
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 22.904999999998836,
+          "minioFetch": 92.76390000000538,
+          "sha256": 24.25340000000142,
+          "hashCheck": 0.007199999992735684,
+          "total": 139.92949999999837
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 36.96910000000207,
+          "minioFetch": 90.79860000000917,
+          "sha256": 20.360599999999977,
+          "hashCheck": 0.0079999999870779,
+          "total": 148.1362999999983
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 33.007500000006985,
+          "minioFetch": 96.70749999998952,
+          "sha256": 20.632300000012037,
+          "hashCheck": 0.006899999993038364,
+          "total": 150.35420000000158
+        }
+      ],
+      "p50": {
+        "onChain": 29.28880000000936,
+        "minioFetch": 93.68349999999919,
+        "sha256": 21.106100000004517,
+        "hashCheck": 0.0078000000066822395,
+        "total": 145.6591999999946
+      },
+      "p95": {
+        "onChain": 38.23159999999916,
+        "minioFetch": 105.8854999999894,
+        "sha256": 26.925700000007055,
+        "hashCheck": 0.010699999998905696,
+        "total": 168.34270000000834
+      },
+      "p99": {
+        "onChain": 38.692900000009104,
+        "minioFetch": 122.85940000000119,
+        "sha256": 28.944100000007893,
+        "hashCheck": 0.022500000006402843,
+        "total": 174.5046999999904
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 50,
+      "artifactBytes": 1024,
+      "materialId": "bio:cell_line:1104",
+      "credentialId": "cred:1191",
+      "artifactCid": "s3://artifacts/bio:cell_line:1104/QC_MYCO/fb7df9e4-test-1024.bin",
+      "artifactHash": "0xfb7df9e49a5e997ffbad5609360d30819adbb6ddb759ca88b4c215a57a502418",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 29.365399999995134,
+          "minioFetch": 57.38400000000547,
+          "sha256": 0.06459999999788124,
+          "hashCheck": 0.00990000000456348,
+          "total": 86.82390000000305
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 37.34399999999732,
+          "minioFetch": 59.99880000000121,
+          "sha256": 0.02860000000509899,
+          "hashCheck": 0.013600000005681068,
+          "total": 97.38500000000931
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 33.185599999997066,
+          "minioFetch": 56.372300000002724,
+          "sha256": 0.02719999999681022,
+          "hashCheck": 0.003400000001420267,
+          "total": 89.58849999999802
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 38.13760000000184,
+          "minioFetch": 57.03089999999793,
+          "sha256": 0.04989999999816064,
+          "hashCheck": 0.007300000012037344,
+          "total": 95.22570000000997
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 32.849399999991874,
+          "minioFetch": 56.9152000000031,
+          "sha256": 0.032700000010663643,
+          "hashCheck": 0.005299999989802018,
+          "total": 89.80259999999544
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 38.427700000000186,
+          "minioFetch": 60.40469999999914,
+          "sha256": 0.035499999998137355,
+          "hashCheck": 0.004300000000512227,
+          "total": 98.87219999999797
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 29.046799999996438,
+          "minioFetch": 55.038100000005215,
+          "sha256": 0.0318999999872176,
+          "hashCheck": 0.004100000005564652,
+          "total": 84.12089999999444
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 36.04069999999774,
+          "minioFetch": 56.791600000011385,
+          "sha256": 0.0268999999971129,
+          "hashCheck": 0.003299999996670522,
+          "total": 92.86250000000291
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 36.15699999999197,
+          "minioFetch": 59.88230000001204,
+          "sha256": 0.0938999999925727,
+          "hashCheck": 0.012300000002142042,
+          "total": 96.14549999999872
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 52.267599999991944,
+          "minioFetch": 58.28620000000228,
+          "sha256": 0.08060000000114087,
+          "hashCheck": 0.011800000007497147,
+          "total": 110.64620000000286
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 34.794900000008056,
+          "minioFetch": 84.63219999999274,
+          "sha256": 0.03610000001208391,
+          "hashCheck": 0.0046999999904073775,
+          "total": 119.46790000000328
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 33.127800000002026,
+          "minioFetch": 56.97819999999774,
+          "sha256": 0.02650000000721775,
+          "hashCheck": 0.003299999996670522,
+          "total": 90.13580000000366
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 35.50920000000042,
+          "minioFetch": 80.32690000000002,
+          "sha256": 0.08539999999629799,
+          "hashCheck": 0.011799999992945231,
+          "total": 115.93329999998969
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 31.206600000004983,
+          "minioFetch": 70.38450000000012,
+          "sha256": 0.03250000000116415,
+          "hashCheck": 0.004600000000209548,
+          "total": 101.62820000000647
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 31.125499999994645,
+          "minioFetch": 56.556299999996554,
+          "sha256": 0.031100000007427298,
+          "hashCheck": 0.003700000001117587,
+          "total": 87.71659999999974
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 35.04630000000179,
+          "minioFetch": 60.18859999999404,
+          "sha256": 0.02800000000570435,
+          "hashCheck": 0.003899999996065162,
+          "total": 95.2667999999976
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 30.99779999999737,
+          "minioFetch": 55.44530000000668,
+          "sha256": 0.027300000001559965,
+          "hashCheck": 0.003799999991315417,
+          "total": 86.47419999999693
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 36.13960000000952,
+          "minioFetch": 57.404899999994086,
+          "sha256": 0.04039999999804422,
+          "hashCheck": 0.004300000000512227,
+          "total": 93.58920000000217
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 37.540400000012596,
+          "minioFetch": 56.45659999999043,
+          "sha256": 0.04140000000188593,
+          "hashCheck": 0.0063999999983934686,
+          "total": 94.0448000000033
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 36.09990000000107,
+          "minioFetch": 55.81939999999304,
+          "sha256": 0.029000000009546056,
+          "hashCheck": 0.004399999990710057,
+          "total": 91.95269999999437
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 38.056300000011106,
+          "minioFetch": 67.79789999999048,
+          "sha256": 0.026700000002165325,
+          "hashCheck": 0.003599999996367842,
+          "total": 105.88450000000012
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 35.861900000003516,
+          "minioFetch": 56.630300000004354,
+          "sha256": 0.02779999999620486,
+          "hashCheck": 0.0044999999954598024,
+          "total": 92.52449999999953
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 38.063099999999395,
+          "minioFetch": 57.57770000000892,
+          "sha256": 0.027699999991455115,
+          "hashCheck": 0.003400000001420267,
+          "total": 95.67190000000119
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 42.531199999997625,
+          "minioFetch": 57.40179999999236,
+          "sha256": 0.03130000000237487,
+          "hashCheck": 0.0042000000103143975,
+          "total": 99.96850000000268
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 30.37829999999667,
+          "minioFetch": 58.97969999999623,
+          "sha256": 0.08650000000488944,
+          "hashCheck": 0.012799999996786937,
+          "total": 89.45729999999458
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 27.48309999999765,
+          "minioFetch": 56.98880000000645,
+          "sha256": 0.04589999999734573,
+          "hashCheck": 0.005499999999301508,
+          "total": 84.52330000000075
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 38.50759999999718,
+          "minioFetch": 56.221099999995204,
+          "sha256": 0.02770000000600703,
+          "hashCheck": 0.0031000000017229468,
+          "total": 94.75950000000012
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 35.70769999999902,
+          "minioFetch": 55.32469999999739,
+          "sha256": 0.03689999999187421,
+          "hashCheck": 0.003600000010919757,
+          "total": 91.07289999999921
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 34.1197000000102,
+          "minioFetch": 56.28759999999602,
+          "sha256": 0.0507999999972526,
+          "hashCheck": 0.0044000000052619725,
+          "total": 90.46250000000873
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 38.210800000000745,
+          "minioFetch": 55.677800000004936,
+          "sha256": 0.027099999992060475,
+          "hashCheck": 0.003600000010919757,
+          "total": 93.91930000000866
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 38.09269999999378,
+          "minioFetch": 55.852800000007846,
+          "sha256": 0.02749999999650754,
+          "hashCheck": 0.003400000001420267,
+          "total": 93.97639999999956
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 36.21940000000177,
+          "minioFetch": 55.46169999999984,
+          "sha256": 0.028200000000651926,
+          "hashCheck": 0.003299999996670522,
+          "total": 91.71259999999893
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 37.536799999987124,
+          "minioFetch": 54.88990000000922,
+          "sha256": 0.027900000000954606,
+          "hashCheck": 0.003400000001420267,
+          "total": 92.45799999999872
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 37.56539999999222,
+          "minioFetch": 57.763099999996484,
+          "sha256": 0.02659999999741558,
+          "hashCheck": 0.003200000006472692,
+          "total": 95.3582999999926
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 32.83199999999488,
+          "minioFetch": 55.37880000000587,
+          "sha256": 0.029099999999743886,
+          "hashCheck": 0.003499999991618097,
+          "total": 88.2433999999921
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 36.238100000002305,
+          "minioFetch": 55.973299999997835,
+          "sha256": 0.02899999999499414,
+          "hashCheck": 0.0039000000106170774,
+          "total": 92.24430000000575
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 37.79679999999644,
+          "minioFetch": 55.03489999999874,
+          "sha256": 0.02719999999681022,
+          "hashCheck": 0.003400000001420267,
+          "total": 92.86229999999341
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 35.960800000000745,
+          "minioFetch": 59.113200000007055,
+          "sha256": 0.06960000000253785,
+          "hashCheck": 0.008900000000721775,
+          "total": 95.15250000001106
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 34.175900000002,
+          "minioFetch": 55.97679999998945,
+          "sha256": 0.027600000001257285,
+          "hashCheck": 0.003200000006472692,
+          "total": 90.18349999999919
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 35.991399999998976,
+          "minioFetch": 57.592600000003586,
+          "sha256": 0.051800000001094304,
+          "hashCheck": 0.007100000002537854,
+          "total": 93.6429000000062
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 36.988400000002,
+          "minioFetch": 55.83269999999902,
+          "sha256": 0.028200000000651926,
+          "hashCheck": 0.0038000000058673322,
+          "total": 92.85310000000754
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 38.38699999998789,
+          "minioFetch": 60.72609999999986,
+          "sha256": 0.027600000001257285,
+          "hashCheck": 0.003300000011222437,
+          "total": 99.14400000000023
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 31.689200000007986,
+          "minioFetch": 64.09819999999308,
+          "sha256": 0.02740000000630971,
+          "hashCheck": 0.004199999995762482,
+          "total": 95.81900000000314
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 26.701699999990524,
+          "minioFetch": 57.387100000007194,
+          "sha256": 0.08419999999750871,
+          "hashCheck": 0.011700000002747402,
+          "total": 84.18469999999797
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 42.51820000000589,
+          "minioFetch": 60.66670000000158,
+          "sha256": 0.02789999998640269,
+          "hashCheck": 0.0039000000106170774,
+          "total": 103.2167000000045
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 39.9320000000007,
+          "minioFetch": 75.80049999999756,
+          "sha256": 0.08280000000377186,
+          "hashCheck": 0.01690000000235159,
+          "total": 115.83220000000438
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 29.85120000000461,
+          "minioFetch": 59.19739999999001,
+          "sha256": 0.03590000000258442,
+          "hashCheck": 0.004300000000512227,
+          "total": 89.08879999999772
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 33.17689999999129,
+          "minioFetch": 55.13060000000405,
+          "sha256": 0.03160000000207219,
+          "hashCheck": 0.005799999998998828,
+          "total": 88.34489999999641
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 34.80100000000675,
+          "minioFetch": 55.834700000006706,
+          "sha256": 0.028299999990849756,
+          "hashCheck": 0.004199999995762482,
+          "total": 90.66820000000007
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 38.45940000000701,
+          "minioFetch": 59.57760000000417,
+          "sha256": 0.027999999991152436,
+          "hashCheck": 0.003500000006170012,
+          "total": 98.0685000000085
+        }
+      ],
+      "p50": {
+        "onChain": 35.991399999998976,
+        "minioFetch": 56.98880000000645,
+        "sha256": 0.029000000009546056,
+        "hashCheck": 0.004199999995762482,
+        "total": 92.86250000000291
+      },
+      "p95": {
+        "onChain": 39.9320000000007,
+        "minioFetch": 70.38450000000012,
+        "sha256": 0.08419999999750871,
+        "hashCheck": 0.012300000002142042,
+        "total": 110.64620000000286
+      },
+      "p99": {
+        "onChain": 42.531199999997625,
+        "minioFetch": 80.32690000000002,
+        "sha256": 0.08650000000488944,
+        "hashCheck": 0.013600000005681068,
+        "total": 115.93329999998969
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 50,
+      "artifactBytes": 1048576,
+      "materialId": "bio:cell_line:1105",
+      "credentialId": "cred:1193",
+      "artifactCid": "s3://artifacts/bio:cell_line:1105/QC_MYCO/6fa7bb87-test-1048576.bin",
+      "artifactHash": "0x6fa7bb879c4979f0b4e4177d07eea0626f4f70aa1ef3c1d78b886aa1e14e4e62",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 29.083700000002864,
+          "minioFetch": 367.8414000000048,
+          "sha256": 2.065199999997276,
+          "hashCheck": 0.005499999999301508,
+          "total": 398.99580000000424
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 34.55079999999725,
+          "minioFetch": 165.94590000000608,
+          "sha256": 2.0504999999975553,
+          "hashCheck": 0.005700000008800998,
+          "total": 202.55290000000969
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 34.788000000000466,
+          "minioFetch": 165.1070000000036,
+          "sha256": 2.0472000000008848,
+          "hashCheck": 0.003999999986262992,
+          "total": 201.94619999999122
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 37.3293999999878,
+          "minioFetch": 175.0289000000048,
+          "sha256": 2.0693000000028405,
+          "hashCheck": 0.005099999994854443,
+          "total": 214.4326999999903
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 32.70230000000447,
+          "minioFetch": 167.41150000000198,
+          "sha256": 2.0414999999920838,
+          "hashCheck": 0.004500000010011718,
+          "total": 202.15980000000854
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 33.744200000001,
+          "minioFetch": 175.01780000000144,
+          "sha256": 2.0578999999997905,
+          "hashCheck": 0.005300000004353933,
+          "total": 210.8252000000066
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 37.48720000000321,
+          "minioFetch": 165.73059999999532,
+          "sha256": 2.066500000000815,
+          "hashCheck": 0.005499999999301508,
+          "total": 205.28979999999865
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 32.64280000000144,
+          "minioFetch": 165.20300000000861,
+          "sha256": 2.0568999999959487,
+          "hashCheck": 0.0044000000052619725,
+          "total": 199.90710000001127
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 33.18279999999504,
+          "minioFetch": 165.29170000000158,
+          "sha256": 2.04759999999078,
+          "hashCheck": 0.004800000009709038,
+          "total": 200.5268999999971
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 35.08840000000782,
+          "minioFetch": 173.98500000000058,
+          "sha256": 2.090599999995902,
+          "hashCheck": 0.005099999994854443,
+          "total": 211.16909999999916
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 26.958299999998417,
+          "minioFetch": 177.25819999999658,
+          "sha256": 2.044900000008056,
+          "hashCheck": 0.004899999999906868,
+          "total": 206.26630000000296
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 39.90350000000035,
+          "minioFetch": 181.34330000000773,
+          "sha256": 2.2857999999978347,
+          "hashCheck": 0.006099999998696148,
+          "total": 223.5387000000046
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 29.16590000000724,
+          "minioFetch": 166.54079999998794,
+          "sha256": 2.0437000000092667,
+          "hashCheck": 0.005799999998998828,
+          "total": 197.75620000000345
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 25.198299999989104,
+          "minioFetch": 169.47170000000915,
+          "sha256": 9.228199999997742,
+          "hashCheck": 0.01720000000204891,
+          "total": 203.91539999999804
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 29.062799999999697,
+          "minioFetch": 166.78850000000966,
+          "sha256": 2.0803000000014435,
+          "hashCheck": 0.005899999989196658,
+          "total": 197.9375
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 32.24670000000333,
+          "minioFetch": 165.9484999999986,
+          "sha256": 2.71480000000156,
+          "hashCheck": 0.008900000000721775,
+          "total": 200.91890000000421
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 29.350299999990966,
+          "minioFetch": 172.6935000000085,
+          "sha256": 2.0776000000041677,
+          "hashCheck": 0.005099999994854443,
+          "total": 204.1264999999985
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 26.716599999999744,
+          "minioFetch": 216.19770000000426,
+          "sha256": 2.1829999999899883,
+          "hashCheck": 0.004500000010011718,
+          "total": 245.101800000004
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 26.935899999996764,
+          "minioFetch": 164.85920000000624,
+          "sha256": 2.0396999999939,
+          "hashCheck": 0.005300000004353933,
+          "total": 193.84010000000126
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 36.13730000000214,
+          "minioFetch": 164.5954999999958,
+          "sha256": 2.1040000000066357,
+          "hashCheck": 0.007599999997182749,
+          "total": 202.84440000000177
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 32.92269999999553,
+          "minioFetch": 190.99710000000778,
+          "sha256": 2.0587999999988824,
+          "hashCheck": 0.004600000000209548,
+          "total": 225.9832000000024
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 35.542700000005425,
+          "minioFetch": 180.4930999999924,
+          "sha256": 2.049200000008568,
+          "hashCheck": 0.005199999999604188,
+          "total": 218.090200000006
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 34.135800000003655,
+          "minioFetch": 168.86219999998866,
+          "sha256": 2.27290000001085,
+          "hashCheck": 0.010999999998603016,
+          "total": 205.28190000000177
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 28.81139999999141,
+          "minioFetch": 165.7963000000018,
+          "sha256": 2.082299999994575,
+          "hashCheck": 0.004899999999906868,
+          "total": 196.69489999998768
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 32.931299999996554,
+          "minioFetch": 166.47149999999965,
+          "sha256": 2.028999999994994,
+          "hashCheck": 0.0044000000052619725,
+          "total": 201.43619999999646
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 29.321299999995972,
+          "minioFetch": 165.38460000000487,
+          "sha256": 2.0455999999976484,
+          "hashCheck": 0.004600000000209548,
+          "total": 196.7560999999987
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 33.51060000000871,
+          "minioFetch": 165.566599999991,
+          "sha256": 2.0296999999991385,
+          "hashCheck": 0.005000000004656613,
+          "total": 201.11190000000352
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 24.425600000002305,
+          "minioFetch": 167.30259999999544,
+          "sha256": 2.0777999999991152,
+          "hashCheck": 0.004899999999906868,
+          "total": 193.81089999999676
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 27.06470000000263,
+          "minioFetch": 163.82700000000477,
+          "sha256": 2.1687999999994645,
+          "hashCheck": 0.006899999993038364,
+          "total": 193.0673999999999
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 36.6024000000034,
+          "minioFetch": 163.9701000000059,
+          "sha256": 2.0740999999979977,
+          "hashCheck": 0.006599999993341044,
+          "total": 202.65320000000065
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 34.36830000000191,
+          "minioFetch": 165.84159999999974,
+          "sha256": 2.031700000006822,
+          "hashCheck": 0.004799999995157123,
+          "total": 202.24640000000363
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 26.57270000000426,
+          "minioFetch": 165.7942999999941,
+          "sha256": 2.146200000002864,
+          "hashCheck": 0.00840000000607688,
+          "total": 194.5216000000073
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 37.050299999988056,
+          "minioFetch": 165.79180000000633,
+          "sha256": 4.408999999999651,
+          "hashCheck": 0.0102000000042608,
+          "total": 207.2612999999983
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 31.792900000000373,
+          "minioFetch": 166.876299999989,
+          "sha256": 2.0447000000131084,
+          "hashCheck": 0.004099999991012737,
+          "total": 200.71799999999348
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 31.52629999999772,
+          "minioFetch": 164.27999999999884,
+          "sha256": 2.055500000002212,
+          "hashCheck": 0.006199999988893978,
+          "total": 197.86799999998766
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 24.167600000000675,
+          "minioFetch": 170.76980000000913,
+          "sha256": 11.914299999989453,
+          "hashCheck": 0.016400000007706694,
+          "total": 206.86810000000696
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 34.28670000001148,
+          "minioFetch": 231.9493999999977,
+          "sha256": 2.069499999997788,
+          "hashCheck": 0.004300000000512227,
+          "total": 268.3099000000075
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 26.944700000007288,
+          "minioFetch": 166.8012999999919,
+          "sha256": 3.1371000000071945,
+          "hashCheck": 0.007599999997182749,
+          "total": 196.89070000000356
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 24.035800000012387,
+          "minioFetch": 174.66119999998773,
+          "sha256": 2.147400000001653,
+          "hashCheck": 0.005499999999301508,
+          "total": 200.84990000000107
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 35.771999999997206,
+          "minioFetch": 165.88429999999062,
+          "sha256": 2.0516000000061467,
+          "hashCheck": 0.005499999999301508,
+          "total": 203.71339999999327
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 30.51490000000922,
+          "minioFetch": 164.44349999999395,
+          "sha256": 2.0296999999991385,
+          "hashCheck": 0.005699999994249083,
+          "total": 196.99379999999655
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 35.88730000000214,
+          "minioFetch": 167.87519999999495,
+          "sha256": 2.1284000000014203,
+          "hashCheck": 0.006099999998696148,
+          "total": 205.8969999999972
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 29.76830000001064,
+          "minioFetch": 163.38409999999567,
+          "sha256": 2.078800000002957,
+          "hashCheck": 0.005199999999604188,
+          "total": 195.23640000000887
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 34.3411000000051,
+          "minioFetch": 165.3689999999915,
+          "sha256": 2.0494000000035157,
+          "hashCheck": 0.005699999994249083,
+          "total": 201.76519999999437
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 32.23859999999695,
+          "minioFetch": 165.60009999999602,
+          "sha256": 2.052800000004936,
+          "hashCheck": 0.005199999999604188,
+          "total": 199.8966999999975
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 33.29069999999774,
+          "minioFetch": 166.13990000000922,
+          "sha256": 2.1325999999971827,
+          "hashCheck": 0.0063999999983934686,
+          "total": 201.56960000000254
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 39.28549999999814,
+          "minioFetch": 165.61719999999332,
+          "sha256": 2.051900000005844,
+          "hashCheck": 0.0044999999954598024,
+          "total": 206.95909999999276
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 28.212100000004284,
+          "minioFetch": 165.41189999999187,
+          "sha256": 2.0592000000033295,
+          "hashCheck": 0.004899999999906868,
+          "total": 195.6880999999994
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 33.4319000000105,
+          "minioFetch": 163.82630000000063,
+          "sha256": 2.068199999994249,
+          "hashCheck": 0.0060000000084983185,
+          "total": 199.33240000001388
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 25.125400000004447,
+          "minioFetch": 166.67519999999786,
+          "sha256": 2.1128000000026077,
+          "hashCheck": 0.005699999994249083,
+          "total": 193.91909999999916
+        }
+      ],
+      "p50": {
+        "onChain": 32.64280000000144,
+        "minioFetch": 165.9484999999986,
+        "sha256": 2.066500000000815,
+        "hashCheck": 0.005300000004353933,
+        "total": 201.76519999999437
+      },
+      "p95": {
+        "onChain": 37.3293999999878,
+        "minioFetch": 190.99710000000778,
+        "sha256": 3.1371000000071945,
+        "hashCheck": 0.0102000000042608,
+        "total": 225.9832000000024
+      },
+      "p99": {
+        "onChain": 39.28549999999814,
+        "minioFetch": 231.9493999999977,
+        "sha256": 9.228199999997742,
+        "hashCheck": 0.016400000007706694,
+        "total": 268.3099000000075
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 50,
+      "artifactBytes": 10485760,
+      "materialId": "bio:cell_line:1106",
+      "credentialId": "cred:1195",
+      "artifactCid": "s3://artifacts/bio:cell_line:1106/QC_MYCO/d56c1e65-test-10485760.bin",
+      "artifactHash": "0xd56c1e65f5fa171738fbca69875b581c0ce065d73fe14f7b20f426ffe87ec5a9",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 28.935700000001816,
+          "minioFetch": 1439.6321000000025,
+          "sha256": 20.59230000000389,
+          "hashCheck": 0.005999999993946403,
+          "total": 1489.1661000000022
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 25.380999999993946,
+          "minioFetch": 1263.5938000000024,
+          "sha256": 20.71029999999155,
+          "hashCheck": 0.0062000000034458935,
+          "total": 1309.6912999999913
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 25.668399999995017,
+          "minioFetch": 1261.4245000000083,
+          "sha256": 29.894499999994878,
+          "hashCheck": 0.005799999998998828,
+          "total": 1316.9931999999972
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 25.172299999991083,
+          "minioFetch": 1254.8562000000093,
+          "sha256": 23.858399999997346,
+          "hashCheck": 0.006299999993643723,
+          "total": 1303.8931999999913
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 24.833400000003166,
+          "minioFetch": 1275.198199999999,
+          "sha256": 25.058300000004238,
+          "hashCheck": 0.007199999992735684,
+          "total": 1325.097099999999
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 29.03310000000056,
+          "minioFetch": 1234.8459000000003,
+          "sha256": 21.306600000010803,
+          "hashCheck": 0.005599999989499338,
+          "total": 1285.1912000000011
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 32.592599999989034,
+          "minioFetch": 1237.6719000000012,
+          "sha256": 22.808199999999488,
+          "hashCheck": 0.007100000002537854,
+          "total": 1293.0797999999922
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 38.46339999999327,
+          "minioFetch": 1204.153600000005,
+          "sha256": 27.577399999994668,
+          "hashCheck": 0.0062000000034458935,
+          "total": 1270.2005999999965
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 35.76539999998931,
+          "minioFetch": 1250.6261000000086,
+          "sha256": 21.69749999999476,
+          "hashCheck": 0.00789999999688007,
+          "total": 1308.0968999999895
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 26.551599999991595,
+          "minioFetch": 1225.0486999999994,
+          "sha256": 31.866200000004028,
+          "hashCheck": 0.005699999994249083,
+          "total": 1283.4721999999892
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 38.84169999998994,
+          "minioFetch": 1204.3807000000088,
+          "sha256": 25.6649000000034,
+          "hashCheck": 0.007099999987985939,
+          "total": 1268.8943999999901
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 29.312900000004447,
+          "minioFetch": 1203.539300000004,
+          "sha256": 20.58759999999893,
+          "hashCheck": 0.006799999988288619,
+          "total": 1253.4465999999957
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 31.427899999995134,
+          "minioFetch": 1310.9797000000108,
+          "sha256": 28.178699999989476,
+          "hashCheck": 0.005499999999301508,
+          "total": 1370.5917999999947
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 38.26640000000771,
+          "minioFetch": 1226.6869000000006,
+          "sha256": 20.413000000000466,
+          "hashCheck": 0.006699999998090789,
+          "total": 1285.3730000000069
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 22.959600000001956,
+          "minioFetch": 1264.041499999992,
+          "sha256": 21.280300000013085,
+          "hashCheck": 0.010599999979604036,
+          "total": 1308.2919999999867
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 25.31380000000354,
+          "minioFetch": 1279.5709999999963,
+          "sha256": 21.520900000003166,
+          "hashCheck": 0.007099999987985939,
+          "total": 1326.412799999991
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 26.630299999989802,
+          "minioFetch": 1211.2520000000077,
+          "sha256": 24.651500000007218,
+          "hashCheck": 0.006099999998696148,
+          "total": 1262.5399000000034
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 36.67919999998412,
+          "minioFetch": 1218.4776999999885,
+          "sha256": 20.617900000012014,
+          "hashCheck": 0.006599999993341044,
+          "total": 1275.781399999978
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 30.83609999998589,
+          "minioFetch": 1212.5994000000064,
+          "sha256": 21.168600000004517,
+          "hashCheck": 0.005600000004051253,
+          "total": 1264.6097000000009
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 34.610799999994924,
+          "minioFetch": 1232.955099999992,
+          "sha256": 20.527300000016112,
+          "hashCheck": 0.007400000002235174,
+          "total": 1288.1006000000052
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 22.970200000010664,
+          "minioFetch": 1208.3532000000123,
+          "sha256": 20.690999999991618,
+          "hashCheck": 0.005999999993946403,
+          "total": 1252.0204000000085
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 26.50010000000475,
+          "minioFetch": 1230.956600000005,
+          "sha256": 20.973499999992782,
+          "hashCheck": 0.005499999999301508,
+          "total": 1278.4357000000018
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 24.971900000004098,
+          "minioFetch": 1268.469299999997,
+          "sha256": 28.28849999999511,
+          "hashCheck": 0.00849999999627471,
+          "total": 1321.7381999999925
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 24.174599999998463,
+          "minioFetch": 1244.1794999999984,
+          "sha256": 28.859800000005635,
+          "hashCheck": 0.014800000004470348,
+          "total": 1297.228700000007
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 24.151000000012573,
+          "minioFetch": 1218.8170999999857,
+          "sha256": 20.46850000001723,
+          "hashCheck": 0.005600000004051253,
+          "total": 1263.4422000000195
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 27.83879999999772,
+          "minioFetch": 1244.7725999999966,
+          "sha256": 20.519399999990128,
+          "hashCheck": 0.006300000008195639,
+          "total": 1293.1370999999926
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 24.606599999999162,
+          "minioFetch": 1244.6826,
+          "sha256": 20.45089999999618,
+          "hashCheck": 0.005199999985052273,
+          "total": 1289.7452999999805
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 25.61060000001453,
+          "minioFetch": 1226.2854999999981,
+          "sha256": 20.419599999993807,
+          "hashCheck": 0.008999999990919605,
+          "total": 1272.3246999999974
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 32.00639999998384,
+          "minioFetch": 1220.863800000021,
+          "sha256": 23.67939999999362,
+          "hashCheck": 0.01639999999315478,
+          "total": 1276.5659999999916
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 37.55979999998817,
+          "minioFetch": 1205.227199999994,
+          "sha256": 20.75810000000638,
+          "hashCheck": 0.006400000012945384,
+          "total": 1263.5515000000014
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 31.847299999993993,
+          "minioFetch": 1241.9760999999999,
+          "sha256": 26.122199999983422,
+          "hashCheck": 0.0058000000135507435,
+          "total": 1299.9513999999908
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 24.778800000000047,
+          "minioFetch": 1203.6513999999734,
+          "sha256": 21.33670000001439,
+          "hashCheck": 0.00849999999627471,
+          "total": 1249.775399999984
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 28.511200000008103,
+          "minioFetch": 1253.297900000005,
+          "sha256": 30.27520000000368,
+          "hashCheck": 0.0050999999803025275,
+          "total": 1312.089399999997
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 37.62950000001001,
+          "minioFetch": 1220.0983000000124,
+          "sha256": 22.109199999977136,
+          "hashCheck": 0.006099999998696148,
+          "total": 1279.8430999999982
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 29.542700000019977,
+          "minioFetch": 1210.8518999999797,
+          "sha256": 21.93210000000545,
+          "hashCheck": 0.005000000004656613,
+          "total": 1262.3317000000097
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 26.431700000015553,
+          "minioFetch": 1204.465899999981,
+          "sha256": 20.52139999999781,
+          "hashCheck": 0.006099999998696148,
+          "total": 1251.425099999993
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 30.694599999987986,
+          "minioFetch": 1224.453999999998,
+          "sha256": 21.30999999999767,
+          "hashCheck": 0.005399999994551763,
+          "total": 1276.4639999999781
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 37.522600000025705,
+          "minioFetch": 1205.5984999999928,
+          "sha256": 23.32379999998375,
+          "hashCheck": 0.006800000002840534,
+          "total": 1266.451700000005
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 36.360799999994924,
+          "minioFetch": 1228.1131999999925,
+          "sha256": 20.993000000016764,
+          "hashCheck": 0.006699999998090789,
+          "total": 1285.4737000000023
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 30.224599999986822,
+          "minioFetch": 1234.7496999999858,
+          "sha256": 21.93760000000475,
+          "hashCheck": 0.005900000018300489,
+          "total": 1286.9177999999956
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 24.254899999999907,
+          "minioFetch": 1229.0107000000135,
+          "sha256": 21.473899999982677,
+          "hashCheck": 0.006300000008195639,
+          "total": 1274.7458000000042
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 25.52970000001369,
+          "minioFetch": 1208.8429999999935,
+          "sha256": 20.534699999989243,
+          "hashCheck": 0.006800000002840534,
+          "total": 1254.9141999999993
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 35.335399999981746,
+          "minioFetch": 1207.1825000000244,
+          "sha256": 22.21789999998873,
+          "hashCheck": 0.005899999989196658,
+          "total": 1264.7416999999841
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 24.567099999985658,
+          "minioFetch": 1205.1019000000088,
+          "sha256": 21.88949999999022,
+          "hashCheck": 0.005100000009406358,
+          "total": 1251.563599999994
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 26.41380000000936,
+          "minioFetch": 1221.6659999999974,
+          "sha256": 26.769499999994878,
+          "hashCheck": 0.007100000017089769,
+          "total": 1274.8564000000188
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 23.324699999997392,
+          "minioFetch": 1202.6014999999898,
+          "sha256": 21.48430000001099,
+          "hashCheck": 0.006399999983841553,
+          "total": 1247.416899999982
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 36.34490000002552,
+          "minioFetch": 1203.5227000000014,
+          "sha256": 21.732399999978952,
+          "hashCheck": 0.005900000018300489,
+          "total": 1261.6059000000241
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 40.50500000000466,
+          "minioFetch": 1227.407600000006,
+          "sha256": 22.817399999999907,
+          "hashCheck": 0.0062000000034458935,
+          "total": 1290.736200000014
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 35.93279999998049,
+          "minioFetch": 1243.7213000000047,
+          "sha256": 25.685900000011316,
+          "hashCheck": 0.005600000004051253,
+          "total": 1305.3456000000006
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 25.23399999999674,
+          "minioFetch": 1235.965600000025,
+          "sha256": 20.42119999998249,
+          "hashCheck": 0.006500000017695129,
+          "total": 1281.627300000022
+        }
+      ],
+      "p50": {
+        "onChain": 28.511200000008103,
+        "minioFetch": 1226.6869000000006,
+        "sha256": 21.520900000003166,
+        "hashCheck": 0.0062000000034458935,
+        "total": 1279.8430999999982
+      },
+      "p95": {
+        "onChain": 38.26640000000771,
+        "minioFetch": 1275.198199999999,
+        "sha256": 28.859800000005635,
+        "hashCheck": 0.008999999990919605,
+        "total": 1325.097099999999
+      },
+      "p99": {
+        "onChain": 38.84169999998994,
+        "minioFetch": 1310.9797000000108,
+        "sha256": 30.27520000000368,
+        "hashCheck": 0.014800000004470348,
+        "total": 1370.5917999999947
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 100,
+      "artifactBytes": 1024,
+      "materialId": "bio:cell_line:1104",
+      "credentialId": "cred:1191",
+      "artifactCid": "s3://artifacts/bio:cell_line:1104/QC_MYCO/fb7df9e4-test-1024.bin",
+      "artifactHash": "0xfb7df9e49a5e997ffbad5609360d30819adbb6ddb759ca88b4c215a57a502418",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 28.200500000006286,
+          "minioFetch": 106.69969999999739,
+          "sha256": 0.03889999998500571,
+          "hashCheck": 0.003300000011222437,
+          "total": 134.9423999999999
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 31.751900000002934,
+          "minioFetch": 108.05270000000019,
+          "sha256": 0.08699999999953434,
+          "hashCheck": 0.011700000002747402,
+          "total": 139.9033000000054
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 30.574699999997392,
+          "minioFetch": 116.41250000000582,
+          "sha256": 0.08359999998356216,
+          "hashCheck": 0.011200000008102506,
+          "total": 147.08199999999488
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 37.857500000012806,
+          "minioFetch": 105.89349999997648,
+          "sha256": 0.02550000001792796,
+          "hashCheck": 0.0038000000058673322,
+          "total": 143.78030000001309
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 33.16339999999036,
+          "minioFetch": 117.43940000000293,
+          "sha256": 0.05069999999250285,
+          "hashCheck": 0.006300000008195639,
+          "total": 150.659799999994
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 34.82740000000922,
+          "minioFetch": 110.40609999999288,
+          "sha256": 0.02789999998640269,
+          "hashCheck": 0.0038000000058673322,
+          "total": 145.26519999999437
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 28.159000000014203,
+          "minioFetch": 107.12150000000838,
+          "sha256": 0.027199999982258305,
+          "hashCheck": 0.003200000006472692,
+          "total": 135.31090000001132
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 29.572500000009313,
+          "minioFetch": 106.12200000000303,
+          "sha256": 0.02650000000721775,
+          "hashCheck": 0.003700000001117587,
+          "total": 135.72470000002068
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 31.995500000019092,
+          "minioFetch": 107.92639999999665,
+          "sha256": 0.0829000000085216,
+          "hashCheck": 0.011899999983143061,
+          "total": 140.0167000000074
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 31.90730000002077,
+          "minioFetch": 114.54529999999795,
+          "sha256": 0.02849999998579733,
+          "hashCheck": 0.003400000015972182,
+          "total": 146.4845000000205
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 38.35659999999916,
+          "minioFetch": 105.64689999999246,
+          "sha256": 0.0268999999971129,
+          "hashCheck": 0.003700000001117587,
+          "total": 144.03409999998985
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 31.870999999984633,
+          "minioFetch": 105.07660000000033,
+          "sha256": 0.027200000011362135,
+          "hashCheck": 0.0033999999868683517,
+          "total": 136.9781999999832
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 32.888300000020536,
+          "minioFetch": 105.55100000000675,
+          "sha256": 0.026799999992363155,
+          "hashCheck": 0.0031000000017229468,
+          "total": 138.46920000002137
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 33.47349999999278,
+          "minioFetch": 107.10620000000927,
+          "sha256": 0.02730000001611188,
+          "hashCheck": 0.003999999986262992,
+          "total": 140.61100000000442
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 31.89550000001327,
+          "minioFetch": 105.53740000000107,
+          "sha256": 0.027799999981652945,
+          "hashCheck": 0.0031000000017229468,
+          "total": 137.46379999999772
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 33.30249999999069,
+          "minioFetch": 105.57629999998608,
+          "sha256": 0.030700000002980232,
+          "hashCheck": 0.0039000000106170774,
+          "total": 138.91339999999036
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 32.64900000000489,
+          "minioFetch": 108.49580000000424,
+          "sha256": 0.02650000000721775,
+          "hashCheck": 0.0031000000017229468,
+          "total": 141.17440000001807
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 27.807700000004843,
+          "minioFetch": 105.33460000000196,
+          "sha256": 0.027000000001862645,
+          "hashCheck": 0.0029999999969732016,
+          "total": 133.17230000000563
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 33.6536999999953,
+          "minioFetch": 106.19180000000051,
+          "sha256": 0.02809999999590218,
+          "hashCheck": 0.0038000000058673322,
+          "total": 139.87739999999758
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 32.16010000000824,
+          "minioFetch": 106.56830000001355,
+          "sha256": 0.03459999998449348,
+          "hashCheck": 0.0040000000153668225,
+          "total": 138.76700000002165
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 28.6817999999912,
+          "minioFetch": 105.93609999999171,
+          "sha256": 0.030100000003585592,
+          "hashCheck": 0.003300000011222437,
+          "total": 134.65129999999772
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 30.972100000013597,
+          "minioFetch": 105.4716999999946,
+          "sha256": 0.027799999981652945,
+          "hashCheck": 0.003700000001117587,
+          "total": 136.47529999999097
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 34.24069999999483,
+          "minioFetch": 107.09979999999632,
+          "sha256": 0.08509999999660067,
+          "hashCheck": 0.011100000003352761,
+          "total": 141.4366999999911
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 28.43420000001788,
+          "minioFetch": 105.46950000000652,
+          "sha256": 0.02889999997569248,
+          "hashCheck": 0.003400000015972182,
+          "total": 133.93600000001607
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 32.54200000001583,
+          "minioFetch": 117.23489999998128,
+          "sha256": 0.027400000020861626,
+          "hashCheck": 0.004799999995157123,
+          "total": 149.80910000001313
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 36.79680000001099,
+          "minioFetch": 105.91079999998328,
+          "sha256": 0.03380000000470318,
+          "hashCheck": 0.0035000000207219273,
+          "total": 142.7449000000197
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 33.36429999998654,
+          "minioFetch": 105.45560000001569,
+          "sha256": 0.05669999998644926,
+          "hashCheck": 0.003499999991618097,
+          "total": 138.8800999999803
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 32.02540000001318,
+          "minioFetch": 106.55949999997392,
+          "sha256": 0.030400000017834827,
+          "hashCheck": 0.003700000001117587,
+          "total": 138.61900000000605
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 31.56940000000759,
+          "minioFetch": 106.14429999998538,
+          "sha256": 0.05720000001019798,
+          "hashCheck": 0.003700000001117587,
+          "total": 137.77460000000428
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 32.162100000015926,
+          "minioFetch": 106.37260000000242,
+          "sha256": 0.02650000000721775,
+          "hashCheck": 0.0031999999773688614,
+          "total": 138.56440000000293
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 30.791399999987334,
+          "minioFetch": 106.55809999999474,
+          "sha256": 0.0261000000173226,
+          "hashCheck": 0.003999999986262992,
+          "total": 137.37959999998566
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 32.66879999998491,
+          "minioFetch": 106.14750000002095,
+          "sha256": 0.02829999997629784,
+          "hashCheck": 0.003400000015972182,
+          "total": 138.84799999999814
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 29.81940000000759,
+          "minioFetch": 106.71270000000368,
+          "sha256": 0.026799999992363155,
+          "hashCheck": 0.003300000011222437,
+          "total": 136.56220000001485
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 29.281300000002375,
+          "minioFetch": 108.1650999999838,
+          "sha256": 0.08300000001327135,
+          "hashCheck": 0.011399999988498166,
+          "total": 137.54079999998794
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 29.808900000003632,
+          "minioFetch": 105.67300000000978,
+          "sha256": 0.029599999979836866,
+          "hashCheck": 0.0035000000207219273,
+          "total": 135.51500000001397
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 33.75720000002184,
+          "minioFetch": 105.78190000000177,
+          "sha256": 0.028800000000046566,
+          "hashCheck": 0.004099999991012737,
+          "total": 139.57200000001467
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 35.069599999987986,
+          "minioFetch": 107.77629999999772,
+          "sha256": 0.08230000000912696,
+          "hashCheck": 0.010399999999208376,
+          "total": 142.93859999999404
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 32.18800000002375,
+          "minioFetch": 112.56639999998151,
+          "sha256": 0.026600000011967495,
+          "hashCheck": 0.003599999996367842,
+          "total": 144.7846000000136
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 26.44900000002235,
+          "minioFetch": 105.84439999997267,
+          "sha256": 0.02690000002621673,
+          "hashCheck": 0.0031999999773688614,
+          "total": 132.3234999999986
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 32.01999999998952,
+          "minioFetch": 105.45709999999963,
+          "sha256": 0.027600000001257285,
+          "hashCheck": 0.003400000015972182,
+          "total": 137.50810000000638
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 34.85469999999623,
+          "minioFetch": 108.5010000000184,
+          "sha256": 0.027600000001257285,
+          "hashCheck": 0.0031000000017229468,
+          "total": 143.3864000000176
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 28.831700000009732,
+          "minioFetch": 106.04269999999087,
+          "sha256": 0.026799999992363155,
+          "hashCheck": 0.003400000015972182,
+          "total": 134.90460000000894
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 32.804599999974016,
+          "minioFetch": 105.28040000001783,
+          "sha256": 0.0268999999971129,
+          "hashCheck": 0.003200000006472692,
+          "total": 138.11509999999544
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 32.149700000009034,
+          "minioFetch": 105.91929999997956,
+          "sha256": 0.03130000000237487,
+          "hashCheck": 0.005000000004656613,
+          "total": 138.10529999999562
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 33.913899999985006,
+          "minioFetch": 106.75190000000293,
+          "sha256": 0.026799999992363155,
+          "hashCheck": 0.003200000006472692,
+          "total": 140.69579999998678
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 30.19450000001234,
+          "minioFetch": 105.92119999998249,
+          "sha256": 0.02710000000661239,
+          "hashCheck": 0.013399999996181577,
+          "total": 136.15619999999763
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 30.979500000015832,
+          "minioFetch": 105.94109999999637,
+          "sha256": 0.0268999999971129,
+          "hashCheck": 0.003200000006472692,
+          "total": 136.9507000000158
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 34.49700000000303,
+          "minioFetch": 116.04769999999553,
+          "sha256": 0.026799999992363155,
+          "hashCheck": 0.003200000006472692,
+          "total": 150.5746999999974
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 33.25200000000768,
+          "minioFetch": 107.32310000000871,
+          "sha256": 0.026599999982863665,
+          "hashCheck": 0.003499999991618097,
+          "total": 140.60519999999087
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 30.60879999998724,
+          "minioFetch": 106.06390000000829,
+          "sha256": 0.026599999982863665,
+          "hashCheck": 0.003300000011222437,
+          "total": 136.70259999998962
+        }
+      ],
+      "p50": {
+        "onChain": 32.02540000001318,
+        "minioFetch": 106.14750000002095,
+        "sha256": 0.027600000001257285,
+        "hashCheck": 0.0035000000207219273,
+        "total": 138.61900000000605
+      },
+      "p95": {
+        "onChain": 35.069599999987986,
+        "minioFetch": 116.04769999999553,
+        "sha256": 0.08300000001327135,
+        "hashCheck": 0.011399999988498166,
+        "total": 147.08199999999488
+      },
+      "p99": {
+        "onChain": 37.857500000012806,
+        "minioFetch": 117.23489999998128,
+        "sha256": 0.08509999999660067,
+        "hashCheck": 0.011899999983143061,
+        "total": 150.5746999999974
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 100,
+      "artifactBytes": 1048576,
+      "materialId": "bio:cell_line:1105",
+      "credentialId": "cred:1193",
+      "artifactCid": "s3://artifacts/bio:cell_line:1105/QC_MYCO/6fa7bb87-test-1048576.bin",
+      "artifactHash": "0x6fa7bb879c4979f0b4e4177d07eea0626f4f70aa1ef3c1d78b886aa1e14e4e62",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 28.013099999981932,
+          "minioFetch": 714.8407000000007,
+          "sha256": 2.0384000000194646,
+          "hashCheck": 0.0050999999803025275,
+          "total": 744.8972999999824
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 25.09979999999632,
+          "minioFetch": 314.22650000001886,
+          "sha256": 2.088499999983469,
+          "hashCheck": 0.005000000004656613,
+          "total": 341.4198000000033
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 35.83379999999306,
+          "minioFetch": 317.79530000002705,
+          "sha256": 2.095899999985704,
+          "hashCheck": 0.007199999992735684,
+          "total": 355.73219999999856
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 31.446200000005774,
+          "minioFetch": 314.2680999999866,
+          "sha256": 2.046200000011595,
+          "hashCheck": 0.004099999991012737,
+          "total": 347.76459999999497
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 36.82269999998971,
+          "minioFetch": 313.8762000000279,
+          "sha256": 3.3526999999885447,
+          "hashCheck": 0.008999999990919605,
+          "total": 354.06059999999707
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 34.1530999999959,
+          "minioFetch": 314.9010999999882,
+          "sha256": 2.0935000000172295,
+          "hashCheck": 0.005499999999301508,
+          "total": 351.15320000000065
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 36.023400000005495,
+          "minioFetch": 314.5219999999972,
+          "sha256": 2.0513999999966472,
+          "hashCheck": 0.005399999994551763,
+          "total": 352.6021999999939
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 36.32359999997425,
+          "minioFetch": 314.9261000000115,
+          "sha256": 2.0322999999916647,
+          "hashCheck": 0.005300000018905848,
+          "total": 353.2872999999963
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 34.130200000014156,
+          "minioFetch": 319.77619999999297,
+          "sha256": 2.088099999993574,
+          "hashCheck": 0.008200000011129305,
+          "total": 356.0027000000118
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 31.05529999997816,
+          "minioFetch": 316.0769000000146,
+          "sha256": 2.057200000010198,
+          "hashCheck": 0.0046999999904073775,
+          "total": 349.19409999999334
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 36.89599999997881,
+          "minioFetch": 313.97870000000694,
+          "sha256": 2.421100000006845,
+          "hashCheck": 0.005499999999301508,
+          "total": 353.3012999999919
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 25.233199999987846,
+          "minioFetch": 315.32240000000456,
+          "sha256": 2.058599999989383,
+          "hashCheck": 0.004799999995157123,
+          "total": 342.61899999997695
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 38.81489999999758,
+          "minioFetch": 318.28330000001006,
+          "sha256": 2.068199999979697,
+          "hashCheck": 0.006400000012945384,
+          "total": 359.1728000000003
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 33.314199999993434,
+          "minioFetch": 314.06700000001,
+          "sha256": 2.055800000001909,
+          "hashCheck": 0.0050999999803025275,
+          "total": 349.44209999998566
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 24.24179999998887,
+          "minioFetch": 315.4960999999894,
+          "sha256": 2.106400000018766,
+          "hashCheck": 0.0064999999885912985,
+          "total": 341.8507999999856
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 39.80350000000908,
+          "minioFetch": 314.1906000000017,
+          "sha256": 2.104800000000978,
+          "hashCheck": 0.008200000011129305,
+          "total": 356.1071000000229
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 34.435900000011316,
+          "minioFetch": 313.3738000000012,
+          "sha256": 2.2399999999906868,
+          "hashCheck": 0.005299999989802018,
+          "total": 350.054999999993
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 36.90100000001257,
+          "minioFetch": 316.2662999999884,
+          "sha256": 2.220100000005914,
+          "hashCheck": 0.006299999979091808,
+          "total": 355.393699999986
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 35.27959999997984,
+          "minioFetch": 315.36740000001737,
+          "sha256": 2.0399000000033993,
+          "hashCheck": 0.005299999989802018,
+          "total": 352.6921999999904
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 36.66730000000098,
+          "minioFetch": 314.7368000000133,
+          "sha256": 2.0455999999830965,
+          "hashCheck": 0.0044000000052619725,
+          "total": 353.45410000000265
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 24.511499999993248,
+          "minioFetch": 316.17399999999907,
+          "sha256": 2.0428000000247266,
+          "hashCheck": 0.005699999979697168,
+          "total": 342.73399999999674
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 34.52090000000317,
+          "minioFetch": 314.7478000000119,
+          "sha256": 2.051000000006752,
+          "hashCheck": 0.006299999979091808,
+          "total": 351.32600000000093
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 35.6767000000109,
+          "minioFetch": 314.2410999999847,
+          "sha256": 2.087599999998929,
+          "hashCheck": 0.006300000008195639,
+          "total": 352.01170000000275
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 23.520399999979418,
+          "minioFetch": 321.1935999999987,
+          "sha256": 2.0456000000122003,
+          "hashCheck": 0.005100000009406358,
+          "total": 346.7646999999997
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 33.21129999999539,
+          "minioFetch": 314.0877000000037,
+          "sha256": 2.0939999999827705,
+          "hashCheck": 0.006800000002840534,
+          "total": 349.3997999999847
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 36.48020000001998,
+          "minioFetch": 315.77169999998296,
+          "sha256": 2.0458999999973457,
+          "hashCheck": 0.005300000018905848,
+          "total": 354.3031000000192
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 35.74350000001141,
+          "minioFetch": 314.52249999999185,
+          "sha256": 2.04670000000624,
+          "hashCheck": 0.005000000004656613,
+          "total": 352.31770000001416
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 23.38949999999022,
+          "minioFetch": 314.8999999999942,
+          "sha256": 2.2070999999996275,
+          "hashCheck": 0.005399999994551763,
+          "total": 340.5019999999786
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 36.60490000000573,
+          "minioFetch": 316.02429999999003,
+          "sha256": 2.13990000000922,
+          "hashCheck": 0.005600000004051253,
+          "total": 354.77470000000903
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 30.006099999998696,
+          "minioFetch": 316.93760000000475,
+          "sha256": 2.0578999999852385,
+          "hashCheck": 0.005700000008800998,
+          "total": 349.0072999999975
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 32.18130000002566,
+          "minioFetch": 314.96369999999297,
+          "sha256": 2.068200000008801,
+          "hashCheck": 0.005199999985052273,
+          "total": 349.2184000000125
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 34.14500000001863,
+          "minioFetch": 318.22299999999814,
+          "sha256": 2.077099999994971,
+          "hashCheck": 0.004899999999906868,
+          "total": 354.45000000001164
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 32.074099999998,
+          "minioFetch": 315.542300000001,
+          "sha256": 3.1653999999980442,
+          "hashCheck": 0.008399999991524965,
+          "total": 350.79019999998854
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 35.999700000014855,
+          "minioFetch": 324.77900000000955,
+          "sha256": 2.6608999999880325,
+          "hashCheck": 0.010399999999208376,
+          "total": 363.45000000001164
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 37.516199999983655,
+          "minioFetch": 315.8076000000001,
+          "sha256": 2.1569000000017695,
+          "hashCheck": 0.0058000000135507435,
+          "total": 355.48649999999907
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 35.45840000000317,
+          "minioFetch": 315.804300000018,
+          "sha256": 2.0491999999794643,
+          "hashCheck": 0.007200000021839514,
+          "total": 353.31910000002244
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 35.36819999999716,
+          "minioFetch": 313.64929999999003,
+          "sha256": 3.4293999999936204,
+          "hashCheck": 0.00990000000456348,
+          "total": 352.4567999999854
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 28.221900000004098,
+          "minioFetch": 316.73929999998654,
+          "sha256": 2.0874999999941792,
+          "hashCheck": 0.006400000012945384,
+          "total": 347.05509999999776
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 31.674700000003213,
+          "minioFetch": 315.32580000002054,
+          "sha256": 2.121599999984028,
+          "hashCheck": 0.004799999995157123,
+          "total": 349.12690000000293
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 32.54529999999795,
+          "minioFetch": 315.4150999999838,
+          "sha256": 2.0419000000110827,
+          "hashCheck": 0.006599999993341044,
+          "total": 350.00889999998617
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 32.55790000001434,
+          "minioFetch": 314.79980000000796,
+          "sha256": 2.0304999999934807,
+          "hashCheck": 0.005000000004656613,
+          "total": 349.39320000002044
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 28.129300000000512,
+          "minioFetch": 316.49790000001667,
+          "sha256": 2.0683999999891967,
+          "hashCheck": 0.005600000004051253,
+          "total": 346.70120000001043
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 25.00869999997667,
+          "minioFetch": 314.03760000001057,
+          "sha256": 2.1902999999874737,
+          "hashCheck": 0.005900000018300489,
+          "total": 341.242499999993
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 35.86710000000312,
+          "minioFetch": 312.65929999999935,
+          "sha256": 2.044099999999162,
+          "hashCheck": 0.0058000000135507435,
+          "total": 350.5763000000152
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 34.42420000000857,
+          "minioFetch": 315.3692999999912,
+          "sha256": 2.743499999982305,
+          "hashCheck": 0.008800000010523945,
+          "total": 352.5457999999926
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 33.759799999999814,
+          "minioFetch": 320.09330000000773,
+          "sha256": 2.074300000007497,
+          "hashCheck": 0.005899999989196658,
+          "total": 355.93330000000424
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 25.726900000008754,
+          "minioFetch": 312.7639999999956,
+          "sha256": 2.4116999999969266,
+          "hashCheck": 0.006699999998090789,
+          "total": 340.90929999999935
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 38.40030000000843,
+          "minioFetch": 319.81219999998575,
+          "sha256": 2.0463000000163447,
+          "hashCheck": 0.004300000000512227,
+          "total": 360.26310000001104
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 29.60940000001574,
+          "minioFetch": 317.5646999999881,
+          "sha256": 2.0763999999908265,
+          "hashCheck": 0.004700000019511208,
+          "total": 349.25520000001416
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 24.49900000001071,
+          "minioFetch": 313.354399999982,
+          "sha256": 2.0719000000099186,
+          "hashCheck": 0.006900000007590279,
+          "total": 339.9322000000102
+        }
+      ],
+      "p50": {
+        "onChain": 34.130200000014156,
+        "minioFetch": 315.32580000002054,
+        "sha256": 2.074300000007497,
+        "hashCheck": 0.005600000004051253,
+        "total": 351.15320000000065
+      },
+      "p95": {
+        "onChain": 37.516199999983655,
+        "minioFetch": 320.09330000000773,
+        "sha256": 2.743499999982305,
+        "hashCheck": 0.008800000010523945,
+        "total": 359.1728000000003
+      },
+      "p99": {
+        "onChain": 38.81489999999758,
+        "minioFetch": 324.77900000000955,
+        "sha256": 3.3526999999885447,
+        "hashCheck": 0.00990000000456348,
+        "total": 363.45000000001164
+      },
+      "failures": []
+    },
+    {
+      "rttMs": 100,
+      "artifactBytes": 10485760,
+      "materialId": "bio:cell_line:1106",
+      "credentialId": "cred:1195",
+      "artifactCid": "s3://artifacts/bio:cell_line:1106/QC_MYCO/d56c1e65-test-10485760.bin",
+      "artifactHash": "0xd56c1e65f5fa171738fbca69875b581c0ce065d73fe14f7b20f426ffe87ec5a9",
+      "samples": [
+        {
+          "iteration": 0,
+          "verifiedPass": true,
+          "onChain": 28.50229999999283,
+          "minioFetch": 2748.8972999999824,
+          "sha256": 26.305500000016764,
+          "hashCheck": 0.005899999989196658,
+          "total": 2803.710999999981
+        },
+        {
+          "iteration": 1,
+          "verifiedPass": true,
+          "onChain": 23.504099999991013,
+          "minioFetch": 2377.7549,
+          "sha256": 20.483600000006845,
+          "hashCheck": 0.0058000000135507435,
+          "total": 2421.7484000000113
+        },
+        {
+          "iteration": 2,
+          "verifiedPass": true,
+          "onChain": 31.309800000017276,
+          "minioFetch": 2351.6555999999982,
+          "sha256": 25.105799999990268,
+          "hashCheck": 0.005299999989802018,
+          "total": 2408.0764999999956
+        },
+        {
+          "iteration": 3,
+          "verifiedPass": true,
+          "onChain": 23.7333000000217,
+          "minioFetch": 2351.301699999982,
+          "sha256": 27.19460000001709,
+          "hashCheck": 0.006399999983841553,
+          "total": 2402.2360000000044
+        },
+        {
+          "iteration": 4,
+          "verifiedPass": true,
+          "onChain": 24.44310000000405,
+          "minioFetch": 2352.3223999999755,
+          "sha256": 21.822700000018813,
+          "hashCheck": 0.006599999993341044,
+          "total": 2398.5947999999917
+        },
+        {
+          "iteration": 5,
+          "verifiedPass": true,
+          "onChain": 24.823199999984354,
+          "minioFetch": 2347.6937000000034,
+          "sha256": 22.99460000000545,
+          "hashCheck": 0.006599999993341044,
+          "total": 2395.5180999999866
+        },
+        {
+          "iteration": 6,
+          "verifiedPass": true,
+          "onChain": 34.21700000000419,
+          "minioFetch": 2353.0503000000026,
+          "sha256": 21.432399999990594,
+          "hashCheck": 0.006300000008195639,
+          "total": 2408.7060000000056
+        },
+        {
+          "iteration": 7,
+          "verifiedPass": true,
+          "onChain": 35.475399999995716,
+          "minioFetch": 2356.9077999999863,
+          "sha256": 26.142599999991944,
+          "hashCheck": 0.005700000008800998,
+          "total": 2418.5314999999828
+        },
+        {
+          "iteration": 8,
+          "verifiedPass": true,
+          "onChain": 24.542699999990873,
+          "minioFetch": 2354.006399999984,
+          "sha256": 29.77050000001327,
+          "hashCheck": 0.0064999999885912985,
+          "total": 2408.3260999999766
+        },
+        {
+          "iteration": 9,
+          "verifiedPass": true,
+          "onChain": 34.78580000001239,
+          "minioFetch": 2356.806099999987,
+          "sha256": 22.06040000001667,
+          "hashCheck": 0.007599999982630834,
+          "total": 2413.6598999999987
+        },
+        {
+          "iteration": 10,
+          "verifiedPass": true,
+          "onChain": 30.29790000000503,
+          "minioFetch": 2354.7298999999766,
+          "sha256": 28.618000000016764,
+          "hashCheck": 0.006399999983841553,
+          "total": 2413.6521999999823
+        },
+        {
+          "iteration": 11,
+          "verifiedPass": true,
+          "onChain": 23.112500000017462,
+          "minioFetch": 2355.1712999999872,
+          "sha256": 21.280300000013085,
+          "hashCheck": 0.007199999992735684,
+          "total": 2399.5713000000105
+        },
+        {
+          "iteration": 12,
+          "verifiedPass": true,
+          "onChain": 30.21929999999702,
+          "minioFetch": 2353.272100000002,
+          "sha256": 20.467600000003586,
+          "hashCheck": 0.0068999999784864485,
+          "total": 2403.965899999981
+        },
+        {
+          "iteration": 13,
+          "verifiedPass": true,
+          "onChain": 23.318599999998696,
+          "minioFetch": 2353.2872000000207,
+          "sha256": 29.01789999997709,
+          "hashCheck": 0.006500000017695129,
+          "total": 2405.630200000014
+        },
+        {
+          "iteration": 14,
+          "verifiedPass": true,
+          "onChain": 25.385899999993853,
+          "minioFetch": 2364.300600000017,
+          "sha256": 22.989899999985937,
+          "hashCheck": 0.008999999990919605,
+          "total": 2412.6853999999876
+        },
+        {
+          "iteration": 15,
+          "verifiedPass": true,
+          "onChain": 23.300300000002608,
+          "minioFetch": 2368.883999999991,
+          "sha256": 23.7278000000224,
+          "hashCheck": 0.00789999999688007,
+          "total": 2415.920000000013
+        },
+        {
+          "iteration": 16,
+          "verifiedPass": true,
+          "onChain": 28.103699999977835,
+          "minioFetch": 2377.6996000000217,
+          "sha256": 30.71209999997518,
+          "hashCheck": 0.005300000018905848,
+          "total": 2436.5206999999937
+        },
+        {
+          "iteration": 17,
+          "verifiedPass": true,
+          "onChain": 28.07630000001518,
+          "minioFetch": 2356.213599999988,
+          "sha256": 20.644999999989523,
+          "hashCheck": 0.005499999999301508,
+          "total": 2404.940399999992
+        },
+        {
+          "iteration": 18,
+          "verifiedPass": true,
+          "onChain": 33.4945000000007,
+          "minioFetch": 2360.0244999999995,
+          "sha256": 23.0848999999871,
+          "hashCheck": 0.0058000000135507435,
+          "total": 2416.609700000001
+        },
+        {
+          "iteration": 19,
+          "verifiedPass": true,
+          "onChain": 36.672500000015134,
+          "minioFetch": 2355.8717999999935,
+          "sha256": 22.230799999990268,
+          "hashCheck": 0.005499999999301508,
+          "total": 2414.7805999999982
+        },
+        {
+          "iteration": 20,
+          "verifiedPass": true,
+          "onChain": 32.7502000000095,
+          "minioFetch": 2376.2296999999962,
+          "sha256": 26.27629999999772,
+          "hashCheck": 0.006500000017695129,
+          "total": 2435.262700000021
+        },
+        {
+          "iteration": 21,
+          "verifiedPass": true,
+          "onChain": 23.459800000011455,
+          "minioFetch": 2371.928799999994,
+          "sha256": 27.227300000027753,
+          "hashCheck": 0.005099999951198697,
+          "total": 2422.6209999999846
+        },
+        {
+          "iteration": 22,
+          "verifiedPass": true,
+          "onChain": 35.84029999998165,
+          "minioFetch": 2359.748900000006,
+          "sha256": 23.6416999999783,
+          "hashCheck": 0.005100000009406358,
+          "total": 2419.2359999999753
+        },
+        {
+          "iteration": 23,
+          "verifiedPass": true,
+          "onChain": 23.62349999998696,
+          "minioFetch": 2352.1614999999874,
+          "sha256": 29.64110000000801,
+          "hashCheck": 0.005300000018905848,
+          "total": 2405.4314000000013
+        },
+        {
+          "iteration": 24,
+          "verifiedPass": true,
+          "onChain": 24.737200000032317,
+          "minioFetch": 2352.901499999978,
+          "sha256": 22.04470000002766,
+          "hashCheck": 0.005999999993946403,
+          "total": 2399.689400000032
+        },
+        {
+          "iteration": 25,
+          "verifiedPass": true,
+          "onChain": 34.00410000002012,
+          "minioFetch": 2364.668799999985,
+          "sha256": 25.318499999993946,
+          "hashCheck": 0.007500000006984919,
+          "total": 2423.998900000006
+        },
+        {
+          "iteration": 26,
+          "verifiedPass": true,
+          "onChain": 28.899800000013784,
+          "minioFetch": 2377.0120999999926,
+          "sha256": 21.279099999985192,
+          "hashCheck": 0.006099999998696148,
+          "total": 2427.1970999999903
+        },
+        {
+          "iteration": 27,
+          "verifiedPass": true,
+          "onChain": 31.770100000023376,
+          "minioFetch": 2386.4389000000083,
+          "sha256": 24.92659999994794,
+          "hashCheck": 0.005600000033155084,
+          "total": 2443.1412000000128
+        },
+        {
+          "iteration": 28,
+          "verifiedPass": true,
+          "onChain": 25.619999999995343,
+          "minioFetch": 2369.7405000000144,
+          "sha256": 20.632199999992736,
+          "hashCheck": 0.005900000047404319,
+          "total": 2415.99860000005
+        },
+        {
+          "iteration": 29,
+          "verifiedPass": true,
+          "onChain": 27.184199999959674,
+          "minioFetch": 2383.7588000000105,
+          "sha256": 21.365999999979977,
+          "hashCheck": 0.005700000037904829,
+          "total": 2432.314699999988
+        },
+        {
+          "iteration": 30,
+          "verifiedPass": true,
+          "onChain": 23.912199999962468,
+          "minioFetch": 2358.0567000000156,
+          "sha256": 29.464099999982864,
+          "hashCheck": 0.006500000017695129,
+          "total": 2411.4394999999786
+        },
+        {
+          "iteration": 31,
+          "verifiedPass": true,
+          "onChain": 25.381800000031944,
+          "minioFetch": 2352.678399999975,
+          "sha256": 20.820000000006985,
+          "hashCheck": 0.005499999970197678,
+          "total": 2398.8856999999844
+        },
+        {
+          "iteration": 32,
+          "verifiedPass": true,
+          "onChain": 29.630900000047404,
+          "minioFetch": 2366.0251999999746,
+          "sha256": 25.769399999990128,
+          "hashCheck": 0.0062000000034458935,
+          "total": 2421.4317000000156
+        },
+        {
+          "iteration": 33,
+          "verifiedPass": true,
+          "onChain": 35.55480000004172,
+          "minioFetch": 2372.558799999999,
+          "sha256": 22.132799999963026,
+          "hashCheck": 0.0079000000259839,
+          "total": 2430.2543000000296
+        },
+        {
+          "iteration": 34,
+          "verifiedPass": true,
+          "onChain": 35.478699999977835,
+          "minioFetch": 2360.183799999999,
+          "sha256": 23.618799999996554,
+          "hashCheck": 0.007200000050943345,
+          "total": 2419.288500000024
+        },
+        {
+          "iteration": 35,
+          "verifiedPass": true,
+          "onChain": 35.101199999975506,
+          "minioFetch": 2364.6880000000237,
+          "sha256": 28.195999999996275,
+          "hashCheck": 0.005799999984446913,
+          "total": 2427.99099999998
+        },
+        {
+          "iteration": 36,
+          "verifiedPass": true,
+          "onChain": 23.66870000003837,
+          "minioFetch": 2366.192299999995,
+          "sha256": 24.433799999998882,
+          "hashCheck": 0.006599999964237213,
+          "total": 2414.3013999999966
+        },
+        {
+          "iteration": 37,
+          "verifiedPass": true,
+          "onChain": 23.35740000003716,
+          "minioFetch": 2355.9263999999966,
+          "sha256": 32.72579999995651,
+          "hashCheck": 0.00849999999627471,
+          "total": 2412.0180999999866
+        },
+        {
+          "iteration": 38,
+          "verifiedPass": true,
+          "onChain": 25.246400000003632,
+          "minioFetch": 2356.4814999999944,
+          "sha256": 21.430899999977555,
+          "hashCheck": 0.005599999974947423,
+          "total": 2403.1643999999505
+        },
+        {
+          "iteration": 39,
+          "verifiedPass": true,
+          "onChain": 34.84269999997923,
+          "minioFetch": 2376.109300000011,
+          "sha256": 21.181899999966845,
+          "hashCheck": 0.010900000052060932,
+          "total": 2432.144800000009
+        },
+        {
+          "iteration": 40,
+          "verifiedPass": true,
+          "onChain": 36.507199999992736,
+          "minioFetch": 2387.4533999999985,
+          "sha256": 31.64110000000801,
+          "hashCheck": 0.006399999954737723,
+          "total": 2455.608099999954
+        },
+        {
+          "iteration": 41,
+          "verifiedPass": true,
+          "onChain": 22.875700000033248,
+          "minioFetch": 2370.9610000000102,
+          "sha256": 23.89110000000801,
+          "hashCheck": 0.006099999998696148,
+          "total": 2417.73390000005
+        },
+        {
+          "iteration": 42,
+          "verifiedPass": true,
+          "onChain": 32.102000000013504,
+          "minioFetch": 2381.1975000000093,
+          "sha256": 21.728499999968335,
+          "hashCheck": 0.010200000018812716,
+          "total": 2435.03820000001
+        },
+        {
+          "iteration": 43,
+          "verifiedPass": true,
+          "onChain": 23.176800000015646,
+          "minioFetch": 2362.2734000000055,
+          "sha256": 23.013699999952223,
+          "hashCheck": 0.005400000023655593,
+          "total": 2408.469299999997
+        },
+        {
+          "iteration": 44,
+          "verifiedPass": true,
+          "onChain": 37.192600000009406,
+          "minioFetch": 2446.5513999999966,
+          "sha256": 28.958799999963958,
+          "hashCheck": 0.005800000042654574,
+          "total": 2512.7086000000127
+        },
+        {
+          "iteration": 45,
+          "verifiedPass": true,
+          "onChain": 24.87719999998808,
+          "minioFetch": 2356.895499999984,
+          "sha256": 26.628900000010617,
+          "hashCheck": 0.006300000008195639,
+          "total": 2408.407899999991
+        },
+        {
+          "iteration": 46,
+          "verifiedPass": true,
+          "onChain": 23.991899999964517,
+          "minioFetch": 2444.13400000002,
+          "sha256": 29.447400000004563,
+          "hashCheck": 0.006599999964237213,
+          "total": 2497.5798999999533
+        },
+        {
+          "iteration": 47,
+          "verifiedPass": true,
+          "onChain": 33.369000000006054,
+          "minioFetch": 2360.3886000000057,
+          "sha256": 22.988300000026356,
+          "hashCheck": 0.005999999993946403,
+          "total": 2416.751900000032
+        },
+        {
+          "iteration": 48,
+          "verifiedPass": true,
+          "onChain": 30.84749999997439,
+          "minioFetch": 2384.7061000000103,
+          "sha256": 43.91139999998268,
+          "hashCheck": 0.006700000027194619,
+          "total": 2459.4716999999946
+        },
+        {
+          "iteration": 49,
+          "verifiedPass": true,
+          "onChain": 28.0451999999932,
+          "minioFetch": 2381.344299999997,
+          "sha256": 20.610800000024028,
+          "hashCheck": 0.00849999999627471,
+          "total": 2430.0088000000105
+        }
+      ],
+      "p50": {
+        "onChain": 28.07630000001518,
+        "minioFetch": 2360.3886000000057,
+        "sha256": 23.6416999999783,
+        "hashCheck": 0.006300000008195639,
+        "total": 2415.99860000005
+      },
+      "p95": {
+        "onChain": 35.84029999998165,
+        "minioFetch": 2387.4533999999985,
+        "sha256": 30.71209999997518,
+        "hashCheck": 0.00849999999627471,
+        "total": 2459.4716999999946
+      },
+      "p99": {
+        "onChain": 36.672500000015134,
+        "minioFetch": 2446.5513999999966,
+        "sha256": 32.72579999995651,
+        "hashCheck": 0.010200000018812716,
+        "total": 2512.7086000000127
+      },
+      "failures": []
+    }
+  ],
+  "stagedArtifacts": [
+    {
+      "size": 1024,
+      "materialId": "bio:cell_line:1104",
+      "credentialId": "cred:1191",
+      "artifactCid": "s3://artifacts/bio:cell_line:1104/QC_MYCO/fb7df9e4-test-1024.bin",
+      "artifactHash": "0xfb7df9e49a5e997ffbad5609360d30819adbb6ddb759ca88b4c215a57a502418",
+      "presignedUrl": "http://localhost:9010/artifacts/bio%3Acell_line%3A1104/QC_MYCO/fb7df9e4-test-1024.bin?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20260423%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260423T113444Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=b97f7ba6eb19c2de72d4b55b8e62a5cba8310b59c42ec5c77902d7f6dea89ef5"
+    },
+    {
+      "size": 1048576,
+      "materialId": "bio:cell_line:1105",
+      "credentialId": "cred:1193",
+      "artifactCid": "s3://artifacts/bio:cell_line:1105/QC_MYCO/6fa7bb87-test-1048576.bin",
+      "artifactHash": "0x6fa7bb879c4979f0b4e4177d07eea0626f4f70aa1ef3c1d78b886aa1e14e4e62",
+      "presignedUrl": "http://localhost:9010/artifacts/bio%3Acell_line%3A1105/QC_MYCO/6fa7bb87-test-1048576.bin?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20260423%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260423T113457Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=0ab341af381cc0381d85529412e42f21ea3519d03e40004ab72c47e08a46db53"
+    },
+    {
+      "size": 10485760,
+      "materialId": "bio:cell_line:1106",
+      "credentialId": "cred:1195",
+      "artifactCid": "s3://artifacts/bio:cell_line:1106/QC_MYCO/d56c1e65-test-10485760.bin",
+      "artifactHash": "0xd56c1e65f5fa171738fbca69875b581c0ce065d73fe14f7b20f426ffe87ec5a9",
+      "presignedUrl": "http://localhost:9010/artifacts/bio%3Acell_line%3A1106/QC_MYCO/d56c1e65-test-10485760.bin?X-Amz-Algorithm=AWS4-HMAC-SHA256&X-Amz-Credential=minio%2F20260423%2Fus-east-1%2Fs3%2Faws4_request&X-Amz-Date=20260423T113513Z&X-Amz-Expires=3600&X-Amz-SignedHeaders=host&X-Amz-Signature=372f467d3efe9111c94654588063075d38cebdcc89373ccd71b028c2b7ee59e9"
+    }
+  ],
+  "purechain": {
+    "registryAddress": "0x22cC5D83D8a62c9cdA5959fd1EDBd1e380996FfC",
+    "rpcUrl": "https://purechainnode.com:8547"
+  },
+  "minio": {
+    "endpoint": "localhost:9010",
+    "console": "localhost:9011",
+    "bucket": "artifacts"
+  }
+}

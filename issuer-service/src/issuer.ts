@@ -11,12 +11,15 @@
 
 import { v4 as uuidv4 } from 'uuid';
 import { ec as EC } from 'elliptic';
+import * as nodeCrypto from 'crypto';
+import { ethers } from 'ethers';
 import {
   IssuerConfig,
   MaterialMetadata,
   CredentialPayload,
   ArtifactUploadResult,
   SignedCredential,
+  SignedAttestation,
   IssuanceResult,
   RegistrationResult
 } from './types';
@@ -61,6 +64,10 @@ export class CredentialIssuer {
    */
   async close(): Promise<void> {
     await this.purechain.disconnect();
+  }
+
+  async getDevice(deviceId: string) {
+    return this.purechain.getDevice(deviceId);
   }
 
   /**
@@ -142,17 +149,18 @@ export class CredentialIssuer {
     const signature = signCredential(fullPayload, this.privateKey);
 
     // Anchor on-chain
-    const chainArtifactRefs = artifactRefs.map(a => ({
-      cid: a.cid,
-      hash: a.hash
-    }));
+    // Contract expects: (materialId, credType, commitmentHash, validUntilUnixSec, artifactCid, artifactHash, issuerId)
+    const artifactCid = artifactRefs.length > 0 ? artifactRefs[0].cid : '';
+    const artifactHash = artifactRefs.length > 0 ? artifactRefs[0].hash : '0'.repeat(64);
+    const validUntilUnixSec = Math.floor(validUntil.getTime() / 1000);
 
     const result = await this.purechain.issueCredential(
       materialId,
-      credentialType,
+      credentialType as 'IDENTITY' | 'QC_MYCO' | 'USAGE_RIGHTS',
       commitmentHash,
-      validUntil.toISOString(),
-      chainArtifactRefs,
+      validUntilUnixSec,
+      artifactCid,
+      artifactHash,
       signature
     );
 
@@ -171,6 +179,62 @@ export class CredentialIssuer {
       artifactRefs,
       txId: result.txId,
       issuedAt: fullPayload.issuedAt as string
+    };
+  }
+
+  /**
+   * Issue a QC credential from an edge-signed attestation.
+   */
+  async issueFromAttestation(
+    attestation: SignedAttestation,
+    artifactBytes: Buffer,
+    filename: string,
+    devicePublicAddress: string
+  ): Promise<IssuanceResult> {
+    const recovered = ethers.verifyMessage(
+      ethers.getBytes(attestation.attestationHash),
+      attestation.signature
+    );
+    if (recovered.toLowerCase() !== devicePublicAddress.toLowerCase()) {
+      throw new Error('Device signature did not recover to expected address');
+    }
+
+    const actualHash = '0x' + nodeCrypto.createHash('sha256').update(artifactBytes).digest('hex');
+    if (actualHash.toLowerCase() !== attestation.payload.rawArtifactHash.toLowerCase()) {
+      throw new Error('Artifact hash mismatch');
+    }
+
+    const upload = await this.storage.uploadArtifactBuffer(
+      artifactBytes,
+      filename,
+      attestation.payload.materialId,
+      attestation.payload.credentialType
+    );
+
+    const canonical = canonicalizeJson(attestation.payload);
+    const commitmentHash = '0x' + sha256(canonical);
+
+    const result = await this.purechain.issueCredentialWithAttestation({
+      materialId: attestation.payload.materialId,
+      credType: attestation.payload.credentialType,
+      commitmentHash,
+      validUntil: 0,
+      artifactCid: upload.cid,
+      artifactHash: attestation.payload.rawArtifactHash,
+      issuerId: this.config.orgId,
+      deviceId: attestation.payload.deviceId,
+      captureTs: attestation.payload.captureTs,
+      deviceSig: attestation.signature,
+    });
+
+    return {
+      credentialId: result.credentialId,
+      materialId: attestation.payload.materialId,
+      credentialType: attestation.payload.credentialType,
+      commitmentHash,
+      artifactRefs: [upload],
+      txId: result.txHash,
+      issuedAt: new Date().toISOString()
     };
   }
 
@@ -434,7 +498,11 @@ export function createIssuer(config: Partial<IssuerConfig> = {}): CredentialIssu
   });
 
   const purechain = createPureChainClient({
-    endpoint: fullConfig.purechainEndpoint,
+    network: {
+      name: 'purechain',
+      chainId: 900520900520,
+      rpcUrl: fullConfig.purechainEndpoint,
+    },
     orgId: fullConfig.orgId
   });
 

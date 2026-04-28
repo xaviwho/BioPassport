@@ -6,6 +6,7 @@
 import 'dotenv/config';
 import { ethers } from 'ethers';
 import { Pool } from 'pg';
+import * as Minio from 'minio';
 import * as fs from 'fs';
 import * as path from 'path';
 
@@ -18,6 +19,11 @@ interface IndexerConfig {
   chainId?: number;
   startBlock?: number;
   pollIntervalMs?: number;
+  storageEndpoint?: string;
+  storagePort?: number;
+  storageAccessKey?: string;
+  storageSecretKey?: string;
+  storageBucket?: string;
 }
 
 const DEFAULT_CONFIG: IndexerConfig = {
@@ -27,6 +33,11 @@ const DEFAULT_CONFIG: IndexerConfig = {
   chainId: process.env.CHAIN_ID ? parseInt(process.env.CHAIN_ID) : 900520900520,
   startBlock: parseInt(process.env.START_BLOCK || '0'),
   pollIntervalMs: parseInt(process.env.POLL_INTERVAL_MS || '2000'),
+  storageEndpoint: process.env.STORAGE_ENDPOINT || 'localhost',
+  storagePort: parseInt(process.env.STORAGE_PORT || '9000'),
+  storageAccessKey: process.env.STORAGE_ACCESS_KEY || 'minioadmin',
+  storageSecretKey: process.env.STORAGE_SECRET_KEY || 'minioadmin',
+  storageBucket: process.env.STORAGE_BUCKET || 'biopassport',
 };
 
 // ==================== Contract ABI (events only) ====================
@@ -44,24 +55,34 @@ export class BioPassportIndexer {
   private provider: ethers.JsonRpcProvider;
   private contract: ethers.Contract;
   private db: Pool;
+  private storage: Minio.Client;
   private config: IndexerConfig;
   private isRunning: boolean = false;
 
   constructor(config: Partial<IndexerConfig> = {}) {
     this.config = { ...DEFAULT_CONFIG, ...config };
-    
+
     this.provider = new ethers.JsonRpcProvider(
       this.config.rpcUrl,
-      this.config.chainId ? { chainId: this.config.chainId, name: 'purechain' } : undefined
+      this.config.chainId ? { chainId: this.config.chainId, name: 'purechain' } : undefined,
+      { staticNetwork: true }
     );
     this.contract = new ethers.Contract(
       this.config.contractAddress,
       CONTRACT_ABI,
       this.provider
     );
-    
+
     this.db = new Pool({
       connectionString: this.config.dbConnectionString,
+    });
+
+    this.storage = new Minio.Client({
+      endPoint: this.config.storageEndpoint || 'localhost',
+      port: this.config.storagePort || 9000,
+      useSSL: false,
+      accessKey: this.config.storageAccessKey || 'minioadmin',
+      secretKey: this.config.storageSecretKey || 'minioadmin',
     });
   }
 
@@ -378,9 +399,37 @@ export class BioPassportIndexer {
   }
 
   private async fetchFromPointer(pointer: string): Promise<string | null> {
-    // TODO: Implement S3/IPFS/HTTP fetching
-    // For now, return null (enrichment will be skipped)
-    return null;
+    try {
+      // S3/MinIO pointer: s3://bucket/key
+      if (pointer.startsWith('s3://')) {
+        const match = pointer.match(/^s3:\/\/([^/]+)\/(.+)$/);
+        if (!match) return null;
+        const [, bucket, key] = match;
+
+        const chunks: Buffer[] = [];
+        const stream = await this.storage.getObject(bucket, key);
+        return new Promise((resolve) => {
+          stream.on('data', (chunk: Buffer) => chunks.push(chunk));
+          stream.on('end', () => resolve(Buffer.concat(chunks).toString('utf-8')));
+          stream.on('error', (err) => {
+            console.warn(`  Could not fetch from S3 ${pointer}: ${err.message}`);
+            resolve(null);
+          });
+        });
+      }
+
+      // HTTPS pointer
+      if (pointer.startsWith('http://') || pointer.startsWith('https://')) {
+        const response = await fetch(pointer, { signal: AbortSignal.timeout(10000) });
+        if (!response.ok) return null;
+        return await response.text();
+      }
+
+      return null;
+    } catch (error: any) {
+      console.warn(`  Could not fetch pointer ${pointer}: ${error.message}`);
+      return null;
+    }
   }
 
   private async getLastSyncedBlock(): Promise<number> {

@@ -5,10 +5,12 @@
  */
 
 import express, { Request, Response, NextFunction } from 'express';
+import multer from 'multer';
 import { createIssuer, CredentialIssuer } from './issuer';
 import { MaterialMetadata, CredentialPayload } from './types';
 
 const app = express();
+const upload = multer({ storage: multer.memoryStorage() });
 app.use(express.json());
 
 let issuer: CredentialIssuer;
@@ -96,6 +98,32 @@ app.post('/credentials/qc-myco', async (req: Request, res: Response, next: NextF
     res.status(201).json(result);
   } catch (error) {
     next(error);
+  }
+});
+
+app.post('/v1/attested-credential', upload.single('artifact'), async (req: Request, res: Response) => {
+  try {
+    if (!req.body.attestation || !req.file) {
+      res.status(400).json({ error: 'attestation and artifact are required' });
+      return;
+    }
+
+    const attestation = JSON.parse(req.body.attestation);
+    const device = await issuer.getDevice(attestation.payload.deviceId);
+    if (!device || device.revokedAt !== 0n) {
+      res.status(400).json({ error: 'device not enrolled or revoked' });
+      return;
+    }
+
+    const result = await issuer.issueFromAttestation(
+      attestation,
+      req.file.buffer,
+      req.file.originalname,
+      device.deviceAddress
+    );
+    res.status(201).json(result);
+  } catch (e: any) {
+    res.status(400).json({ error: e.message });
   }
 });
 

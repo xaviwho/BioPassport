@@ -1,0 +1,19 @@
+{
+  "network": {
+    "name": "purechain",
+    "chainId": 900520900520,
+    "rpcUrl": "https://purechainnode.com:8547"
+  },
+  "deployer": "0xAA3DFc054293Dd3731892A1Ba0366D6e6FB1Ee51",
+  "deployedAt": "2026-03-06T13:31:36.584Z",
+  "contracts": {
+    "BioPassportRegistry": {
+      "address": "0x8fC7e91A24A8CfAefc3DCB5E04d9c81f5F825b34",
+      "description": "Full credential lifecycle (issuer-service, verifier-cli)"
+    },
+    "BioPassportV2": {
+      "address": "0x01877E8f9b87528787a3fcEE90915E80981F463B",
+      "description": "Event-driven audit trail (services API, indexer, audit-pack)"
+    }
+  }
+}

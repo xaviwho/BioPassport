@@ -1,0 +1,40 @@
+{
+  "perScenario": [
+    {
+      "scenario": "normal",
+      "total": 200,
+      "valid": 155,
+      "invalid": 45,
+      "invalidRate": 0.225
+    },
+    {
+      "scenario": "drift",
+      "total": 200,
+      "valid": 109,
+      "invalid": 91,
+      "invalidRate": 0.455
+    },
+    {
+      "scenario": "adversarial",
+      "total": 500,
+      "valid": 141,
+      "invalid": 359,
+      "invalidRate": 0.718
+    }
+  ],
+  "totals": {
+    "valid": 405,
+    "invalid": 495,
+    "total": 900,
+    "invalidRate": 0.55
+  },
+  "perAnomaly": {
+    "REVOKED": 47,
+    "EXPIRED_QC": 327,
+    "PENDING_TRANSFER": 59,
+    "QUARANTINED": 24,
+    "TAMPERED_ARTIFACT": 148,
+    "MISSING_QC": 48,
+    "QC_REPLAY": 55
+  }
+}

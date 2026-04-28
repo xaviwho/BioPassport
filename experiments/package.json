@@ -7,11 +7,17 @@
     "test": "ts-node test-integration.ts",
     "benchmark": "ts-node benchmark-suite.ts",
     "benchmark:full": "ts-node benchmark-suite.ts --full",
+    "bench:upgraded": "ts-node bench-upgraded.ts",
+    "bench:upgraded:full": "ts-node bench-upgraded.ts --reads 5000 --writes 500 --bootstrap 5000",
+    "security:live": "ts-node security-tests-live.ts",
+    "scaling:state": "ts-node scaling-state-growth.ts",
+    "diagnostics:dataset": "ts-node diagnostics/dataset-composition.ts",
     "reproduce": "ts-node reproduce-all.ts",
     "reproduce:full": "ts-node reproduce-all.ts --full",
     "all": "npm run generate && npm run test && npm run benchmark"
   },
   "dependencies": {
+    "ethers": "^6.11.0",
     "ts-node": "^10.9.0",
     "typescript": "^5.0.0"
   },
